@@ -4,6 +4,22 @@
 "- Last Updated:  06/20/2020
 "-------------------------------
 
+"----- Plugin
+set nocompatible
+filetype off
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+Plugin 'tpope/vim-fugitive'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'vim-airline/vim-airline'
+Plugin 'jacquesbh/vim-showmarks'
+Plugin 'easymotion/vim-easymotion'
+
+call vundle#end()
+filetype plugin indent on
+
+
 "----- Refresh vimrc with <F5>
 noremap <F5> :source ~/.vimrc<CR>
 
@@ -99,3 +115,30 @@ inoremap (<CR> (<CR>)<Esc>O
 hi Search ctermbg=LightMagenta
 hi ErrorMsg guibg=Blue
 
+"----- Airline Theme
+let g:ariline_solarized_bg='dark'
+
+"----- Showmarks
+augroup show_marks_sync
+  autocmd!
+  autocmd BufReadPost * silent! DoShowMarks
+augroup END
+
+"----- Easymotion Sample : to be cleaned
+
+map  <C-f> <Plug>(easymotion-bd-f)
+nmap <C-f> <Plug>(easymotion-overwin-f)
+
+" s{char}{char} to move to {char}{char}
+nmap <C-s> <Plug>(easymotion-overwin-f2)
+
+" Move to line
+map <Leader>L <Plug>(easymotion-bd-jk)
+nmap <Leader>L <Plug>(easymotion-overwin-line)
+
+" Move to word
+map  <Leader>w <Plug>(easymotion-bd-w)
+nmap <Leader>w <Plug>(easymotion-overwin-w)
+
+map / <Plug>(easymotion-sn)
+nmap / <Plug>(easymotion-tn)
