@@ -14,7 +14,7 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'vim-airline/vim-airline'
 Plugin 'jacquesbh/vim-showmarks'
-Plugin 'easymotion/vim-easymotion'
+" Plugin 'easymotion/vim-easymotion'
 
 call vundle#end()
 filetype plugin indent on
@@ -79,12 +79,12 @@ noremap <Leader><Leader><Leader> :wq<CR>
 
 "----- Shortcut for config files
 noremap <Leader>. :tabe ~/.vimrc<CR>
-noremap <Leader>b :tabe ~/.bashrc<CR>
+noremap <Leader>t :tabe ~/.vimrc<CR>
 noremap <Leader>i :tabe ~/.config/i3/config<CR>
 
 "----- Keymapping for tabs
 nmap <C-t> :tabe <C-d>
-nmap <C-CR> :vsplit<CR>
+nmap <C-s> :vsplit <C-d>
 
 "----- Scorll Faster
 nmap <C-j> jjj
@@ -126,19 +126,25 @@ augroup END
 
 "----- Easymotion Sample : to be cleaned
 
-map  <C-f> <Plug>(easymotion-bd-f)
-nmap <C-f> <Plug>(easymotion-overwin-f)
+"map  <C-f> <Plug>(easymotion-bd-f)
+"nmap <C-f> <Plug>(easymotion-overwin-f)
+
 
 " s{char}{char} to move to {char}{char}
 nmap <C-s> <Plug>(easymotion-overwin-f2)
 
 " Move to line
-map <Leader>L <Plug>(easymotion-bd-jk)
-nmap <Leader>L <Plug>(easymotion-overwin-line)
+map ,L <Plug>(easymotion-bd-jk)
+nmap ,L <Plug>(easymotion-overwin-line)
 
 " Move to word
-map  <Leader>w <Plug>(easymotion-bd-w)
-nmap <Leader>w <Plug>(easymotion-overwin-w)
+map  ,w <Plug>(easymotion-bd-w)
+nmap ,w <Plug>(easymotion-overwin-w)
 
-map / <Plug>(easymotion-sn)
+map , <Plug>(easymotion-prefix))
+map  / <Plug>(easymotion-sn)
+omap / <Plug>(easymotion-tn)
+map  n <Plug>(easymotion-next)
+map  N <Plug>(easymotion-prev)))))/ <Plug>(easymotion-sn)
 nmap / <Plug>(easymotion-tn)
+
