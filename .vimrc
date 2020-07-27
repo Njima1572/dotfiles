@@ -90,6 +90,9 @@ nmap <C-s> :vsplit <C-d>
 nmap <C-j> jjj
 nmap <C-k> kkk
 
+"nmap <S-j> jjj
+"nmap <S-k> kkk
+
 "----- gj gk mapping
 noremap j gj
 noremap k gk
@@ -117,6 +120,15 @@ hi ErrorMsg guibg=Blue
 
 "----- Airline Theme
 let g:ariline_solarized_bg='dark'
+
+"----- Sessions
+noremap <Leader>s :mks ~/.vim/session/
+noremap <Leader>r :source ~/.vim/session/<C-d>
+
+"----- Buffers
+set hidden
+noremap <Leader>b :ls<CR>:b 
+noremap <Leader>x :bd<CR>
 
 "----- Showmarks
 augroup show_marks_sync
