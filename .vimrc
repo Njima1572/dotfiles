@@ -1,8 +1,10 @@
 "-------------------------------
 "- Author:        Njima1572
 "- Created:       06/19/2020
-"- Last Updated:  06/20/2020
+"- Last Updated:  07/27/2020
 "-------------------------------
+"
+"Cheat sheet: https://devhints.io/vimscript
 
 "----- Plugin
 set nocompatible
@@ -44,6 +46,10 @@ set shiftwidth=2
 set softtabstop=2
 set expandtab
 set list listchars=tab:\-\-
+
+"---- Vim file explorer
+"delete the header for the explorer
+let g:netrw_banner=0
 
 
 "----- Undo
@@ -121,9 +127,18 @@ hi ErrorMsg guibg=Blue
 "----- Airline Theme
 let g:ariline_solarized_bg='dark'
 
-"----- Sessions
-noremap <Leader>s :mks ~/.vim/session/
-noremap <Leader>r :source ~/.vim/session/<C-d>
+" ---- Sessions
+"  If session was loaded, then overwrites it,
+"  if not, then asks for new name
+if eval(v:this_session)
+  exe "noremap <Space>s :mks! ".v:this_session."<CR>"
+else
+  noremap <Space>s :mks ~/.vim/session/
+endif
+
+noremap <Space>S :mks ~/.vim/session/
+noremap <Space>r :source ~/.vim/session/<C-d>
+
 
 "----- Buffers
 set hidden
