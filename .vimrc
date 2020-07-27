@@ -12,6 +12,9 @@ filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
+"----- Color Scheme
+source ~/.vim/colorscheme.vim
+
 Plugin 'tpope/vim-fugitive'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'vim-airline/vim-airline'
@@ -130,14 +133,16 @@ let g:ariline_solarized_bg='dark'
 " ---- Sessions
 "  If session was loaded, then overwrites it,
 "  if not, then asks for new name
-if eval(v:this_session)
-  exe "noremap <Space>s :mks! ".v:this_session."<CR>"
+if empty(v:this_session)
+  noremap <Leader>s :mks ~/.vim/session/
+  noremap <Leader><Leader><Leader> :wq<CR> 
 else
-  noremap <Space>s :mks ~/.vim/session/
+  exe "noremap <Leader>s :mks! ".v:this_session."<CR>"
+  exe "noremap <Leader><Leader><Leader> :mks! ".v:this_session."<CR>:wqa<CR>"
 endif
 
-noremap <Space>S :mks ~/.vim/session/
-noremap <Space>r :source ~/.vim/session/<C-d>
+noremap <Leader>S :mks ~/.vim/session/
+noremap <Leader>r :source ~/.vim/session/<C-d>
 
 
 "----- Buffers
