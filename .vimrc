@@ -96,11 +96,16 @@ nmap <C-t> :tabe <C-d>
 nmap <C-s> :vsplit <C-d>
 
 "----- Scorll Faster
-nmap <C-j> jjj
-nmap <C-k> kkk
 
-"nmap <S-j> jjj
-"nmap <S-k> kkk
+nmap <S-j> jjj
+nmap <S-k> kkk
+
+" ------ Move between panes with Ctrl + hjkl *Note map Alt + hjkl for tmux and
+"  win + hjkl for i3
+nmap <C-h> :wincmd h<CR>
+nmap <C-j> :wincmd j<CR>
+nmap <C-k> :wincmd k<CR>
+nmap <C-l> :wincmd l<CR>
 
 "----- gj gk mapping
 noremap j gj
@@ -149,6 +154,9 @@ noremap <Leader>r :source ~/.vim/session/<C-d>
 set hidden
 noremap <Leader>b :ls<CR>:b 
 noremap <Leader>x :bd<CR>
+
+"Automatically set directory to current file
+autocmd BufEnter * silent! lcd %:p:h
 
 "----- Showmarks
 augroup show_marks_sync
