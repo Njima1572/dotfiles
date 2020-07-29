@@ -19,14 +19,16 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'vim-airline/vim-airline'
 Plugin 'jacquesbh/vim-showmarks'
-" Plugin 'easymotion/vim-easymotion'
+Plugin 'easymotion/vim-easymotion'
+Plugin 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plugin 'junegunn/fzf.vim'
 
 call vundle#end()
 filetype plugin indent on
 
 
 "----- Refresh vimrc with <F5>
-noremap <F5> :source ~/.vimrc<CR>
+noremap <F5> :source ~/.vimrc<CR>:noh<CR>
 
 "----- Some basic vim stuff
 set title
@@ -49,6 +51,10 @@ set shiftwidth=2
 set softtabstop=2
 set expandtab
 set list listchars=tab:\-\-
+
+"---- explorer stuff
+let g:netrw_banner = 0
+let g:netrw_liststyle = 3
 
 "---- Vim file explorer
 "delete the header for the explorer
@@ -149,6 +155,8 @@ endif
 noremap <Leader>S :mks ~/.vim/session/
 noremap <Leader>r :source ~/.vim/session/<C-d>
 
+"----- Directory stuff
+autocmd BufEnter * silent! lcd %:p:h
 
 "----- Buffers
 set hidden
@@ -166,12 +174,12 @@ augroup END
 
 "----- Easymotion Sample : to be cleaned
 
-"map  <C-f> <Plug>(easymotion-bd-f)
+"map  <C-f> <Plug>(easymotion-bd-n)
 "nmap <C-f> <Plug>(easymotion-overwin-f)
 
 
 " s{char}{char} to move to {char}{char}
-nmap <C-s> <Plug>(easymotion-overwin-f2)
+nmap <C-s> <Plug>(easymotion-everwin-f2)
 
 " Move to line
 map ,L <Plug>(easymotion-bd-jk)
