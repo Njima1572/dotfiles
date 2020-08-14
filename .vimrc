@@ -12,6 +12,8 @@ filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
+packloadall
+
 "----- Color Scheme
 source ~/.vim/colorscheme.vim
 
@@ -22,6 +24,9 @@ Plugin 'jacquesbh/vim-showmarks'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plugin 'junegunn/fzf.vim'
+Plugin 'rhysd/vim-clang-format'
+Plugin 'prettier/vim-prettier', { 'do': 'yarn install' }
+Plugin 'sjl/gundo.vim',
 
 call vundle#end()
 filetype plugin indent on
@@ -45,6 +50,8 @@ set hlsearch
 set wrapscan
 noremap <Esc><Esc> :nohl<CR>
 
+syntax on
+
 "----- Tab stuff
 set tabstop=2
 set shiftwidth=2
@@ -59,7 +66,6 @@ let g:netrw_liststyle = 3
 "---- Vim file explorer
 "delete the header for the explorer
 let g:netrw_banner=0
-
 
 "----- Undo
 if has('persistent_undo')
@@ -113,6 +119,9 @@ nmap <C-j> :wincmd j<CR>
 nmap <C-k> :wincmd k<CR>
 nmap <C-l> :wincmd l<CR>
 
+nmap <S-j> jjj
+nmap <S-k> kkk
+
 "----- gj gk mapping
 noremap j gj
 noremap k gk
@@ -134,6 +143,10 @@ inoremap {<CR> {<CR>}<Esc>O
 inoremap [<CR> [<CR>]<Esc>O
 inoremap (<CR> (<CR>)<Esc>O
 
+"----- Call command line commands
+vnoremap <Leader><CR> :!sh<CR>
+nnoremap <Leader><CR> V:!sh<CR>
+
 "----- Colors
 hi Search ctermbg=LightMagenta
 hi ErrorMsg guibg=Blue
@@ -154,6 +167,16 @@ endif
 
 noremap <Leader>S :mks ~/.vim/session/
 noremap <Leader>r :source ~/.vim/session/<C-d>
+
+noremap <Leader>o :e <C-d>
+noremap <Leader>v :vs .<CR>
+noremap <Leader>h :split .<CR>
+
+"----- Gundo
+if has ('python3')
+  let g:gundo_prefer_python3 = 1
+endif
+noremap <Leader>u :GundoToggle<CR>
 
 "----- Directory stuff
 autocmd BufEnter * silent! lcd %:p:h
@@ -195,4 +218,17 @@ omap / <Plug>(easymotion-tn)
 map  n <Plug>(easymotion-next)
 map  N <Plug>(easymotion-prev)))))/ <Plug>(easymotion-sn)
 nmap / <Plug>(easymotion-tn)
+
+" Clang 
+augroup c_group
+  autocmd!
+  autocmd BufRead,BufNewFile *.cpp,*.c source ~/.vim/cpp/cpp.vim
+  autocmd BufWritePost *.cpp,*.c,*.h,*.hpp ClangFormat
+augroup END
+
+" Javascripts
+augroup js_group
+  autocmd!
+  autocmd BufWritePost *.js,*.jsx,*.ts PrettierAsync
+augroup END
 

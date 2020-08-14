@@ -14,3 +14,5 @@ hi SpecialKey ctermfg=0
 hi Identifier ctermfg=0
 hi pythonComment ctermfg=236 guibg=NONE
 hi Comment ctermfg=60 guifg=NONE ctermbg=NONE guibg=NONE
+hi vimGlobal ctermfg=255
+hi Normal ctermfg=255
