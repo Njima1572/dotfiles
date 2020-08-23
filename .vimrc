@@ -21,7 +21,7 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'vim-airline/vim-airline'
 Plugin 'jacquesbh/vim-showmarks'
-Plugin 'easymotion/vim-easymotion'
+"Plugin 'easymotion/vim-easymotion'
 Plugin 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plugin 'junegunn/fzf.vim'
 Plugin 'rhysd/vim-clang-format'
@@ -43,6 +43,8 @@ set smartindent
 set virtualedit=onemore
 set scrolloff=999
 set laststatus=2
+set cursorline
+set cursorcolumn
 
 set showcmd
 
@@ -202,22 +204,22 @@ augroup END
 
 
 " s{char}{char} to move to {char}{char}
-nmap <C-s> <Plug>(easymotion-everwin-f2)
+" nmap <C-s> <Plug>(easymotion-everwin-f2)
 
 " Move to line
-map ,L <Plug>(easymotion-bd-jk)
-nmap ,L <Plug>(easymotion-overwin-line)
+" map ,L <Plug>(easymotion-bd-jk)
+" nmap ,L <Plug>(easymotion-overwin-line)
 
 " Move to word
-map  ,w <Plug>(easymotion-bd-w)
-nmap ,w <Plug>(easymotion-overwin-w)
+" map  ,w <Plug>(easymotion-bd-w)
+" nmap ,w <Plug>(easymotion-overwin-w)
 
-map , <Plug>(easymotion-prefix))
-map  / <Plug>(easymotion-sn)
-omap / <Plug>(easymotion-tn)
-map  n <Plug>(easymotion-next)
-map  N <Plug>(easymotion-prev)))))/ <Plug>(easymotion-sn)
-nmap / <Plug>(easymotion-tn)
+" map , <Plug>(easymotion-prefix))
+" map  / <Plug>(easymotion-sn)
+" omap / <Plug>(easymotion-tn)
+" map  n <Plug>(easymotion-next)
+" map  N <Plug>(easymotion-prev)))))/ <Plug>(easymotion-sn)
+" nmap / <Plug>(easymotion-tn)
 
 " Clang 
 augroup c_group
