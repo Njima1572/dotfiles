@@ -114,6 +114,8 @@ nmap <C-s> :vsplit <C-d>
 nmap <S-j> jjj
 nmap <S-k> kkk
 
+map <C-z> <Nop>
+
 " ------ Move between panes with Ctrl + hjkl *Note map Alt + hjkl for tmux and
 "  win + hjkl for i3
 nmap <C-h> :wincmd h<CR>
