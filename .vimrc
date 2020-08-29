@@ -27,6 +27,8 @@ Plugin 'junegunn/fzf.vim'
 Plugin 'rhysd/vim-clang-format'
 Plugin 'prettier/vim-prettier', { 'do': 'yarn install' }
 Plugin 'sjl/gundo.vim',
+Plugin 'leafgarland/typescript-vim'
+Plugin 'peitalin/vim-jsx-typescript'
 
 call vundle#end()
 filetype plugin indent on
@@ -236,3 +238,8 @@ augroup js_group
   autocmd BufWritePost *.js,*.jsx,*.ts PrettierAsync
 augroup END
 
+" Set filetype as typescript.tsx
+augroup jsx_group
+  autocmd!
+  autocmd BufNewFile,BufRead *.tsx,*.jsx source ~/.vim/typescript/typescript.vim
+augroup END
