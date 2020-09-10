@@ -1,7 +1,7 @@
 "-------------------------------
 "- Author:        Njima1572
 "- Created:       06/19/2020
-"- Last Updated:  07/27/2020
+"- Last Updated:  09/10/2020
 "-------------------------------
 "
 "Cheat sheet: https://devhints.io/vimscript
