@@ -134,6 +134,10 @@ noremap k gk
 nmap <Leader>h ^
 nmap <Leader>l $
 
+"----- Window Split open with tree
+nmap <Leader> h :split .<CR>
+nmap <Leader> v :vsplit .<CR>
+
 "----- Replace Undo and redo with g+-
 noremap u g-
 noremap <C-r> g+ 
