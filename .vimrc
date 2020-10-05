@@ -107,6 +107,14 @@ noremap <Leader>i :tabe ~/.config/i3/config<CR>
 
 "----- Keymapping for tabs
 nmap <C-t> :tabe <C-d>
+nmap <C-s> :vsplit <C-d>
+
+"----- Scorll Faster
+
+nmap <S-j> jjj
+nmap <S-k> kkk
+vmap <S-j> jjj
+vmap <S-k> kkk
 
 map <C-z> <Nop>
 
