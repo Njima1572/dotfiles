@@ -9,5 +9,5 @@ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 mkdir -p $THIS_DIR/.vim/undo
 mkdir -p $THIS_DIR/.vim/session
 cd ~/
-ln -s $THIS_DIR/.vimrc .
+ln -s $THIS_DIR/.vim .
 ln -s $THIS_DIR/.tmux.conf .
