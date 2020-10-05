@@ -1,7 +1,7 @@
 "-------------------------------
 "- Author:        Njima1572
 "- Created:       06/19/2020
-"- Last Updated:  07/27/2020
+"- Last Updated:  09/10/2020
 "-------------------------------
 "
 "Cheat sheet: https://devhints.io/vimscript
@@ -63,13 +63,10 @@ set softtabstop=2
 set expandtab
 set list listchars=tab:\-\-
 
-"---- explorer stuff
-let g:netrw_banner = 0
-let g:netrw_liststyle = 3
-
 "---- Vim file explorer
 "delete the header for the explorer
 let g:netrw_banner=0
+let g:netrw_liststyle = 3
 
 "----- Undo
 if has('persistent_undo')
@@ -90,10 +87,11 @@ inoremap <Right> <Nop>
 noremap F K
 
 "----- Remap HJKL
-noremap H ^
-noremap J :tabp<CR>
-noremap K :tabn<CR>
-noremap L $
+noremap <S-h> ^
+noremap <S-l> $
+""---- Scroll Faster
+nmap <S-j> jjj
+nmap <S-k> kkk
 
 "----- Normal mode shortcut
 imap jj <Esc>
@@ -109,12 +107,6 @@ noremap <Leader>i :tabe ~/.config/i3/config<CR>
 
 "----- Keymapping for tabs
 nmap <C-t> :tabe <C-d>
-nmap <C-s> :vsplit <C-d>
-
-"----- Scorll Faster
-
-nmap <S-j> jjj
-nmap <S-k> kkk
 
 map <C-z> <Nop>
 
@@ -133,8 +125,11 @@ noremap j gj
 noremap k gk
 
 "----- Line Start and line end 
-nmap <Leader>h ^
 nmap <Leader>l $
+
+"----- Window Split open with tree
+nmap <Leader> h :split .<CR>
+nmap <Leader> v :vsplit .<CR>
 
 "----- Replace Undo and redo with g+-
 noremap u g-
@@ -177,6 +172,9 @@ noremap <Leader>r :source ~/.vim/session/<C-d>
 noremap <Leader>o :e <C-d>
 noremap <Leader>v :vs .<CR>
 noremap <Leader>h :split .<CR>
+
+noremap <Leader>f :BLines<CR>
+noremap <Leader>g :Lines<CR>
 
 "----- Gundo
 if has ('python3')
