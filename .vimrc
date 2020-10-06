@@ -177,7 +177,7 @@ endif
 noremap <Leader>S :mks ~/.vim/session/
 noremap <Leader>r :source ~/.vim/session/<C-d>
 
-noremap <Leader>o :e <C-d>
+noremap <Leader>o :e .<CR>
 noremap <Leader>v :vs .<CR>
 noremap <Leader>h :split .<CR>
 
