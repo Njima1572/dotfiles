@@ -29,6 +29,8 @@ Plugin 'prettier/vim-prettier', { 'do': 'yarn install' }
 Plugin 'sjl/gundo.vim',
 Plugin 'leafgarland/typescript-vim'
 Plugin 'peitalin/vim-jsx-typescript'
+Plugin 'zah/nim.vim'
+Plugin 'altercation/vim-colors-solarized'
 
 call vundle#end()
 filetype plugin indent on
@@ -92,6 +94,13 @@ noremap <S-l> $
 ""---- Scroll Faster
 nmap <S-j> jjj
 nmap <S-k> kkk
+
+vmap <S-j> jjj
+vmap <S-k> kkk
+
+"----- Tryin to add emacs useful bindings
+noremap <C-e> ?\.<CR>:nohl<CR>
+noremap <S-e> /\.<CR>:nohl<CR>
 
 "----- Normal mode shortcut
 imap jj <Esc>
@@ -247,5 +256,5 @@ augroup END
 " Set filetype as typescript.tsx
 augroup jsx_group
   autocmd!
-  autocmd BufNewFile,BufRead *.tsx,*.jsx source ~/.vim/typescript/typescript.vim
+  autocmd BufNewFile,BufRead *.js,*.tsx,*.jsx source ~/.vim/javascript/typescript.vim
 augroup END

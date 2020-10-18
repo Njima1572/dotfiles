@@ -1,4 +1,5 @@
 set filetype=typescript.tsx
+source ~/.vim/javascript/javascript.vim
 
 " dark red
 hi tsxTagName guifg=#E06C75
