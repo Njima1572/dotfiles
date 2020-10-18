@@ -62,6 +62,3 @@
 	prune = true
 [init]
 	defaultBranch = main
-[url "github:"]
-	InsteadOf = https://github.com/
-	Insteadof = git@github.com:
