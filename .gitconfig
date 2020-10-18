@@ -1,0 +1,64 @@
+; Adopted from forno/dotfiles
+
+[user]
+	email = kochi.nakajima@gmail.com
+	name = Njima1572
+	signingkey = F318AAD1F0C6372C
+[alias]
+	a = add
+	aa = add -A
+	ap = add -p
+	au = add -u
+	b = branch
+	ba = branch -a
+	bd = branch -d
+	c = commit -v
+	ca = commit -a -v
+	chb = checkout -b
+	d = diff
+	dc = diff --cached
+	dch = diff --check
+	g = log --graph --date=short --decorate=short --pretty=format:'%Cgreen%h %Creset%cd %Cblue%cn %Cred%d %Creset%s'
+	ga = log --all --graph --date=short --decorate=short --pretty=format:'%Cgreen%h %Creset%cd %Cblue%cn %Cred%d %Creset%s'
+	l = log
+	ld = log --diff-filter=D --summary
+	lo = log --oneline
+	lp = log -p
+	ls = log --stat
+	s = status
+	sh = show
+	st = stash
+	sw = switch
+	r = restore
+	rp = restore -p
+	rs = restore --staged
+[color]
+	ui = auto
+[core]
+	editor = vi
+	autocrlf = input
+	ignorecase = true
+[merge]
+	ff = false
+[pull]
+	rebase = true
+[push]
+	default = simple
+	gpgSign = if-asked
+[rerere]
+	enabled = true
+[tag]
+	forceSignAnnotated = true
+[http "https://gopkg.in"]
+	followRedirects = true
+[commit]
+	gpgsign = true
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[fetch]
+	prune = true
+[init]
+	defaultBranch = main
