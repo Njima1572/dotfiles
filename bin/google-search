@@ -1,3 +1,10 @@
 #!/bin/bash
 
-firefox "https://www.google.com/search?q=$1"
+if [ -z "$BROWSER" ]
+then
+  export BROWSER=firefox
+else
+  echo Using $BROWSER
+fi
+
+$BROWSER "https://www.google.com/search?q=$1"
