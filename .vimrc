@@ -31,6 +31,7 @@ Plugin 'leafgarland/typescript-vim'
 Plugin 'peitalin/vim-jsx-typescript'
 Plugin 'zah/nim.vim'
 Plugin 'altercation/vim-colors-solarized'
+Plugin 'psf/black', { 'tag': '19.10b0' }
 
 call vundle#end()
 filetype plugin indent on
@@ -245,6 +246,13 @@ augroup c_group
   autocmd!
   autocmd BufRead,BufNewFile *.cpp,*.c source ~/.vim/cpp/cpp.vim
   autocmd BufWritePost *.cpp,*.c,*.h,*.hpp ClangFormat
+augroup END
+
+" Python
+augroup py_group
+  autocmd!
+  autocmd BufRead,BufNewFile *.py source ~/.vim/python/python.vim
+  autocmd BufWritePost *.py Black
 augroup END
 
 " Javascripts
