@@ -39,27 +39,5 @@
 	editor = vi
 	autocrlf = input
 	ignorecase = true
-[merge]
-	ff = false
-[pull]
-	rebase = true
-[push]
-	default = simple
-	gpgSign = if-asked
-[rerere]
-	enabled = true
-[tag]
-	forceSignAnnotated = true
-[http "https://gopkg.in"]
-	followRedirects = true
 [commit]
 	gpgsign = true
-[filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
-[fetch]
-	prune = true
-[init]
-	defaultBranch = main
