@@ -5,6 +5,12 @@
 "-------------------------------
 "
 "Cheat sheet: https://devhints.io/vimscript
+"
+" Quickguide for folding
+" `[visual]zf to fold the visual selected place
+" `zd` to delete the fold
+" `zo` to open the fold
+" `zc` to close the fold that was opened
 
 "----- Plugin
 set nocompatible
@@ -35,6 +41,7 @@ Plugin 'psf/black', { 'tag': '19.10b0' }
 Plugin 'voldikss/vim-wenyan'
 Plugin 'cespare/vim-toml'
 Plugin 'rust-lang/rust.vim'
+Plugin 'dag/vim-fish'
 
 call vundle#end()
 filetype plugin indent on
@@ -62,6 +69,8 @@ set showcmd
 
 set hlsearch
 set wrapscan
+set foldmethod=marker
+
 noremap <Esc><Esc> :nohl<CR>
 
 syntax on
@@ -114,17 +123,19 @@ noremap <S-e> /\.<CR>:nohl<CR>
 imap jj <Esc>
 
 "----- Save and quit
-noremap <Leader><Leader> :w<CR>
+noremap <Leader><Leader> :mkview<CR>:w<CR>
 noremap <Leader><Leader><Leader> :wq<CR>
 
 "----- Shortcut for config files
 noremap <Leader>. :tabe ~/.vimrc<CR>
-noremap <Leader>t :tabe ~/.vimrc<CR>
+noremap <Leader>t :tabe ~/.tmux.conf<CR>
 noremap <Leader>i :tabe ~/.config/i3/config<CR>
 
 "----- Keymapping for tabs
 nmap <C-t> :tabe <C-d>
 nmap <C-s> :vsplit <C-d>
+nmap <F7> :tabp<CR>
+nmap <F8> :tabn<CR>
 
 "----- Scorll Faster
 
@@ -155,6 +166,8 @@ nmap <Leader>l $
 "----- Window Split open with tree
 nmap <Leader> h :split .<CR>
 nmap <Leader> v :vsplit .<CR>
+
+nmap <Leader>= <C-w>=
 
 "----- Replace Undo and redo with g+-
 noremap u g-
