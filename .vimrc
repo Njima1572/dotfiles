@@ -32,6 +32,9 @@ Plugin 'peitalin/vim-jsx-typescript'
 Plugin 'zah/nim.vim'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'psf/black', { 'tag': '19.10b0' }
+Plugin 'voldikss/vim-wenyan'
+Plugin 'cespare/vim-toml'
+Plugin 'rust-lang/rust.vim'
 
 call vundle#end()
 filetype plugin indent on
@@ -50,6 +53,10 @@ set scrolloff=999
 set laststatus=2
 set cursorline
 set cursorcolumn
+set clipboard=unnamedplus
+set guioptions-=T
+set guioptions-=m
+set guioptions-=r
 
 set showcmd
 
@@ -265,4 +272,9 @@ augroup END
 augroup jsx_group
   autocmd!
   autocmd BufNewFile,BufRead *.js,*.tsx,*.jsx source ~/.vim/javascript/typescript.vim
+augroup END
+
+augroup rust
+  autocmd!
+  autocmd! BufNewFile,BufRead *.rs source ~/.vim/rust/rust.vim
 augroup END
