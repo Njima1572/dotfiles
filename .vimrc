@@ -23,6 +23,7 @@ packloadall
 "----- Color Scheme
 source ~/.vim/colorscheme.vim
 
+Plugin 'VundleVim/Vundle.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'vim-airline/vim-airline'
@@ -38,10 +39,16 @@ Plugin 'peitalin/vim-jsx-typescript'
 Plugin 'zah/nim.vim'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'psf/black', { 'tag': '19.10b0' }
-Plugin 'voldikss/vim-wenyan'
-Plugin 'cespare/vim-toml'
 Plugin 'rust-lang/rust.vim'
 Plugin 'dag/vim-fish'
+Plugin 'alvan/vim-closetag'
+Plugin 'dart-lang/dart-vim-plugin'
+Plugin 'natebosch/vim-lsc'
+Plugin 'natebosch/vim-lsc-dart'
+"" An autocompletion plugin but replaced by kite
+" Plugin 'neoclide/coc.nvim', {'branch': 'release'}
+Plugin 'jparise/vim-graphql'
+Plugin 'kiteco/vim-plugin'
 
 call vundle#end()
 filetype plugin indent on
@@ -66,6 +73,8 @@ set guioptions-=m
 set guioptions-=r
 
 set showcmd
+
+set foldmethod=marker
 
 set hlsearch
 set wrapscan
@@ -210,6 +219,7 @@ noremap <Leader>r :source ~/.vim/session/<C-d>
 noremap <Leader>o :e .<CR>
 noremap <Leader>v :vs .<CR>
 noremap <Leader>h :split .<CR>
+noremap <Leader>= <C-w>=
 
 noremap <Leader>f :BLines<CR>
 noremap <Leader>g :Lines<CR>
@@ -237,6 +247,49 @@ augroup show_marks_sync
   autocmd BufReadPost * silent! DoShowMarks
 augroup END
 
+
+"----- Tag Closing
+" filenames like *.xml, *.html, *.xhtml, ...
+" These are the file extensions where this plugin is enabled.
+"
+let g:closetag_filenames = '*.html,*.xhtml,*.phtml'
+
+" filenames like *.xml, *.xhtml, ...
+" This will make the list of non-closing tags self-closing in the specified files.
+"
+let g:closetag_xhtml_filenames = '*.xhtml,*.jsx'
+
+" filetypes like xml, html, xhtml, ...
+" These are the file types where this plugin is enabled.
+"
+let g:closetag_filetypes = 'html,xhtml,phtml'
+
+" filetypes like xml, xhtml, ...
+" This will make the list of non-closing tags self-closing in the specified files.
+"
+let g:closetag_xhtml_filetypes = 'xhtml,jsx'
+
+" integer value [0|1]
+" This will make the list of non-closing tags case-sensitive (e.g. `<Link>` will be closed while `<link>` won't.)
+"
+let g:closetag_emptyTags_caseSensitive = 1
+
+" dict
+" Disables auto-close if not in a "valid" region (based on filetype)
+"
+let g:closetag_regions = {
+    \ 'typescript.tsx': 'jsxRegion,tsxRegion',
+    \ 'javascript.jsx': 'jsxRegion',
+    \ }
+
+" Shortcut for closing tags, default is '>'
+"
+let g:closetag_shortcut = '>'
+
+" Add > at current position without closing the current tag, default is ''
+"
+let g:closetag_close_shortcut = '<leader>>'
+
 "----- Easymotion Sample : to be cleaned
 
 "map  <C-f> <Plug>(easymotion-bd-n)
@@ -260,6 +313,13 @@ augroup END
 " map  n <Plug>(easymotion-next)
 " map  N <Plug>(easymotion-prev)))))/ <Plug>(easymotion-sn)
 " nmap / <Plug>(easymotion-tn)
+
+" Kite config
+let g:kite_supported_languages = ["python", "javascript"]
+let g:kite_tab_complete=1
+let g:kite_completions=0
+set completeopt+=noinsert
+set completeopt+=menuone
 
 " Clang 
 augroup c_group
@@ -290,4 +350,10 @@ augroup END
 augroup rust
   autocmd!
   autocmd! BufNewFile,BufRead *.rs source ~/.vim/rust/rust.vim
+augroup END
+  
+" Dart is for flutter
+augroup dart_group
+  autocmd!
+  autocmd BufNewFile,BufRead *.dart source ~/.vim/dart/dart.vim
 augroup END

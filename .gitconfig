@@ -7,6 +7,7 @@
 [alias]
 	a = add
 	aa = add -A
+	ae = add -e
 	ap = add -p
 	au = add -u
 	b = branch
