@@ -1,7 +1,7 @@
 alias g="git"
 alias l="ls"
 alias llr="ls -lR"
-alias v="vim"
+alias v="nvim"
 alias nv="nvim"
 alias py2="python2"
 alias py3="python3"

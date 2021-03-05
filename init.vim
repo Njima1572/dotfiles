@@ -1,61 +1,65 @@
+" colorscheme ----------------------------
+syntax enable
+set background=light
+colorscheme solarized
+
+
 "dein Scripts-----------------------------
+
 if &compatible
   set nocompatible               " Be iMproved
 endif
 
-" Required:
-set runtimepath+=/home/kochi/.cache/dein/repos/github.com/Shougo/dein.vim
+call plug#begin('~/.vim/plugged')
 
-" Required:
-if dein#load_state('/home/kochi/.cache/dein')
-  call dein#begin('/home/kochi/.cache/dein')
+Plug 'vim-airline/vim-airline'
+Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
+Plug 'easymotion/vim-easymotion'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+Plug 'tpope/vim-fugitive'
+Plug 'rhysd/vim-clang-format'
+Plug 'sjl/gundo.vim',
+Plug 'leafgarland/typescript-vim'
+Plug 'peitalin/vim-jsx-typescript'
+Plug 'dbeniamine/cheat.sh-vim'
 
-  " Let dein manage dein
-  " Required:
-  call dein#add('/home/kochi/.cache/dein/repos/github.com/Shougo/dein.vim')
+Plug 'nvim-lua/popup.nvim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope-fzy-native.nvim'
+Plug 'nvim-telescope/telescope.nvim'
 
-  " Add or remove your plugins here like this:
-  "call dein#add('Shougo/neosnippet.vim')
-  "call dein#add('Shougo/neosnippet-snippets')
+Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 
-  " Required:
-  call dein#end()
-  call dein#save_state()
-endif
+Plug 'jiangmiao/auto-pairs'
 
-" Required:
-filetype plugin indent on
-syntax enable
+call plug#end()
 
-" If you want to install not installed plugins on startup.
-"if dein#check_install()
-"  call dein#install()
-"endif
 
 "End dein Scripts-------------------------
 
 " Colemak remapping to use qwerty hjkl
 noremap n j
-noremap k n
 noremap e k
 noremap i l
+
+noremap k n
 noremap l i
 noremap N J
 noremap E K
 noremap I L
-noremap L I
 noremap K N
-
+noremap L I
 
 " Colemak version of jj <Esc>
 imap nnn <Esc>
 
 
-nmap <S-n> jjj
-nmap <S-e> kkk
+nnoremap <S-n> jjj
+nnoremap <S-e> kkk
 
-vmap <S-n> jjj
-vmap <S-e> kkk
+vnoremap <S-n> jjj
+vnoremap <S-e> kkk
 
 
 " From original vimrc
@@ -73,9 +77,7 @@ set laststatus=2
 set cursorline
 set cursorcolumn
 set showcmd
-
 set foldmethod=marker
-
 set hlsearch
 set wrapscan
 noremap <Esc><Esc> :nohl<CR>
@@ -104,3 +106,43 @@ inoremap <Left> <Nop>
 inoremap <Up> <Nop>
 inoremap <Down> <Nop>
 inoremap <Right> <Nop>
+
+
+nmap <C-h> :wincmd h<CR>
+nmap <C-n> :wincmd j<CR>
+nmap <C-e> :wincmd k<CR>
+nmap <C-i> :wincmd l<CR>
+
+
+" ~/.vimrc
+noremap <Leader>. :tabe ~/.config/nvim/init.vim<CR>
+noremap <Leader>t :tabe ~/.tmux.conf<CR>
+noremap <Leader>i :tabe ~/.config/i3/config<CR>
+
+"----- Buffers
+set hidden
+noremap <Leader>b :ls<CR>:b 
+noremap <Leader>x :bd<CR>
+
+
+noremap <Leader>o :e .<CR>
+noremap <Leader>v :vs .<CR>
+noremap <Leader>h :split .<CR>
+noremap <Leader>= <C-w>=
+
+"----- Telescope
+"" Find files using Telescope command-line sugar.
+" nnoremap <leader>ff <cmd>Telescope find_files<cr>
+" nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+" nnoremap <leader>fb <cmd>Telescope buffers<cr>
+" nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+
+
+"----- Easymotion
+" <Leader>f{char} to move to {char}
+map  <Leader>f <Plug>(easymotion-bd-f)
+nmap <Leader>f <Plug>(easymotion-overwin-f)
+
+" Move to word
+map  <Leader>w <Plug>(easymotion-bd-w)
+nmap <Leader>w <Plug>(easymotion-overwin-w)
