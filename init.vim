@@ -3,6 +3,8 @@ syntax enable
 set background=light
 colorscheme solarized
 
+hi Search ctermbg=224
+
 
 "dein Scripts-----------------------------
 
@@ -19,7 +21,7 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'rhysd/vim-clang-format'
-Plug 'sjl/gundo.vim',
+Plug 'mbbill/undotree'
 Plug 'leafgarland/typescript-vim'
 Plug 'peitalin/vim-jsx-typescript'
 Plug 'dbeniamine/cheat.sh-vim'
@@ -33,6 +35,10 @@ Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 
 Plug 'jiangmiao/auto-pairs'
 
+Plug 'tpope/vim-fugitive'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'ycm-core/YouCompleteMe'
+
 call plug#end()
 
 
@@ -41,6 +47,8 @@ call plug#end()
 " Colemak remapping to use qwerty hjkl
 noremap n j
 noremap e k
+noremap n gj
+noremap e gk
 noremap i l
 
 noremap k n
@@ -67,12 +75,18 @@ let mapleader = " "
 
 noremap <F5> :source ~/.config/nvim/init.vim<CR>:noh<CR>
 
+set exrc
+set relativenumber
+set hidden
+set noswapfile
+set nobackup
+
 set title
 set number
 set autoindent
 set smartindent
 set virtualedit=onemore
-set scrolloff=999
+set scrolloff=12
 set laststatus=2
 set cursorline
 set cursorcolumn
@@ -80,6 +94,12 @@ set showcmd
 set foldmethod=marker
 set hlsearch
 set wrapscan
+set noerrorbells
+set nowrap
+set incsearch
+set undofile
+set undodir=~/.vim/undo
+
 noremap <Esc><Esc> :nohl<CR>
 
 syntax on
@@ -100,6 +120,7 @@ noremap <Leader><Leader><Leader> :wq<CR>
 "delete the header for the explorer
 let g:netrw_banner=0
 let g:netrw_liststyle = 3
+let g:netrw_winsize=25
 
 "----- Disable arrow keys
 inoremap <Left> <Nop>
@@ -126,23 +147,37 @@ noremap <Leader>x :bd<CR>
 
 
 noremap <Leader>o :e .<CR>
-noremap <Leader>v :vs .<CR>
+noremap <Leader>v :vs .<CR> :vertical resize 30<CR>
 noremap <Leader>h :split .<CR>
 noremap <Leader>= <C-w>=
 
 "----- Telescope
 "" Find files using Telescope command-line sugar.
-" nnoremap <leader>ff <cmd>Telescope find_files<cr>
-" nnoremap <leader>fg <cmd>Telescope live_grep<cr>
-" nnoremap <leader>fb <cmd>Telescope buffers<cr>
-" nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 
+" ------ Undotree
+nnoremap <leader>u :UndotreeToggle<CR>
 
-"----- Easymotion
+""----- Easymotion
 " <Leader>f{char} to move to {char}
-map  <Leader>f <Plug>(easymotion-bd-f)
-nmap <Leader>f <Plug>(easymotion-overwin-f)
+" map  <Leader>f <Plug>(easymotion-bd-f)
+" nmap <Leader>f <Plug>(easymotion-overwin-f)
+"
+" ----- Git
+nmap <leader>gs :G<CR>
+
+" YouCompleteMe
+nnoremap <silent> <Leader>gd :YcmCompleter GoTo<CR>
+nnoremap <silent> <Leader>gf :YcmCompleter FixIt<CR>
 
 " Move to word
 map  <Leader>w <Plug>(easymotion-bd-w)
 nmap <Leader>w <Plug>(easymotion-overwin-w)
+
+augroup js
+  autocmd!
+  autocmd BufWritePost *.js,*.jsx,*.ts,*.tsx PrettierAsync
+augroup END
