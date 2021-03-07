@@ -3,7 +3,6 @@ syntax enable
 set background=light
 " colorscheme solarized
 
-
 hi Search ctermbg=224
 
 
@@ -15,6 +14,7 @@ endif
 call plug#begin('~/.vim/plugged')
 
 Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 Plug 'easymotion/vim-easymotion'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -36,6 +36,7 @@ Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 Plug 'tpope/vim-fugitive'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " Plug 'ycm-core/YouCompleteMe'
+Plug 'jiangmiao/auto-pairs'
 
 Plug 'ThePrimeagen/vim-apm'
 
@@ -63,6 +64,8 @@ noremap L I
 " Colemak version of jj <Esc>
 imap nnn <Esc>
 
+nnoremap <silent> <S-k> :bp<CR>
+nnoremap <silent> <S-j> :bn<CR>
 
 nnoremap <S-n> jjj
 nnoremap <S-e> kkk
@@ -74,7 +77,7 @@ vnoremap <S-e> kkk
 " From original vimrc
 let mapleader = " "
 
-noremap <F5> :source ~/.config/nvim/init.vim<CR>:noh<CR>
+noremap <silent> <F5> :source ~/.config/nvim/init.vim<CR>:noh<CR>:echo "Refreshed config!"<CR>
 
 set exrc
 set relativenumber
@@ -143,7 +146,7 @@ noremap <Leader>i :tabe ~/.config/i3/config<CR>
 
 "----- Buffers
 set hidden
-noremap <Leader>b :ls<CR>:b 
+" noremap <Leader>b :ls<CR>:b 
 noremap <Leader>x :bd<CR>
 
 
@@ -156,7 +159,7 @@ noremap <Leader>= <C-w>=
 "" Find files using Telescope command-line sugar.
 nnoremap <leader>ff <cmd>Telescope find_files<cr>
 nnoremap <leader>fg <cmd>Telescope live_grep<cr>
-nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>b <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 
 " ------ Undotree
@@ -170,8 +173,13 @@ map , <Plug>(easymotion-prefix)
 nmap <leader>gs :G<CR>
 
 " YouCompleteMe
-" nnoremap <silent> <Leader>gd :YcmCompleter GoTo<CR>
+nnoremap <silent> <Leader>gd <Plug>(coc-definition) 
 " nnoremap <silent> <Leader>gf :YcmCompleter FixIt<CR>
+
+" ------ Airline
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_theme='angr'
+
 
 augroup js
   autocmd!
