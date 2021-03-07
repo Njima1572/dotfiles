@@ -1,7 +1,8 @@
 " colorscheme ----------------------------
 syntax enable
 set background=light
-colorscheme solarized
+" colorscheme solarized
+
 
 hi Search ctermbg=224
 
@@ -11,7 +12,6 @@ hi Search ctermbg=224
 if &compatible
   set nocompatible               " Be iMproved
 endif
-
 call plug#begin('~/.vim/plugged')
 
 Plug 'vim-airline/vim-airline'
@@ -33,11 +33,12 @@ Plug 'nvim-telescope/telescope.nvim'
 
 Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 
-Plug 'jiangmiao/auto-pairs'
-
 Plug 'tpope/vim-fugitive'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'ycm-core/YouCompleteMe'
+" Plug 'ycm-core/YouCompleteMe'
+
+Plug 'ThePrimeagen/vim-apm'
+
 
 call plug#end()
 
@@ -162,20 +163,15 @@ nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 nnoremap <leader>u :UndotreeToggle<CR>
 
 ""----- Easymotion
-" <Leader>f{char} to move to {char}
-" map  <Leader>f <Plug>(easymotion-bd-f)
-" nmap <Leader>f <Plug>(easymotion-overwin-f)
+map , <Plug>(easymotion-prefix)
+
 "
 " ----- Git
 nmap <leader>gs :G<CR>
 
 " YouCompleteMe
-nnoremap <silent> <Leader>gd :YcmCompleter GoTo<CR>
-nnoremap <silent> <Leader>gf :YcmCompleter FixIt<CR>
-
-" Move to word
-map  <Leader>w <Plug>(easymotion-bd-w)
-nmap <Leader>w <Plug>(easymotion-overwin-w)
+" nnoremap <silent> <Leader>gd :YcmCompleter GoTo<CR>
+" nnoremap <silent> <Leader>gf :YcmCompleter FixIt<CR>
 
 augroup js
   autocmd!
