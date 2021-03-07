@@ -40,6 +40,8 @@ Plug 'jiangmiao/auto-pairs'
 
 Plug 'ThePrimeagen/vim-apm'
 
+Plug 'jparise/vim-graphql'
+Plug 'airblade/vim-gitgutter'
 
 call plug#end()
 
@@ -90,7 +92,7 @@ set number
 set autoindent
 set smartindent
 set virtualedit=onemore
-set scrolloff=12
+set scrolloff=20
 set laststatus=2
 set cursorline
 set cursorcolumn
@@ -99,7 +101,6 @@ set foldmethod=marker
 set hlsearch
 set wrapscan
 set noerrorbells
-set nowrap
 set incsearch
 set undofile
 set undodir=~/.vim/undo
@@ -173,7 +174,7 @@ map , <Plug>(easymotion-prefix)
 nmap <leader>gs :G<CR>
 
 " YouCompleteMe
-nnoremap <silent> <Leader>gd <Plug>(coc-definition) 
+nmap gd :call CocAction('jumpDefinition', 'tab drop') <CR>
 " nnoremap <silent> <Leader>gf :YcmCompleter FixIt<CR>
 
 " ------ Airline
