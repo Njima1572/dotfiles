@@ -4,6 +4,11 @@ alias llr="ls -lR"
 alias v="nvim"
 alias nv="nvim"
 alias mv="mv -i"
+alias ..="cd .."
+alias ...="cd ..."
+alias ....="cd ...."
+alias .....="cd ....."
+alias /="cd /"
 
 
 function copy
