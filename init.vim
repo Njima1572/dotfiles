@@ -1,4 +1,3 @@
-" colorscheme ----------------------------
 syntax enable
 set background=light
 " colorscheme solarized
@@ -19,13 +18,16 @@ Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 Plug 'easymotion/vim-easymotion'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-Plug 'tpope/vim-fugitive'
-Plug 'rhysd/vim-clang-format'
 Plug 'mbbill/undotree'
 Plug 'leafgarland/typescript-vim'
-Plug 'peitalin/vim-jsx-typescript'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'dbeniamine/cheat.sh-vim'
+Plug 'jiangmiao/auto-pairs'
 
+" --- C++
+Plug 'rhysd/vim-clang-format'
+
+" --- Telescope
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope-fzy-native.nvim'
@@ -33,15 +35,22 @@ Plug 'nvim-telescope/telescope.nvim'
 
 Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 
+" --- Git
+Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-" Plug 'ycm-core/YouCompleteMe'
-Plug 'jiangmiao/auto-pairs'
-
-Plug 'ThePrimeagen/vim-apm'
 
 Plug 'jparise/vim-graphql'
-Plug 'airblade/vim-gitgutter'
+
+" --- Rust
+Plug 'rust-lang/rust.vim'
+
+" --- Web development
+Plug 'alvan/vim-closetag'
+Plug 'peitalin/vim-jsx-typescript'
+
+" --- Vim improvement tools
+Plug 'theprimeagen/vim-be-good'
+Plug 'ThePrimeagen/vim-apm'
 
 call plug#end()
 
@@ -64,10 +73,11 @@ noremap K N
 noremap L I
 
 " Colemak version of jj <Esc>
-imap nnn <Esc>
+imap xx <Esc>
 
-nnoremap <silent> <S-k> :bp<CR>
-nnoremap <silent> <S-j> :bn<CR>
+
+nnoremap <silent> <S-i> :bp<CR>
+nnoremap <silent> <S-h> :bn<CR>
 
 nnoremap <S-n> jjj
 nnoremap <S-e> kkk
@@ -115,6 +125,8 @@ set shiftwidth=2
 set softtabstop=2
 set expandtab
 set list listchars=tab:\-\-
+
+map <C-z> <Nop>
 
 
 noremap <Leader><Leader> :w<CR>
@@ -186,7 +198,56 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline_theme='angr'
 
 
+"----- Tag Closing
+" filenames like *.xml, *.html, *.xhtml, ...
+" These are the file extensions where this plugin is enabled.
+"
+let g:closetag_filenames = '*.html,*.xhtml,*.phtml'
+
+" filenames like *.xml, *.xhtml, ...
+" This will make the list of non-closing tags self-closing in the specified files.
+"
+let g:closetag_xhtml_filenames = '*.xhtml,*.jsx'
+
+" filetypes like xml, html, xhtml, ...
+" These are the file types where this plugin is enabled.
+"
+let g:closetag_filetypes = 'html,xhtml,phtml'
+
+" filetypes like xml, xhtml, ...
+" This will make the list of non-closing tags self-closing in the specified files.
+"
+let g:closetag_xhtml_filetypes = 'xhtml,jsx'
+
+" integer value [0|1]
+" This will make the list of non-closing tags case-sensitive (e.g. `<Link>` will be closed while `<link>` won't.)
+"
+let g:closetag_emptyTags_caseSensitive = 1
+
+" dict
+" Disables auto-close if not in a "valid" region (based on filetype)
+"
+let g:closetag_regions = {
+    \ 'typescript.tsx': 'jsxRegion,tsxRegion',
+    \ 'javascript.jsx': 'jsxRegion',
+    \ }
+
+" Shortcut for closing tags, default is '>'
+"
+let g:closetag_shortcut = '>'
+
+" Add > at current position without closing the current tag, default is ''
+"
+let g:closetag_close_shortcut = '<leader>>'
+
+
+
 augroup js
   autocmd!
   autocmd BufWritePost *.js,*.jsx,*.ts,*.tsx PrettierAsync
+augroup END
+
+augroup rust
+  autocmd!
+  autocmd BufWritePost *.rs RustFmt
 augroup END
