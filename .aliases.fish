@@ -8,7 +8,6 @@ alias ..="cd .."
 alias ...="cd ..."
 alias ....="cd ...."
 alias .....="cd ....."
-alias /="cd /"
 
 
 function copy
