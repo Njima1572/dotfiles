@@ -1,0 +1,64 @@
+{
+    "workbench.colorTheme": "Solarized Dark",
+    "vim.leader": "<Space>",
+    "vim.highlightedyank.enable": true, 
+    "vim.highlightedyank.color": "rgba(250, 240, 170, 0.5)",
+    "vim.insertModeKeyBindings": [
+        {
+            "before": ["x", "x"],
+            "after": ["<Esc>"]
+        }
+    ],
+    "vim.normalModeKeyBindingsNonRecursive": [
+        {
+            "before": ["l"],
+            "after": ["i"]
+        },
+        {
+            "before": ["<leader>", "<leader>"],
+            "commands": [":w"]
+        },
+        {
+            "before": ["n"],
+            "after": ["j"]
+        },
+        {
+            "before": ["e"],
+            "after": ["k"]
+        },
+        {
+            "before": ["i"],
+            "after": ["l"]
+        },
+        {
+            "before": ["N"],
+            "after": ["3", "j"]
+        },
+        {
+            "before": ["E"],
+            "after": ["3", "k"]
+        }
+    ],
+    "vim.visualModeKeyBindingsNonRecursive": [
+        {
+            "before": ["n"],
+            "after": ["j"]
+        },
+        {
+            "before": ["e"],
+            "after": ["k"]
+        },
+        {
+            "before": ["i"],
+            "after": ["l"]
+        },
+        {
+            "before": ["N"],
+            "after": ["3", "j"]
+        },
+        {
+            "before": ["E"],
+            "after": ["3", "k"]
+        }
+    ]
+}
