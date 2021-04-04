@@ -3,8 +3,12 @@ alias l="ls"
 alias llr="ls -lR"
 alias v="nvim"
 alias nv="nvim"
-alias py2="python2"
-alias py3="python3"
+alias mv="mv -i"
+alias ..="cd .."
+alias ...="cd ..."
+alias ....="cd ...."
+alias .....="cd ....."
+alias /="cd /"
 
 
 function copy

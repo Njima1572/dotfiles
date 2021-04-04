@@ -173,6 +173,10 @@ map , <Plug>(easymotion-prefix)
 " ----- Git
 nmap <leader>gs :G<CR>
 
+" ----- Execute shell in vim and paste it
+vnoremap <Leader><CR> :!sh<CR>
+nnoremap <Leader><CR> V:!sh<CR>
+
 " YouCompleteMe
 nmap gd :call CocAction('jumpDefinition', 'tab drop') <CR>
 " nnoremap <silent> <Leader>gf :YcmCompleter FixIt<CR>
