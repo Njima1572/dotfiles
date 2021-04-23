@@ -22,10 +22,13 @@ Plug 'mbbill/undotree'
 Plug 'leafgarland/typescript-vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'dbeniamine/cheat.sh-vim'
-Plug 'jiangmiao/auto-pairs'
+Plug 'cohama/lexima.vim'
 
 " --- C++
 Plug 'rhysd/vim-clang-format'
+
+" --- Dart
+Plug 'dart-lang/dart-vim-plugin'
 
 " --- Telescope
 Plug 'nvim-lua/popup.nvim'
@@ -52,6 +55,13 @@ Plug 'peitalin/vim-jsx-typescript'
 Plug 'theprimeagen/vim-be-good'
 Plug 'ThePrimeagen/vim-apm'
 
+" Javascript
+Plug 'mxw/vim-jsx'
+Plug 'pangloss/vim-javascript'
+
+" C++
+Plug 'cjuniet/clang-format.vim'
+
 call plug#end()
 
 
@@ -75,9 +85,8 @@ noremap L I
 " Colemak version of jj <Esc>
 imap xx <Esc>
 
-
-nnoremap <silent> <S-i> :bp<CR>
-nnoremap <silent> <S-h> :bn<CR>
+nnoremap <silent> <S-h> :bp<CR>
+nnoremap <silent> <S-i> :bn<CR>
 
 nnoremap <S-n> jjj
 nnoremap <S-e> kkk
@@ -144,6 +153,7 @@ inoremap <Left> <Nop>
 inoremap <Up> <Nop>
 inoremap <Down> <Nop>
 inoremap <Right> <Nop>
+noremap <C-z> <Nop>
 
 
 nmap <C-h> :wincmd h<CR>
@@ -241,6 +251,10 @@ let g:closetag_shortcut = '>'
 let g:closetag_close_shortcut = '<leader>>'
 
 
+augroup cpp
+  autocmd!
+  autocmd BufWritePost *.cpp,*.h ClangFormat
+augroup END
 
 augroup js
   autocmd!
