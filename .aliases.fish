@@ -8,6 +8,7 @@ alias ..="cd .."
 alias ...="cd ..."
 alias ....="cd ...."
 alias .....="cd ....."
+alias scd='cd ~/Singularity'
 
 
 function copy
