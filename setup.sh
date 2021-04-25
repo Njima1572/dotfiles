@@ -6,6 +6,18 @@ then
   sudo apt install tmux
 fi
 
+if ! command -v cargo &> /dev/null
+then
+  echo "Rust not found installing Rust..." 
+  curl https://sh.rustup.rs -sSf | sh
+fi
+
+if ! command -v alacritty &> /dev/null
+then
+  echo "Rust not found installing Rust..." 
+  cargo install alacritty
+fi
+
 if ! command -v fish &> /dev/null
 then
   echo "Fish not found"
@@ -32,6 +44,12 @@ if [ -f ".vimrc" ]; then
   mv .vimrc .vimrc.bk
 fi
 ln -s $THIS_DIR/.vimrc .
+
+if [ -f ".alacritty.yml" ]; then
+  echo "Found existing .alacritty.yml, moving to .vimrc.bk"
+  mv .alacritty.yml .alacritty.yml.bk
+fi
+ln -s $THIS_DIR/.alacritty.yml .
 
 
 if [ -f ".tmux.conf" ]; then
