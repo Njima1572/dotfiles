@@ -252,6 +252,16 @@ let g:closetag_shortcut = '>'
 "
 let g:closetag_close_shortcut = '<leader>>'
 
+augroup vim
+  autocmd!
+  autocmd bufnewfile *.vim 0r /home/kochi/dotfiles/.header_template.txt
+  autocmd bufnewfile *.vim exe "1," . 5 . "g/File Name :.*/s//File Name : " .expand("%")
+  autocmd bufnewfile *.vim exe "1," . 5 . "g/Creation Date :.*/s//Creation Date : " .strftime("%Y-%m-%d %H:%M")
+  autocmd Bufwritepre,filewritepre *.vim execute "normal ma"
+  autocmd Bufwritepre,filewritepre *.vim exe "1," . 5 . "g/Last Modified :.*/s/Last Modified :.*/Last Modified : " .strftime("%Y-%m-%d %H:%M")
+  autocmd Bufwritepre,filewritepre *.vim exe "1," . 5 . "g/Created By:.*/s/Created By:.*/Created By: " .expand('$USER')
+  autocmd bufwritepost,filewritepost *.vim execute "normal `a"
+augroup END
 
 augroup cpp
   autocmd!
