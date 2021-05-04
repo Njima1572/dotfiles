@@ -2,7 +2,7 @@
 " File Name : init.vim
 " Purpose :
 " Creation Date : 2021-01-15
-" Last Modified : 2021-05-04 12:58
+" Last Modified : 2021-05-04 15:14
 " Created By : kochi
 " ._._._._._._._._._._._._._._._._._._._._.
 
@@ -260,15 +260,34 @@ let g:closetag_shortcut = '>'
 "
 let g:closetag_close_shortcut = '<leader>>'
 
+function GenerateHeader(filetype)
+  if a:filetype == 'vim'
+    echo 'This is a vim file'
+    r/home/kochi/dotfiles/header_template/.header_template.vim
+  elseif a:filetype == 'py'
+    echo 'This is a python file'
+    r/home/kochi/dotfiles/header_template/.header_template.py
+  endif
+  " exe "1," . 6 . "g/File Name :.*/s//File Name : " .expand("%")
+  " exe "1," . 6 . "g/Creation Date :.*/s//Creation Date : " .strftime("%Y-%m-%d %H:%M")
+endfunction
+
 augroup vim
   autocmd!
-  autocmd bufnewfile *.vim 0r /home/kochi/dotfiles/.header_template.txt
-  autocmd bufnewfile *.vim exe "1," . 6 . "g/File Name :.*/s//File Name : " .expand("%")
-  autocmd bufnewfile *.vim exe "1," . 6 . "g/Creation Date :.*/s//Creation Date : " .strftime("%Y-%m-%d %H:%M")
+  autocmd bufnewfile *.vim call GenerateHeader('vim')
   autocmd Bufwritepre,filewritepre *.vim execute "normal ma"
-  autocmd Bufwritepre,filewritepre *.vim exe "1," . 6 . "g/Last Modified :.*/s/Last Modified :.*/Last Modified : " .strftime("%Y-%m-%d %H:%M")
-  autocmd Bufwritepre,filewritepre *.vim exe "1," . 6 . "g/Created By :.*/s/Created By :.*/Created By : " .expand('$USER')
+  autocmd Bufwritepre,filewritepre *.vim exe "1," . 7 . "g/Last Modified :.*/s/Last Modified :.*/Last Modified : " .strftime("%Y-%m-%d %H:%M")
+  autocmd Bufwritepre,filewritepre *.vim exe "1," . 7 . "g/Created By :.*/s/Created By :.*/Created By : " .expand('$USER')
   autocmd bufwritepost,filewritepost *.vim execute "normal `a"
+augroup END
+
+augroup python
+  autocmd!
+  autocmd bufnewfile *.py call GenerateHeader('py')
+  autocmd Bufwritepre,filewritepre *.py execute "normal ma"
+  autocmd Bufwritepre,filewritepre *.py exe "1," . 7 . "g/Last Modified :.*/s/Last Modified :.*/Last Modified : " .strftime("%Y-%m-%d %H:%M")
+  autocmd Bufwritepre,filewritepre *.py exe "1," . 7 . "g/Created By :.*/s/Created By :.*/Created By : " .expand('$USER')
+  autocmd bufwritepost,filewritepost *.py execute "normal `a"
 augroup END
 
 augroup cpp
