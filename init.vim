@@ -61,6 +61,8 @@ Plug 'pangloss/vim-javascript'
 
 " C++
 Plug 'cjuniet/clang-format.vim'
+" --- Singularity
+Plug 'singularityware/singularity.lang'
 
 call plug#end()
 
@@ -85,8 +87,8 @@ noremap L I
 " Colemak version of jj <Esc>
 imap xx <Esc>
 
-nnoremap <silent> <S-h> :bp<CR>
 nnoremap <silent> <S-i> :bn<CR>
+nnoremap <silent> <S-h> :bp<CR>
 
 nnoremap <S-n> jjj
 nnoremap <S-e> kkk

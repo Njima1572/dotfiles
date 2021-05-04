@@ -1,5 +1,5 @@
 {
-    "workbench.colorTheme": "Solarized Dark",
+    "workbench.colorTheme": "Solarized Light",
     "vim.leader": "<Space>",
     "vim.highlightedyank.enable": true, 
     "vim.highlightedyank.color": "rgba(250, 240, 170, 0.5)",
@@ -60,5 +60,6 @@
             "before": ["E"],
             "after": ["3", "k"]
         }
-    ]
+    ],
+    "window.zoomLevel": -1
 }
