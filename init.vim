@@ -1,3 +1,11 @@
+" -.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.
+" File Name : init.vim
+" Purpose :
+" Creation Date : 2021-01-15
+" Last Modified : 2021-05-04 12:58
+" Created By : kochi
+" ._._._._._._._._._._._._._._._._._._._._.
+
 syntax enable
 set background=light
 " colorscheme solarized
@@ -255,11 +263,11 @@ let g:closetag_close_shortcut = '<leader>>'
 augroup vim
   autocmd!
   autocmd bufnewfile *.vim 0r /home/kochi/dotfiles/.header_template.txt
-  autocmd bufnewfile *.vim exe "1," . 5 . "g/File Name :.*/s//File Name : " .expand("%")
-  autocmd bufnewfile *.vim exe "1," . 5 . "g/Creation Date :.*/s//Creation Date : " .strftime("%Y-%m-%d %H:%M")
+  autocmd bufnewfile *.vim exe "1," . 6 . "g/File Name :.*/s//File Name : " .expand("%")
+  autocmd bufnewfile *.vim exe "1," . 6 . "g/Creation Date :.*/s//Creation Date : " .strftime("%Y-%m-%d %H:%M")
   autocmd Bufwritepre,filewritepre *.vim execute "normal ma"
-  autocmd Bufwritepre,filewritepre *.vim exe "1," . 5 . "g/Last Modified :.*/s/Last Modified :.*/Last Modified : " .strftime("%Y-%m-%d %H:%M")
-  autocmd Bufwritepre,filewritepre *.vim exe "1," . 5 . "g/Created By:.*/s/Created By:.*/Created By: " .expand('$USER')
+  autocmd Bufwritepre,filewritepre *.vim exe "1," . 6 . "g/Last Modified :.*/s/Last Modified :.*/Last Modified : " .strftime("%Y-%m-%d %H:%M")
+  autocmd Bufwritepre,filewritepre *.vim exe "1," . 6 . "g/Created By :.*/s/Created By :.*/Created By : " .expand('$USER')
   autocmd bufwritepost,filewritepost *.vim execute "normal `a"
 augroup END
 
