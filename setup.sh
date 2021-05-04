@@ -43,36 +43,36 @@ if [ -f ".vimrc" ]; then
   echo "Found existing .vimrc, moving to .vimrc.bk"
   mv .vimrc .vimrc.bk
 fi
-ln -s $THIS_DIR/.vimrc .
+ln $THIS_DIR/.vimrc .
 
 if [ -f ".alacritty.yml" ]; then
   echo "Found existing .alacritty.yml, moving to .vimrc.bk"
   mv .alacritty.yml .alacritty.yml.bk
 fi
-ln -s $THIS_DIR/.alacritty.yml .
+ln $THIS_DIR/.alacritty.yml .
 
 
 if [ -f ".tmux.conf" ]; then
   echo "Found existing .tmux.conf, moving to .tmux.conf.bk"
   mv .tmux.conf .tmux.conf.bk
 fi
-ln -s $THIS_DIR/.tmux.conf .
+ln  $THIS_DIR/.tmux.conf .
 
 if [ -f ".gitconfig" ]; then
   echo "Found existing .gitconfig, moving to .gitconfig.bk"
   mv .gitconfig .gitconfig.bk
 fi
-ln -s $THIS_DIR/.gitconfig
+ln $THIS_DIR/.gitconfig
 
 
 if [ -f ".config/fish/config.fish" ]; then
   echo "Found existing config.fish, moving to config.fish.bk"
   mv .config/fish/config.fish .config/fish/config.fish.bk
 fi
-ln -s $THIS_DIR/config.fish .config/fish/config.fish
+ln $THIS_DIR/config.fish .config/fish/config.fish
 
 if [ -f ".config/fish/.aliases.fish" ]; then
   echo "Found existing .aliases.fish, moving to .aliases.fish.bk"
   mv .config/fish/.aliases.fish .config/fish/.aliases.fish.bk
 fi
-ln -s $THIS_DIR/.aliases.fish .config/fish/.aliases.fish
+ln $THIS_DIR/.aliases.fish .config/fish/.aliases.fish
