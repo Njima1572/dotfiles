@@ -15,47 +15,47 @@
 "----- Plugin
 set nocompatible
 filetype off
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+" set rtp+=~/.vim/bundle/Vundle.vim
+" call vundle#begin()
 
 packloadall
 
 "----- Color Scheme
-source ~/.vim/colorscheme.vim
+" source ~/.vim/colorscheme.vim
 
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'tpope/vim-fugitive'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'vim-airline/vim-airline'
-Plugin 'jacquesbh/vim-showmarks'
-"Plugin 'easymotion/vim-easymotion'
-Plugin 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plugin 'junegunn/fzf.vim'
-Plugin 'rhysd/vim-clang-format'
-Plugin 'prettier/vim-prettier', { 'do': 'yarn install' }
-Plugin 'sjl/gundo.vim',
-Plugin 'leafgarland/typescript-vim'
-Plugin 'peitalin/vim-jsx-typescript'
-Plugin 'zah/nim.vim'
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'psf/black', { 'tag': '19.10b0' }
-Plugin 'rust-lang/rust.vim'
-Plugin 'dag/vim-fish'
-Plugin 'alvan/vim-closetag'
-Plugin 'dart-lang/dart-vim-plugin'
-Plugin 'natebosch/vim-lsc'
-Plugin 'natebosch/vim-lsc-dart'
-"" An autocompletion plugin but replaced by kite
-" Plugin 'neoclide/coc.nvim', {'branch': 'release'}
-Plugin 'jparise/vim-graphql'
-Plugin 'kiteco/vim-plugin'
-
-call vundle#end()
-filetype plugin indent on
+" Plugin 'VundleVim/Vundle.vim'
+" Plugin 'tpope/vim-fugitive'
+" Plugin 'airblade/vim-gitgutter'
+" Plugin 'vim-airline/vim-airline'
+" Plugin 'jacquesbh/vim-showmarks'
+" "Plugin 'easymotion/vim-easymotion'
+" Plugin 'junegunn/fzf', { 'do': { -> fzf#install() } }
+" Plugin 'junegunn/fzf.vim'
+" Plugin 'rhysd/vim-clang-format'
+" Plugin 'prettier/vim-prettier', { 'do': 'yarn install' }
+" Plugin 'sjl/gundo.vim',
+" Plugin 'leafgarland/typescript-vim'
+" Plugin 'peitalin/vim-jsx-typescript'
+" Plugin 'zah/nim.vim'
+" Plugin 'altercation/vim-colors-solarized'
+" Plugin 'psf/black', { 'tag': '19.10b0' }
+" Plugin 'rust-lang/rust.vim'
+" Plugin 'dag/vim-fish'
+" Plugin 'alvan/vim-closetag'
+" Plugin 'dart-lang/dart-vim-plugin'
+" Plugin 'natebosch/vim-lsc'
+" Plugin 'natebosch/vim-lsc-dart'
+" "" An autocompletion plugin but replaced by kite
+" " Plugin 'neoclide/coc.nvim', {'branch': 'release'}
+" Plugin 'jparise/vim-graphql'
+" Plugin 'kiteco/vim-plugin'
+" 
+" call vundle#end()
+" filetype plugin indent on
 
 
 "----- Refresh vimrc with <F5>
-noremap <F5> :source ~/.vimrc<CR>:noh<CR>
+noremap <silent> <F5> :source ~/.vimrc<CR>:noh<CR>:echo "Refreshed config!"<CR>
 
 "----- Some basic vim stuff
 set title
@@ -71,6 +71,23 @@ set clipboard=unnamedplus
 set guioptions-=T
 set guioptions-=m
 set guioptions-=r
+set incsearch
+
+
+noremap n j
+noremap e k
+noremap n gj
+noremap e gk
+noremap i l
+
+noremap k n
+noremap l i
+noremap I L
+noremap N J
+noremap E K
+noremap K N
+noremap L I
+
 
 set showcmd
 
@@ -111,6 +128,8 @@ inoremap <Up> <Nop>
 inoremap <Down> <Nop>
 inoremap <Right> <Nop>
 
+inoremap <S-Tab> <C-Q><Tab>
+
 "----- Find
 noremap F K
 
@@ -118,18 +137,14 @@ noremap F K
 noremap <S-h> ^
 noremap <S-l> $
 ""---- Scroll Faster
-nmap <S-j> jjj
-nmap <S-k> kkk
+nnoremap <S-n> jjj
+nnoremap <S-e> kkk
 
-vmap <S-j> jjj
-vmap <S-k> kkk
-
-"----- Tryin to add emacs useful bindings
-noremap <C-e> ?\.<CR>:nohl<CR>
-noremap <S-e> /\.<CR>:nohl<CR>
+vnoremap <S-n> jjj
+vnoremap <S-e> kkk
 
 "----- Normal mode shortcut
-imap jj <Esc>
+imap xx <Esc>
 
 "----- Save and quit
 noremap <Leader><Leader> :mkview<CR>:w<CR>
@@ -145,22 +160,16 @@ nmap <C-t> :tabe <C-d>
 nmap <C-s> :vsplit <C-d>
 nmap <F7> :tabp<CR>
 nmap <F8> :tabn<CR>
-
 "----- Scorll Faster
-
-nmap <S-j> jjj
-nmap <S-k> kkk
-vmap <S-j> jjj
-vmap <S-k> kkk
 
 map <C-z> <Nop>
 
 " ------ Move between panes with Ctrl + hjkl *Note map Alt + hjkl for tmux and
 "  win + hjkl for i3
 nmap <C-h> :wincmd h<CR>
-nmap <C-j> :wincmd j<CR>
-nmap <C-k> :wincmd k<CR>
-nmap <C-l> :wincmd l<CR>
+nmap <C-n> :wincmd j<CR>
+nmap <C-e> :wincmd k<CR>
+nmap <C-i> :wincmd l<CR>
 
 nmap <S-j> jjj
 nmap <S-k> kkk

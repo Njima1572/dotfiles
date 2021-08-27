@@ -2,8 +2,8 @@
 " File Name : init.vim
 " Purpose :
 " Creation Date : 2021-01-15
-" Last Modified : 2021-08-26 10:38
-" Created By : kochi
+" Last Modified : 2021-08-26 23:38
+" Created By : Njima1572
 " ._._._._._._._._._._._._._._._._._._._._.
 
 syntax enable
@@ -73,6 +73,11 @@ Plug 'cjuniet/clang-format.vim'
 " --- Singularity
 Plug 'singularityware/singularity.lang'
 
+Plug 'simeji/winresizer'
+
+" --- Firebase
+Plug 'delphinus/vim-firestore'
+
 call plug#end()
 
 
@@ -96,10 +101,9 @@ noremap I L
 noremap K N
 noremap L I
 
+" inserting actual tab instead of expanded tab
+inoremap <S-Tab> <C-Q><Tab>
 nnoremap Y y$
-
-nnoremap k nzzzv
-nnoremap N Nzzzv
 
 inoremap , ,<c-g>U
 inoremap . .<c-g>U
@@ -176,6 +180,15 @@ let g:netrw_banner=0
 let g:netrw_liststyle = 3
 let g:netrw_winsize=25
 
+" ----- Win Resizer
+nnoremap <silent> <C-j> :WinResizerStartResize<CR>
+let g:winresizer_start_key='<C-j>'
+let g:winresizer_keycode_left=104
+let g:winresizer_keycode_down=110
+let g:winresizer_keycode_up=101
+let g:winresizer_keycode_right=105
+let g:winresizer_keycode_mode=115
+
 "----- Disable arrow keys
 inoremap <Left> <Nop>
 inoremap <Up> <Nop>
@@ -213,6 +226,7 @@ nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 nnoremap <leader>b <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 
+
 " ------ Undotree
 nnoremap <leader>u :UndotreeToggle<CR>
 
@@ -223,9 +237,15 @@ map , <Plug>(easymotion-prefix)
 " ----- Git
 nmap <leader>gs :G<CR>
 
+function CreateAndStartEdit(filename)
+  echom a:filename
+  execute "e " .expand("%:h") . "/" . a:filename
+endfunction
+
 " ----- Execute shell in vim and paste it
 vnoremap <Leader><CR> :!sh<CR>
 nnoremap <Leader><CR> V:!sh<CR>
+nnoremap <Leader>c command! -nargs=1 Nf call CreateAndStartEdit(<q-args>)
 
 " YouCompleteMe
 nmap gd :call CocAction('jumpDefinition', 'tab drop') <CR>
@@ -308,31 +328,34 @@ hi ReactLifeCycleMethods ctermfg=204 guifg=#D19A66
 
 function GenerateHeader(filetype)
   if a:filetype == 'vim'
-    echo 'This is a vim file'
     r/home/kochi/dotfiles/header_template/.header_template.vim
+    exec setline(0, '')
   elseif a:filetype == 'py'
-    echo 'This is a python file'
     r/home/kochi/dotfiles/header_template/.header_template.py
+    exec setline(0, '')
   endif
-  " exe "1," . 6 . "g/File Name :.*/s//File Name : " .expand("%")
-  " exe "1," . 6 . "g/Creation Date :.*/s//Creation Date : " .strftime("%Y-%m-%d %H:%M")
+  exe "1," . 8 . "g/File Name :.*/s//File Name : " .expand("%")
+  exe "1," . 8 . "g/Creation Date :.*/s//Creation Date : " .strftime("%Y-%m-%d %H:%M")
+endfunction
+
+function UpdateHeader()
+  execute "normal ma"
+  exe "1," . 8 . "g/Last Modified :.*/s/Last Modified :.*/Last Modified : " .strftime("%Y-%m-%d %H:%M")
+  exe "1," . 8 . "g/Created By :.*/s/Created By :.*/Created By : Njima1572"
+
 endfunction
 
 augroup vim
   autocmd!
   autocmd bufnewfile *.vim call GenerateHeader('vim')
-  autocmd Bufwritepre,filewritepre *.vim execute "normal ma"
-  autocmd Bufwritepre,filewritepre *.vim exe "1," . 7 . "g/Last Modified :.*/s/Last Modified :.*/Last Modified : " .strftime("%Y-%m-%d %H:%M")
-  autocmd Bufwritepre,filewritepre *.vim exe "1," . 7 . "g/Created By :.*/s/Created By :.*/Created By : " .expand('$USER')
+  autocmd Bufwritepre,filewritepre *.vim call UpdateHeader()
   autocmd bufwritepost,filewritepost *.vim execute "normal `a"
 augroup END
 
 augroup python
   autocmd!
   autocmd bufnewfile *.py call GenerateHeader('py')
-  autocmd Bufwritepre,filewritepre *.py execute "normal ma"
-  autocmd Bufwritepre,filewritepre *.py exe "1," . 7 . "g/Last Modified :.*/s/Last Modified :.*/Last Modified : " .strftime("%Y-%m-%d %H:%M")
-  autocmd Bufwritepre,filewritepre *.py exe "1," . 7 . "g/Created By :.*/s/Created By :.*/Created By : " .expand('$USER')
+  autocmd Bufwritepre,filewritepre *.py call UpdateHeader()
   autocmd bufwritepost,filewritepost *.py execute "normal `a"
 augroup END
 
