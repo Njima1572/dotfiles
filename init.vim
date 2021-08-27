@@ -2,7 +2,7 @@
 " File Name : init.vim
 " Purpose :
 " Creation Date : 2021-01-15
-" Last Modified : 2021-08-24 23:16
+" Last Modified : 2021-08-26 10:38
 " Created By : kochi
 " ._._._._._._._._._._._._._._._._._._._._.
 
@@ -345,7 +345,8 @@ augroup js
   autocmd!
   autocmd FileType typescript :set makeprg=tsc
   autocmd BufNewFile,BufRead *.ts,*.tsx,*.jsx set filetype=typescriptreact
-  autocmd BufWritePost *.js,*.jsx,*.ts,*.tsx PrettierAsync
+  autocmd BufNewFile,BufRead *.vue set filetype=vue
+  autocmd BufWritePost *.vue,*.js,*.jsx,*.ts,*.tsx PrettierAsync
 augroup END
 
 augroup rust
