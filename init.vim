@@ -2,7 +2,7 @@
 " File Name : init.vim
 " Purpose :
 " Creation Date : 2021-01-15
-" Last Modified : 2021-08-06 08:37
+" Last Modified : 2021-08-26 23:34
 " Created By : Njima1572
 " ._._._._._._._._._._._._._._._._._._._._.
 
@@ -27,10 +27,10 @@ Plug 'easymotion/vim-easymotion'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'mbbill/undotree'
-Plug 'leafgarland/typescript-vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'dbeniamine/cheat.sh-vim'
 Plug 'cohama/lexima.vim'
+Plug 'wakatime/vim-wakatime'
 
 " --- C++
 Plug 'rhysd/vim-clang-format'
@@ -56,8 +56,9 @@ Plug 'jparise/vim-graphql'
 Plug 'rust-lang/rust.vim'
 
 " --- Web development
+"Plug 'leafgarland/typescript-vim'
 Plug 'alvan/vim-closetag'
-Plug 'peitalin/vim-jsx-typescript'
+"Plug 'peitalin/vim-jsx-typescript'
 
 " --- Vim improvement tools
 Plug 'theprimeagen/vim-be-good'
@@ -82,6 +83,9 @@ call plug#end()
 
 "End dein Scripts-------------------------
 
+" Custom
+source ~/.config/nvim/customs/aoki_surround.vim
+
 " Colemak remapping to use qwerty hjkl
 noremap n j
 noremap e k
@@ -99,6 +103,16 @@ noremap L I
 
 " inserting actual tab instead of expanded tab
 inoremap <S-Tab> <C-Q><Tab>
+nnoremap Y y$
+
+inoremap , ,<c-g>U
+inoremap . .<c-g>U
+inoremap ! !<c-g>U
+inoremap ? ?<c-g>U
+
+" Moving Chunks
+" vnoremap N :m '>+1<CR>gv=gv
+" vnoremap E :m '<-2<CR>gv=gv
 
 " Colemak version of jj <Esc>
 imap xx <Esc>
@@ -106,11 +120,11 @@ imap xx <Esc>
 nnoremap <silent> <S-i> :bn<CR>
 nnoremap <silent> <S-h> :bp<CR>
 
-nnoremap <S-n> jjj
-nnoremap <S-e> kkk
+nnoremap <S-n> jjjjj
+nnoremap <S-e> kkkkk
 
-vnoremap <S-n> jjj
-vnoremap <S-e> kkk
+vnoremap <S-n> jjjjj
+vnoremap <S-e> kkkkk
 
 
 " From original vimrc
@@ -129,7 +143,7 @@ set number
 set autoindent
 set smartindent
 set virtualedit=onemore
-set scrolloff=20
+set scrolloff=40
 set laststatus=2
 set cursorline
 set cursorcolumn
@@ -276,6 +290,9 @@ let g:closetag_regions = {
     \ 'javascript.jsx': 'jsxRegion',
     \ }
 
+let g:typescript_compile_binary = 'tsc'
+let g:typescript_compile_options = ''
+
 " Shortcut for closing tags, default is '>'
 "
 let g:closetag_shortcut = '>'
@@ -283,6 +300,31 @@ let g:closetag_shortcut = '>'
 " Add > at current position without closing the current tag, default is ''
 "
 let g:closetag_close_shortcut = '<leader>>'
+
+" Highlight for tsx
+" dark red
+hi tsxTagName guifg=#E06C75
+hi tsxComponentName guifg=#E06C75
+hi tsxCloseComponentName guifg=#E06C75
+
+" orange
+hi tsxCloseString guifg=#F99575
+hi tsxCloseTag guifg=#F99575
+hi tsxCloseTagName guifg=#F99575
+hi tsxAttributeBraces guifg=#F99575
+hi tsxEqual guifg=#F99575
+
+" yellow
+hi tsxAttrib guifg=#F8BD7F cterm=italic
+
+hi ReactState guifg=#C176A7
+hi ReactProps guifg=#D19A66
+hi ApolloGraphQL guifg=#CB886B
+hi Events ctermfg=204 guifg=#56B6C2
+hi ReduxKeywords ctermfg=204 guifg=#C678DD
+hi ReduxHooksKeywords ctermfg=204 guifg=#C176A7
+hi WebBrowser ctermfg=204 guifg=#56B6C2
+hi ReactLifeCycleMethods ctermfg=204 guifg=#D19A66
 
 function GenerateHeader(filetype)
   if a:filetype == 'vim'
@@ -324,6 +366,8 @@ augroup END
 
 augroup js
   autocmd!
+  autocmd FileType typescript :set makeprg=tsc
+  autocmd BufNewFile,BufRead *.ts,*.tsx,*.jsx set filetype=typescriptreact
   autocmd BufWritePost *.js,*.jsx,*.ts,*.tsx PrettierAsync
 augroup END
 
