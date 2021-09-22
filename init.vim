@@ -2,7 +2,7 @@
 " File Name : init.vim
 " Purpose :
 " Creation Date : 2021-01-15
-" Last Modified : 2021-09-22 13:10
+" Last Modified : 2021-09-22 13:54
 " Created By : Njima1572
 " ._._._._._._._._._._._._._._._._._._._._.
 
@@ -34,8 +34,19 @@ Plug 'wakatime/vim-wakatime'
 Plug 'Shougo/defx.nvim', {'do': ':UpdateRemotePlugins'}
 Plug 'kristijanhusak/defx-icons'
 
+if has('nvim')
+  Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/defx.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
 " --- C++
 Plug 'rhysd/vim-clang-format'
+
+" --- C#
+Plug 'sheerun/vim-polyglot'
+Plug 'OmniSharp/omnisharp-vim'
 
 " --- Dart
 Plug 'dart-lang/dart-vim-plugin'
@@ -237,6 +248,15 @@ nnoremap <leader>u :UndotreeToggle<CR>
 ""----- Easymotion
 map , <Plug>(easymotion-prefix)
 
+" ----- Defx Config
+noremap <Leader>o :e .<CR>
+noremap <Leader>v :vs .<CR> :vertical resize 30<CR>
+noremap <Leader>h :split .<CR>
+noremap <Leader>= <C-w>=
+
+nnoremap <silent><buffer><expr> <CR> defx#do_action('drop')
+
+
 "
 " ----- Git
 nmap <leader>gs :G<CR>
@@ -313,6 +333,9 @@ nnoremap <silent> <Leader>s :GitRootRg<CR>
 " defx
 source ~/dotfiles/defx_bindings.vim
 
+" ------ Coc Stuff
+let g:coc_global_extensions = ['coc-prettier', 'coc-omnisharp']
+
 " Highlight for tsx
 " dark red
 hi tsxTagName guifg=#E06C75
@@ -366,9 +389,9 @@ augroup END
 
 augroup python
   autocmd!
-  autocmd bufnewfile *.py call GenerateHeader('py')
-  autocmd Bufwritepre,filewritepre *.py call UpdateHeader()
-  autocmd bufwritepost,filewritepost *.py execute "normal `a"
+  "autocmd bufnewfile *.py call GenerateHeader('py')
+  "autocmd Bufwritepre,filewritepre *.py call UpdateHeader()
+  "autocmd bufwritepost,filewritepost *.py execute "normal `a"
 augroup END
 
 augroup cpp
@@ -380,6 +403,7 @@ augroup js
   autocmd!
   autocmd FileType typescript :set makeprg=tsc
   autocmd BufNewFile,BufRead *.ts,*.tsx,*.jsx set filetype=typescriptreact
+  autocmd BufNewFile,BufRead *.vue set filetype=vue
   autocmd BufWritePost *.vue,*.js,*.jsx,*.ts,*.tsx PrettierAsync
 augroup END
 

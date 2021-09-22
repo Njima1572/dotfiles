@@ -6,7 +6,6 @@ set -x QT_IM_MODULE fcitx
 set -x WAKATIME_HOME $HOME
 
 
-# direnv settings
 set -x EDITOR nvim
 
 source ~/.config/fish/.aliases.fish
@@ -30,4 +29,21 @@ function fish_mode_prompt
       echo '? '
   end
   set_color normal
+end
+
+source /opt/asdf-vm/asdf.fish
+
+set -x ANDROID_SDK_ROOT /home/kochi/Android/Sdk
+set -x PATH $PATH:$ANDROID_SDK_ROOT/platform-tools
+set -x PATH $PATH:$ANDROID_SDK_ROOT/emulator
+
+set -x GCM_CREDENTIAL_STORE cache
+set -x PS1 $CUSTOM_PS1:$PS1
+set -gx VENV_WRAPPER_SHELL fish
+function venv
+    set result (venv-wrapper $argv)
+
+    if test -n "$result"
+        string join \n $result | source
+    end
 end
