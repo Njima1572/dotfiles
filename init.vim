@@ -2,7 +2,7 @@
 " File Name : init.vim
 " Purpose :
 " Creation Date : 2021-01-15
-" Last Modified : 2021-09-22 13:54
+" Last Modified : 2021-09-22 14:00
 " Created By : Njima1572
 " ._._._._._._._._._._._._._._._._._._._._.
 
@@ -33,14 +33,6 @@ Plug 'dbeniamine/cheat.sh-vim'
 Plug 'wakatime/vim-wakatime'
 Plug 'Shougo/defx.nvim', {'do': ':UpdateRemotePlugins'}
 Plug 'kristijanhusak/defx-icons'
-
-if has('nvim')
-  Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
-else
-  Plug 'Shougo/defx.nvim'
-  Plug 'roxma/nvim-yarp'
-  Plug 'roxma/vim-hug-neovim-rpc'
-endif
 " --- C++
 Plug 'rhysd/vim-clang-format'
 
@@ -250,12 +242,9 @@ map , <Plug>(easymotion-prefix)
 
 " ----- Defx Config
 noremap <Leader>o :e .<CR>
-noremap <Leader>v :vs .<CR> :vertical resize 30<CR>
-noremap <Leader>h :split .<CR>
+"noremap <Leader>v :vs .<CR> :vertical resize 30<CR>
+"noremap <Leader>h :split .<CR>
 noremap <Leader>= <C-w>=
-
-nnoremap <silent><buffer><expr> <CR> defx#do_action('drop')
-
 
 "
 " ----- Git
@@ -328,10 +317,12 @@ let g:closetag_close_shortcut = '<leader>>'
 " ripgrep
 let g:rg_command = 'rg --vimgrep -S'
 command! GitRootRg execute  'cd '.system('git rev-parse --show-toplevel') 'Rg'
+command! GitRootFileRg execute  'cd '.system('git rev-parse --show-toplevel') 'Rg -f'
 nnoremap <silent> <Leader>s :GitRootRg<CR>
+nnoremap <silent> <Leader>f :GitRootRg<CR>
 
 " defx
-source ~/dotfiles/defx_bindings.vim
+source ~/Git/dotfiles/defx_bindings.vim
 
 " ------ Coc Stuff
 let g:coc_global_extensions = ['coc-prettier', 'coc-omnisharp']
