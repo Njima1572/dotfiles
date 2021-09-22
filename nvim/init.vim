@@ -2,7 +2,7 @@
 " File Name : init.vim
 " Purpose :
 " Creation Date : 2021-01-15
-" Last Modified : 2021-09-22 14:10
+" Last Modified : 2021-09-22 14:38
 " Created By : Njima1572
 " ._._._._._._._._._._._._._._._._._._._._.
 
@@ -322,7 +322,7 @@ nnoremap <silent> <Leader>s :GitRootRg<CR>
 nnoremap <silent> <Leader>f :GitRootRg<CR>
 
 " defx
-source ~/Git/dotfiles/defx_bindings.vim
+source ~/.config/nvim/defx_bindings.vim
 
 " ------ Coc Stuff
 let g:coc_global_extensions = ['coc-prettier', 'coc-omnisharp']
