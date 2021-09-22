@@ -47,3 +47,4 @@ function venv
         string join \n $result | source
     end
 end
+fish_vi_key_bindings

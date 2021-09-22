@@ -1,6 +1,6 @@
 THIS_DIR=$PWD
 
-if [! -f "$THIS_DIR/fish/local_config.fish]; then
+if [! -f "$THIS_DIR/fish/local_config.fish"]; then
   echo "Did not find fish/local_config.fish. Creating one..."
   touch $THIS_DIR/fish/local_config.fish
 fi
@@ -81,10 +81,10 @@ if [ -d ".config/fish" ]; then
   echo "Found existing .config/fish, moving to .config/fish.bk"
   mv .config/fish .config/fish.bk
 fi
-ln $THIS_DIR/fish .config/fish
+ln -s $THIS_DIR/fish .config/fish
 
 if [ -d ".config/nvim/" ]; then
-  echo "Found existing .config/nvim, moving to .config/nvim.bk
+  echo "Found existing .config/nvim, moving to .config/nvim.bk"
   mv .config/nvim .config/nvim.bk
 fi
-ln $THIS_DIR/nvim .config/nvim
+ln -s $THIS_DIR/nvim .config/nvim
