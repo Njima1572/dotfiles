@@ -2,7 +2,7 @@
 " File Name : init.vim
 " Purpose :
 " Creation Date : 2021-01-15
-" Last Modified : 2021-08-26 23:34
+" Last Modified : 2021-09-22 12:29
 " Created By : Njima1572
 " ._._._._._._._._._._._._._._._._._._._._.
 
@@ -26,10 +26,10 @@ Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 Plug 'easymotion/vim-easymotion'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+Plug 'jremmen/vim-ripgrep.vim'
 Plug 'mbbill/undotree'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'dbeniamine/cheat.sh-vim'
-Plug 'cohama/lexima.vim'
 Plug 'wakatime/vim-wakatime'
 
 " --- C++
@@ -39,10 +39,10 @@ Plug 'rhysd/vim-clang-format'
 Plug 'dart-lang/dart-vim-plugin'
 
 " --- Telescope
-Plug 'nvim-lua/popup.nvim'
-Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope-fzy-native.nvim'
-Plug 'nvim-telescope/telescope.nvim'
+" Plug 'nvim-lua/popup.nvim'
+" Plug 'nvim-lua/plenary.nvim'
+" Plug 'nvim-telescope/telescope-fzy-native.nvim'
+" Plug 'nvim-telescope/telescope.nvim'
 
 Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 
@@ -84,7 +84,7 @@ call plug#end()
 "End dein Scripts-------------------------
 
 " Custom
-source ~/.config/nvim/customs/aoki_surround.vim
+"source ~/.config/nvim/customs/aoki_surround.vim
 
 " Colemak remapping to use qwerty hjkl
 noremap n j
@@ -100,6 +100,11 @@ noremap E K
 noremap I L
 noremap K N
 noremap L I
+
+" ripgrep
+let g:rg_command = 'rg --vimgrep -S'
+command! GitRootRg execute  'cd '.system('git rev-parse --show-toplevel') 'Rg'
+nnoremap <silent> <Leader>s :GitRootRg<CR>
 
 " inserting actual tab instead of expanded tab
 inoremap <S-Tab> <C-Q><Tab>
@@ -221,10 +226,10 @@ noremap <Leader>= <C-w>=
 
 "----- Telescope
 "" Find files using Telescope command-line sugar.
-nnoremap <leader>ff <cmd>Telescope find_files<cr>
-nnoremap <leader>fg <cmd>Telescope live_grep<cr>
-nnoremap <leader>b <cmd>Telescope buffers<cr>
-nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+" nnoremap <leader>ff <cmd>Telescope find_files<cr>
+" nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+" nnoremap <leader>b <cmd>Telescope buffers<cr>
+" nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 
 
 " ------ Undotree
@@ -368,7 +373,7 @@ augroup js
   autocmd!
   autocmd FileType typescript :set makeprg=tsc
   autocmd BufNewFile,BufRead *.ts,*.tsx,*.jsx set filetype=typescriptreact
-  autocmd BufWritePost *.js,*.jsx,*.ts,*.tsx PrettierAsync
+  autocmd BufWritePost *.vue,*.js,*.jsx,*.ts,*.tsx PrettierAsync
 augroup END
 
 augroup rust
