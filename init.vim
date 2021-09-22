@@ -2,7 +2,7 @@
 " File Name : init.vim
 " Purpose :
 " Creation Date : 2021-01-15
-" Last Modified : 2021-09-22 12:29
+" Last Modified : 2021-09-22 13:10
 " Created By : Njima1572
 " ._._._._._._._._._._._._._._._._._._._._.
 
@@ -31,6 +31,8 @@ Plug 'mbbill/undotree'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'dbeniamine/cheat.sh-vim'
 Plug 'wakatime/vim-wakatime'
+Plug 'Shougo/defx.nvim', {'do': ':UpdateRemotePlugins'}
+Plug 'kristijanhusak/defx-icons'
 
 " --- C++
 Plug 'rhysd/vim-clang-format'
@@ -101,10 +103,6 @@ noremap I L
 noremap K N
 noremap L I
 
-" ripgrep
-let g:rg_command = 'rg --vimgrep -S'
-command! GitRootRg execute  'cd '.system('git rev-parse --show-toplevel') 'Rg'
-nnoremap <silent> <Leader>s :GitRootRg<CR>
 
 " inserting actual tab instead of expanded tab
 inoremap <S-Tab> <C-Q><Tab>
@@ -175,6 +173,7 @@ set list listchars=tab:\-\-
 map <C-z> <Nop>
 
 
+noremap <CR> :w<CR>
 noremap <Leader><Leader> :w<CR>
 noremap <Leader><Leader><Leader> :wq<CR>
 
@@ -220,8 +219,8 @@ noremap <Leader>x :bd<CR>
 
 
 noremap <Leader>o :e .<CR>
-noremap <Leader>v :vs .<CR> :vertical resize 30<CR>
-noremap <Leader>h :split .<CR>
+noremap <Leader>v :Defx<CR>
+"noremap <Leader>h :split .<CR>
 noremap <Leader>= <C-w>=
 
 "----- Telescope
@@ -305,6 +304,14 @@ let g:closetag_shortcut = '>'
 " Add > at current position without closing the current tag, default is ''
 "
 let g:closetag_close_shortcut = '<leader>>'
+
+" ripgrep
+let g:rg_command = 'rg --vimgrep -S'
+command! GitRootRg execute  'cd '.system('git rev-parse --show-toplevel') 'Rg'
+nnoremap <silent> <Leader>s :GitRootRg<CR>
+
+" defx
+source ~/dotfiles/defx_bindings.vim
 
 " Highlight for tsx
 " dark red

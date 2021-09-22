@@ -24,6 +24,7 @@ then
   sudo apt install fish
 fi
 
+
 git clone https://github.com/VundleVim/Vundle.vim.git $THIS_DIR/.vim/bundle/Vundle.vim
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
@@ -63,6 +64,12 @@ if [ -f ".gitconfig" ]; then
   mv .gitconfig .gitconfig.bk
 fi
 ln $THIS_DIR/.gitconfig
+
+if [ -f ".ripgreprc" ]; then
+  echo "Found existing .ripgreprc, moving to .ripgreprc.bk"
+  mv .ripgreprc .ripgreprc.bk
+fi
+ln $THIS_DIR/.ripgreprc
 
 
 if [ -f ".config/fish/config.fish" ]; then

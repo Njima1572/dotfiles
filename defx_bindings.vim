@@ -2,7 +2,7 @@
 " File Name : defx_bindings.vim
 " Purpose : For separating the defx clutter
 " Creation Date : 2021-09-22 12:53
-" Last Modified : 2021-09-22 13:04
+" Last Modified : 2021-09-22 13:10
 " Created By : Njima1572
 " ._._._._._._._._._._._._._._._._._._._._.
 
@@ -31,8 +31,8 @@ function! s:defx_my_settings() abort
   nnoremap <silent><buffer><expr> M defx#do_action('new_multiple_files')
   nnoremap <silent><buffer><expr> C defx#do_action('toggle_columns', 'mark:indent:icon:filename:type:size:time')
   nnoremap <silent><buffer><expr> S defx#do_action('toggle_sort', 'time')
-  nnoremap <silent><buffer><expr> d defx#do_action('remove')
-  nnoremap <silent><buffer><expr> r defx#do_action('rename')
+  "nnoremap <silent><buffer><expr> d defx#do_action('remove')
+  "nnoremap <silent><buffer><expr> r defx#do_action('rename')
   nnoremap <silent><buffer><expr> ! defx#do_action('execute_command')
   nnoremap <silent><buffer><expr> x defx#do_action('execute_system')
   nnoremap <silent><buffer><expr> yy defx#do_action('yank_path')
