@@ -1,5 +1,10 @@
 THIS_DIR=$PWD
 
+if [! -f "$THIS_DIR/fish/local_config.fish]; then
+  echo "Did not find fish/local_config.fish. Creating one..."
+  touch $THIS_DIR/fish/local_config.fish
+fi
+
 if ! command -v tmux &> /dev/null
 then
   echo "tmux not found" 
