@@ -32,8 +32,19 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'dbeniamine/cheat.sh-vim'
 Plug 'wakatime/vim-wakatime'
 
+if has('nvim')
+  Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/defx.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
 " --- C++
 Plug 'rhysd/vim-clang-format'
+
+" --- C#
+Plug 'sheerun/vim-polyglot'
+Plug 'OmniSharp/omnisharp-vim'
 
 " --- Dart
 Plug 'dart-lang/dart-vim-plugin'
@@ -219,10 +230,6 @@ set hidden
 noremap <Leader>x :bd<CR>
 
 
-noremap <Leader>o :e .<CR>
-noremap <Leader>v :vs .<CR> :vertical resize 30<CR>
-noremap <Leader>h :split .<CR>
-noremap <Leader>= <C-w>=
 
 "----- Telescope
 "" Find files using Telescope command-line sugar.
@@ -237,6 +244,15 @@ nnoremap <leader>u :UndotreeToggle<CR>
 
 ""----- Easymotion
 map , <Plug>(easymotion-prefix)
+
+" ----- Defx Config
+noremap <Leader>o :e .<CR>
+noremap <Leader>v :vs .<CR> :vertical resize 30<CR>
+noremap <Leader>h :split .<CR>
+noremap <Leader>= <C-w>=
+
+nnoremap <silent><buffer><expr> <CR> defx#do_action('drop')
+
 
 "
 " ----- Git
@@ -306,6 +322,9 @@ let g:closetag_shortcut = '>'
 "
 let g:closetag_close_shortcut = '<leader>>'
 
+" ------ Coc Stuff
+let g:coc_global_extensions = ['coc-prettier', 'coc-omnisharp']
+
 " Highlight for tsx
 " dark red
 hi tsxTagName guifg=#E06C75
@@ -359,9 +378,9 @@ augroup END
 
 augroup python
   autocmd!
-  autocmd bufnewfile *.py call GenerateHeader('py')
-  autocmd Bufwritepre,filewritepre *.py call UpdateHeader()
-  autocmd bufwritepost,filewritepost *.py execute "normal `a"
+  "autocmd bufnewfile *.py call GenerateHeader('py')
+  "autocmd Bufwritepre,filewritepre *.py call UpdateHeader()
+  "autocmd bufwritepost,filewritepost *.py execute "normal `a"
 augroup END
 
 augroup cpp
