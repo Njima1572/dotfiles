@@ -317,7 +317,7 @@ let g:closetag_close_shortcut = '<leader>>'
 " ripgrep
 let g:rg_command = 'rg --vimgrep -S'
 command! GitRootRg execute  'cd '.system('git rev-parse --show-toplevel') 'Rg'
-command! GitRootFileRg execute  'cd '.system('git rev-parse --show-toplevel') 'Rg -f'
+command! GitRootFileRg execute  'cd '.system('git rev-parse --show-cdup') 'Rg -g'
 nnoremap <silent> <Leader>s :GitRootRg<CR>
 nnoremap <silent> <Leader>f :GitRootRg<CR>
 

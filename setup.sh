@@ -3,7 +3,7 @@ THIS_DIR=$PWD
 if ! command -v tmux &> /dev/null
 then
   echo "tmux not found" 
-  sudo apt install tmux
+  # sudo apt install tmux
 fi
 
 if ! command -v cargo &> /dev/null
@@ -21,7 +21,7 @@ fi
 if ! command -v fish &> /dev/null
 then
   echo "Fish not found"
-  sudo apt install fish
+  # sudo apt install tmux
 fi
 
 

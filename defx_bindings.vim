@@ -58,7 +58,7 @@ call defx#custom#option('_', {
       \ 'show_ignored_files': 0,
       \ 'buffer_name': 'defxplorer',
       \ 'toggle': 1,
-      \ 'columns': 'icons:filename',
+      \ 'columns': 'icon:filename',
       \ 'resume': 1,
       \ })
 
