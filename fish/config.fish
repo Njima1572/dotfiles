@@ -1,3 +1,4 @@
+#!/usr/local/fish
 set VIRTUALENV_DIR /home/$USER/Virtualenv
 
 set -x XMODIFIER @im=fcitx
