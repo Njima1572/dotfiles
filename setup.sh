@@ -72,19 +72,13 @@ fi
 ln $THIS_DIR/.ripgreprc
 
 
-if [ -f ".config/fish/config.fish" ]; then
-  echo "Found existing config.fish, moving to config.fish.bk"
-  mv .config/fish/config.fish .config/fish/config.fish.bk
+if [ -d ".config/fish" ]; then
+  echo "Found existing .config/fish, moving to .config/fish.bk"
+  mv .config/fish .config/fish.bk
 fi
-ln $THIS_DIR/config.fish .config/fish/config.fish
+ln $THIS_DIR/fish .config/fish
 
-if [ -f ".config/fish/.aliases.fish" ]; then
-  echo "Found existing .aliases.fish, moving to .aliases.fish.bk"
-  mv .config/fish/.aliases.fish .config/fish/.aliases.fish.bk
-fi
-ln $THIS_DIR/.aliases.fish .config/fish/.aliases.fish
-
-if [ -f ".config/nvim/" ]; then
+if [ -d ".config/nvim/" ]; then
   echo "Found existing .config/nvim, moving to .config/nvim.bk
   mv .config/nvim .config/nvim.bk
 fi
