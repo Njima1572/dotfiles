@@ -2,7 +2,7 @@
 " File Name : init.vim
 " Purpose :
 " Creation Date : 2021-01-15
-" Last Modified : 2021-09-22 14:00
+" Last Modified : 2021-09-22 14:10
 " Created By : Njima1572
 " ._._._._._._._._._._._._._._._._._._._._.
 
@@ -221,7 +221,7 @@ set hidden
 noremap <Leader>x :bd<CR>
 
 
-noremap <Leader>o :e .<CR>
+noremap <Leader>o :Defx<CR>
 noremap <Leader>v :Defx<CR>
 "noremap <Leader>h :split .<CR>
 noremap <Leader>= <C-w>=

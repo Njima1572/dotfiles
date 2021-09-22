@@ -83,3 +83,9 @@ if [ -f ".config/fish/.aliases.fish" ]; then
   mv .config/fish/.aliases.fish .config/fish/.aliases.fish.bk
 fi
 ln $THIS_DIR/.aliases.fish .config/fish/.aliases.fish
+
+if [ -f ".config/nvim/" ]; then
+  echo "Found existing .config/nvim, moving to .config/nvim.bk
+  mv .config/nvim .config/nvim.bk
+fi
+ln $THIS_DIR/nvim .config/nvim
