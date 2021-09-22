@@ -34,3 +34,4 @@ window-manager: KDE plasma / i3wm
 - direnv templates
 - aws profile
 - fish history ripgrep
+- xkbconfig for different keyboard layout

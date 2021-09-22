@@ -2,7 +2,7 @@
 " File Name : init.vim
 " Purpose :
 " Creation Date : 2021-01-15
-" Last Modified : 2021-09-22 14:38
+" Last Modified : 2021-09-22 16:36
 " Created By : Njima1572
 " ._._._._._._._._._._._._._._._._._._._._.
 
@@ -10,7 +10,6 @@ syntax enable
 set background=light
 " colorscheme solarized
 
-hi Search ctermbg=224
 
 
 "dein Scripts-----------------------------
@@ -125,12 +124,6 @@ imap xx <Esc>
 
 nnoremap <silent> <S-i> :bn<CR>
 nnoremap <silent> <S-h> :bp<CR>
-
-nnoremap <S-n> jjjjj
-nnoremap <S-e> kkkkk
-
-vnoremap <S-n> jjjjj
-vnoremap <S-e> kkkkk
 
 
 " From original vimrc
@@ -317,9 +310,10 @@ let g:closetag_close_shortcut = '<leader>>'
 " ripgrep
 let g:rg_command = 'rg --vimgrep -S'
 command! GitRootRg execute  'cd '.system('git rev-parse --show-toplevel') 'Rg'
-command! GitRootFileRg execute  'cd '.system('git rev-parse --show-cdup') 'Rg -g'
+command! GitRootFileRg execute  'cd '.system('git rev-parse --show-toplevel') 'GFiles'
 nnoremap <silent> <Leader>s :GitRootRg<CR>
-nnoremap <silent> <Leader>f :GitRootRg<CR>
+nnoremap <silent> <Leader>f :GitRootFileRg<CR>
+nnoremap <silent> <Leader>/ :BLines<CR>
 
 " defx
 source ~/.config/nvim/defx_bindings.vim
@@ -351,6 +345,15 @@ hi ReduxKeywords ctermfg=204 guifg=#C678DD
 hi ReduxHooksKeywords ctermfg=204 guifg=#C176A7
 hi WebBrowser ctermfg=204 guifg=#56B6C2
 hi ReactLifeCycleMethods ctermfg=204 guifg=#D19A66
+
+hi Search ctermbg=224
+hi ColorColumn ctermbg=7
+hi Pmenu ctermbg=7
+hi Folded ctermbg=7
+hi ErrorMsg ctermfg=255 guifg=#FFFFFF
+hi Error ctermfg=255
+hi vimError ctermfg=255
+
 
 function GenerateHeader(filetype)
   if a:filetype == 'vim'
