@@ -2,7 +2,7 @@
 " File Name : init.vim
 " Purpose :
 " Creation Date : 2021-01-15
-" Last Modified : 2021-09-22 20:39
+" Last Modified : 2021-09-22 21:09
 " Created By : Njima1572
 " ._._._._._._._._._._._._._._._._._._._._.
 
@@ -83,7 +83,7 @@ Plug 'simeji/winresizer'
 Plug 'delphinus/vim-firestore'
 
 " --- Aoki stuff
-Plug "siberowl/vim-tiny-surround"
+Plug 'siberowl/vim-tiny-surround'
 
 
 call plug#end()
@@ -321,10 +321,16 @@ let g:closetag_close_shortcut = '<leader>>'
 
 " ripgrep
 let g:rg_command = 'rg --vimgrep -S'
-command! GitRootRg execute  'cd '.system('git rev-parse --show-toplevel') 'Rg'
-command! GitRootFileRg execute  'cd '.system('git rev-parse --show-toplevel') 'GFiles'
-nnoremap <silent> <Leader>s :GitRootRg<CR>
-nnoremap <silent> <Leader>f :GitRootFileRg<CR>
+command! GitRootRg execute 'cd '.system('git rev-parse --show-cdup') 'Rg'
+command! GitRootFileRg execute 'cd '.system('git rev-parse --show-cdup') 'GFiles'
+if system('git rev-parse --is-inside-work-tree') == 'true'
+  nnoremap <silent> <Leader>s :GitRootRg<CR>
+  nnoremap <silent> <Leader>f :GitRootFileRg<CR>
+else
+  nnoremap <silent> <Leader>s :Rg<CR>
+  nnoremap <silent> <Leader>f :Files<CR>
+endif
+
 nnoremap <silent> / :BLines<CR>
 
 " defx
