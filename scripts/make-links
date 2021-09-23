@@ -1,0 +1,43 @@
+#!/bin/bash
+DOTFILES_ROOT=$(git rev-parse --show-toplevel)
+
+make_backup_dir(dirname) {
+ if [ -d $dirname ]; then
+  echo "Found existing $dirname, moving to $dirname.bk"
+  mv $dirname $dirname.bk
+ fi
+}
+
+make_backup_file(filename) {
+ if [ -f $dirname ]; then
+  echo "Found existing $filename, moving to $filename.bk"
+  mv $dirname $filename.bk
+ fi
+}
+
+
+cd ~/
+make_backup_dir(".vim")
+ln -s $DOTFILES_ROOT/.vim .
+
+make_backup_file(".vimrc")
+ln $DOTFILES_ROOT/.vimrc .
+
+make_backup_file(".alacritty.yaml")
+ln $DOTFILES_ROOT/.alacritty.yml .
+
+
+make_backup_file(".tmux.conf")
+ln  $DOTFILES_ROOT/.tmux.conf .
+
+make_backup_file(".gitconfig")
+ln $DOTFILES_ROOT/.gitconfig
+
+make_backup_file(".ripgreprc")
+ln $DOTFILES_ROOT/.ripgreprc
+
+make_backup_dir(".config/fish")
+ln -s $DOTFILES_ROOT/fish .config/fish
+
+make_backup_dir(".config/nvim")
+ln -s $DOTFILES_ROOT/nvim .config/nvim

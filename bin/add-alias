@@ -1,0 +1,5 @@
+#!/bin/bash
+
+cat >> ~/.config/fish/local_config.fish << EOM
+alias $1 \"$2\"
+EOM
