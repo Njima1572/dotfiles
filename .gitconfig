@@ -10,8 +10,8 @@
 	ae = add -e
 	ap = add -p
 	au = add -u
-	b = branch
-	ba = branch -a
+	b = branch -vv
+	ba = branch -avv
 	bd = branch -d
 	c = commit -v
 	ca = commit -a -v
@@ -41,3 +41,7 @@
 	editor = nvim
 	autocrlf = input
 	ignorecase = true
+[credential]
+	helper = /usr/local/bin/git-credential-manager-core
+[credential "https://dev.azure.com"]
+	useHttpPath = true
