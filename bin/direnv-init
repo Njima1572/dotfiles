@@ -1,0 +1,12 @@
+#!/bin/bash
+
+
+cat > .envrc <<- EOM
+#!/bin/bash
+export PROJ_ROOT=$PWD
+export PATH=\$PATH:\$PROJ_ROOT/bin
+mkdir \$PROJ_ROOT/bin
+export DIRENV_NAME=$1
+alias pr-root="cd \$PROJ_ROOT"
+EOM
+
