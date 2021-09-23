@@ -5,8 +5,9 @@ cat > .envrc <<- EOM
 #!/bin/bash
 export PROJ_ROOT=$PWD
 export PATH=\$PATH:\$PROJ_ROOT/bin
-mkdir \$PROJ_ROOT/bin
-export DIRENV_NAME=$1
+export DIRENV_NAME=$(basename $PWD)
 alias pr-root="cd \$PROJ_ROOT"
 EOM
+
+mkdir -p bin
 
