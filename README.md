@@ -1,16 +1,29 @@
 # dotfiles
-
 ## Environment
 
 Editor: neovim / occasional VSCode(for live sharing)
 version-manager: asdf / Docker / virtualenvwrapper
-terminal-multiplexer: tmux
+terminal-multiplexer: tmux / tmuxinator
 shell: fish
 keyboard: colemak
 terminal: alacritty / konsole
-window-manager: KDE plasma / i3wm
 
 ## Setting up
+
+### Dependencies
+#### Install `neovim / Vundle`
+#### Install `fish / fisher`
+#### Install `asdf`
+- http://asdf-vm.com/guide/getting-started.html#_1-install-dependencies
+
+Add Plugins
+- asdf plugin add nodejs
+- asdf plugin add ruby
+- asdf plugin add python
+- asdf plugin add rust
+
+#### Install tmux
+- `yay -S tmux` / `sudo apt install tmux` would work fine
 
 ## Files
 
@@ -31,7 +44,8 @@ window-manager: KDE plasma / i3wm
 1. `init.vim` the config file for neovim
 
 ### Upcoming features
-- direnv templates
-- aws profile
-- fish history ripgrep
-- xkbconfig for different keyboard layout
+- [x] direnv templates
+- [ ] aws profile
+- [ ] fish history ripgrep
+- [ ] xkbconfig for different keyboard layout
+- [ ] i3 config
