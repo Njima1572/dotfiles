@@ -2,7 +2,7 @@
 " File Name : init.vim
 " Purpose :
 " Creation Date : 2021-01-15
-" Last Modified : 2021-09-23 08:32
+" Last Modified : 2021-09-23 09:42
 " Created By : Njima1572
 " ._._._._._._._._._._._._._._._._._._._._.
 
@@ -25,13 +25,14 @@ Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 Plug 'easymotion/vim-easymotion'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-Plug 'jremmen/vim-ripgrep.vim'
+"Plug 'jremmen/vim-ripgrep.vim'
 Plug 'mbbill/undotree'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'dbeniamine/cheat.sh-vim'
 Plug 'wakatime/vim-wakatime'
 Plug 'Shougo/defx.nvim', {'do': ':UpdateRemotePlugins'}
 Plug 'kristijanhusak/defx-icons'
+Plug 'jiangmiao/auto-pairs'
 " --- C++
 Plug 'rhysd/vim-clang-format'
 
