@@ -2,7 +2,7 @@
 " File Name : init.vim
 " Purpose :
 " Creation Date : 2021-01-15
-" Last Modified : 2021-09-22 16:36
+" Last Modified : 2021-09-22 20:06
 " Created By : Njima1572
 " ._._._._._._._._._._._._._._._._._._._._.
 
@@ -104,6 +104,8 @@ noremap E K
 noremap I L
 noremap K N
 noremap L I
+
+tnoremap <C-e> <C-p>
 
 
 " inserting actual tab instead of expanded tab
@@ -215,7 +217,7 @@ noremap <Leader>x :bd<CR>
 
 
 noremap <Leader>o :Defx<CR>
-noremap <Leader>v :Defx<CR>
+noremap <Leader>v :vs ++resize=30 +Defx<CR>
 "noremap <Leader>h :split .<CR>
 noremap <Leader>= <C-w>=
 
@@ -234,7 +236,7 @@ nnoremap <leader>u :UndotreeToggle<CR>
 map , <Plug>(easymotion-prefix)
 
 " ----- Defx Config
-noremap <Leader>o :e .<CR>
+"noremap <Leader>o :e .<CR>
 "noremap <Leader>v :vs .<CR> :vertical resize 30<CR>
 "noremap <Leader>h :split .<CR>
 noremap <Leader>= <C-w>=

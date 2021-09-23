@@ -2,7 +2,7 @@
 " File Name : defx_bindings.vim
 " Purpose : For separating the defx clutter
 " Creation Date : 2021-09-22 12:53
-" Last Modified : 2021-09-22 14:07
+" Last Modified : 2021-09-22 19:58
 " Created By : Njima1572
 " ._._._._._._._._._._._._._._._._._._._._.
 
@@ -22,7 +22,7 @@ function! s:defx_my_settings() abort
   nnoremap <silent><buffer><expr> c defx#do_action('copy')
   nnoremap <silent><buffer><expr> m defx#do_action('move')
   nnoremap <silent><buffer><expr> p defx#do_action('paste')
-  nnoremap <silent><buffer><expr> l defx#do_action('open')
+  nnoremap <silent><buffer><expr> i defx#do_action('open')
   nnoremap <silent><buffer><expr> E defx#do_action('open', 'vsplit')
   nnoremap <silent><buffer><expr> P defx#do_action('open', 'pedit')
   nnoremap <silent><buffer><expr> o defx#do_action('open_or_close_tree')
@@ -40,7 +40,7 @@ function! s:defx_my_settings() abort
   nnoremap <silent><buffer><expr> ; defx#do_action('repeat')
   nnoremap <silent><buffer><expr> h defx#do_action('cd', ['..'])
   nnoremap <silent><buffer><expr> ~ defx#do_action('cd')
-  nnoremap <silent><buffer><expr> q defx#do_action('quit')
+  nnoremap <silent><buffer><expr> q defx#do_action('quit')<CR>:x<CR>
   nnoremap <silent><buffer><expr> <Space> defx#do_action('toggle_select') . 'j'
   nnoremap <silent><buffer><expr> * defx#do_action('toggle_select_all')
   nnoremap <silent><buffer><expr> j line('.') == line('$') ? 'gg' : 'j'
@@ -52,10 +52,7 @@ endfunction
 
 " Set appearance
 call defx#custom#option('_', {
-      \ 'winwidth': 30,
-      \ 'split': 'vertical',
-      \ 'direction': 'topleft',
-      \ 'show_ignored_files': 0,
+      \ 'show_ignored_files': 1,
       \ 'buffer_name': 'defxplorer',
       \ 'toggle': 1,
       \ 'columns': 'icon:filename',
