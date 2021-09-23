@@ -1,6 +1,12 @@
 # Colors (Gruvbox light)
 font:
-  size: 5.5
+  size: 10
+  normal: 
+    family: "Hack"
+  bold: 
+    family: "Hack"
+  italic: 
+    family: "Hack"
 
 colors:
   # Default colors

@@ -17,6 +17,7 @@ make_backup_file() {
 
 
 cd ~/
+mkdir -p .config
 make_backup_dir ".vim"
 ln -s $DOTFILES_ROOT/.vim .
 
