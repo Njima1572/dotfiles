@@ -10,6 +10,8 @@ set -x EDITOR nvim
 
 source ~/.config/fish/aliases.fish
 source ~/.config/fish/local_config.fish
+source ~/.config/fish/vi_mode_bindings.fish
+
 
 function fish_mode_prompt
   switch $fish_bind_mode
