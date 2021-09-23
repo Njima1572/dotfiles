@@ -2,7 +2,7 @@
 " File Name : init.vim
 " Purpose :
 " Creation Date : 2021-01-15
-" Last Modified : 2021-09-22 21:09
+" Last Modified : 2021-09-23 08:32
 " Created By : Njima1572
 " ._._._._._._._._._._._._._._._._._._._._.
 
@@ -85,9 +85,14 @@ Plug 'delphinus/vim-firestore'
 " --- Aoki stuff
 Plug 'siberowl/vim-tiny-surround'
 
+" --- Instant nvim (nvim liveshare)
+" Plug 'jbyuki/instant.nvim'
+
 
 call plug#end()
 
+" Instant Nvim config
+" let g:instant_username = 'njima1572'
 
 "End dein Scripts-------------------------
 

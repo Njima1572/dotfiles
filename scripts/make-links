@@ -42,3 +42,6 @@ ln -s $DOTFILES_ROOT/fish .config/fish
 
 make_backup_dir ".config/nvim"
 ln -s $DOTFILES_ROOT/nvim .config/nvim
+
+make_backup_dir ".config/tmuxinator"
+ln -s $DOTFILES_ROOT/tmuxinator .config/tmuxinator
