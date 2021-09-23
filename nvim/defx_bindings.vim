@@ -2,7 +2,7 @@
 " File Name : defx_bindings.vim
 " Purpose : For separating the defx clutter
 " Creation Date : 2021-09-22 12:53
-" Last Modified : 2021-09-22 21:36
+" Last Modified : 2021-09-23 09:10
 " Created By : Njima1572
 " ._._._._._._._._._._._._._._._._._._._._.
 
@@ -52,7 +52,7 @@ endfunction
 
 " Set appearance
 call defx#custom#option('_', {
-      \ 'show_ignored_files': 1,
+      \ 'show_ignored_files': 0,
       \ 'buffer_name': 'defxplorer',
       \ 'toggle': 1,
       \ 'columns': 'icon:filename',
