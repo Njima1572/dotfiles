@@ -7,7 +7,7 @@ arch:
 	yay -S $(PKGS)
 
 debian:
-	sudo apt install -y $(PKGS)
+	apt install -y $(PKGS)
 
 mac:
 	brew install $(PKGS)
