@@ -49,3 +49,4 @@ Add Plugins
 - [ ] fish history ripgrep
 - [ ] xkbconfig for different keyboard layout
 - [ ] i3 config
+- [ ] install script (for arch / debian / macOS)
