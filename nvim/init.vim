@@ -2,7 +2,7 @@
 " File Name : init.vim
 " Purpose :
 " Creation Date : 2021-01-15
-" Last Modified : 2021-09-22 20:06
+" Last Modified : 2021-09-22 20:39
 " Created By : Njima1572
 " ._._._._._._._._._._._._._._._._._._._._.
 
@@ -81,6 +81,10 @@ Plug 'simeji/winresizer'
 
 " --- Firebase
 Plug 'delphinus/vim-firestore'
+
+" --- Aoki stuff
+Plug "siberowl/vim-tiny-surround"
+
 
 call plug#end()
 
@@ -196,13 +200,19 @@ inoremap <Left> <Nop>
 inoremap <Up> <Nop>
 inoremap <Down> <Nop>
 inoremap <Right> <Nop>
+
+nnoremap <silent> <Left> :vertical resize +5<CR>
+nnoremap <silent> <Up> :resize -5<CR>
+nnoremap <silent> <Down> :resize +5<CR>
+nnoremap <silent> <Right> :vertical resize -5<CR>
+
 noremap <C-z> <Nop>
 
 
-nmap <C-h> :wincmd h<CR>
-nmap <C-n> :wincmd j<CR>
-nmap <C-e> :wincmd k<CR>
-nmap <C-i> :wincmd l<CR>
+nmap <silent> <C-h> :wincmd h<CR>
+nmap <silent> <C-n> :wincmd j<CR>
+nmap <silent> <C-e> :wincmd k<CR>
+nmap <silent> <C-i> :wincmd l<CR>
 
 
 " ~/.vimrc
@@ -217,7 +227,7 @@ noremap <Leader>x :bd<CR>
 
 
 noremap <Leader>o :Defx<CR>
-noremap <Leader>v :vs ++resize=30 +Defx<CR>
+noremap <Leader>v :vs +Defx<CR>:vertical resize 30<CR>
 "noremap <Leader>h :split .<CR>
 noremap <Leader>= <C-w>=
 
@@ -315,7 +325,7 @@ command! GitRootRg execute  'cd '.system('git rev-parse --show-toplevel') 'Rg'
 command! GitRootFileRg execute  'cd '.system('git rev-parse --show-toplevel') 'GFiles'
 nnoremap <silent> <Leader>s :GitRootRg<CR>
 nnoremap <silent> <Leader>f :GitRootFileRg<CR>
-nnoremap <silent> <Leader>/ :BLines<CR>
+nnoremap <silent> / :BLines<CR>
 
 " defx
 source ~/.config/nvim/defx_bindings.vim

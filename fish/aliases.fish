@@ -6,6 +6,7 @@ alias nv="nvim"
 alias mv="mv -i"
 alias ..="cd .."
 alias scd='cd ~/Singularity'
+alias mux=tmuxinator
 
 
 function copy
