@@ -12,7 +12,7 @@
 	au = add -u
 	b = branch -vv
 	ba = branch -avv
-	bd = branch -d
+	bd = branch -dv
 	c = commit -v
 	ca = commit -a -v
 	ch = checkout
@@ -45,3 +45,5 @@
 	helper = /usr/local/bin/git-credential-manager-core
 [credential "https://dev.azure.com"]
 	useHttpPath = true
+[init]
+	defaultBranch = main
