@@ -2,7 +2,7 @@
 " File Name : init.vim
 " Purpose :
 " Creation Date : 2021-01-15
-" Last Modified : 2021-09-23 23:25
+" Last Modified : 2021-09-24 18:29
 " Created By : Njima1572
 " ._._._._._._._._._._._._._._._._._._._._.
 
@@ -380,22 +380,22 @@ hi Error ctermfg=255
 hi vimError ctermfg=255
 
 
-function GenerateHeader(filetype)
-  if a:filetype == 'vim'
-    r/home/kochi/dotfiles/header_template/.header_template.vim
-    exec setline(0, '')
-  elseif a:filetype == 'py'
-    r/home/kochi/dotfiles/header_template/.header_template.py
-    exec setline(0, '')
-  endif
-  exe "1," . 8 . "g/File Name :.*/s//File Name : " .expand("%")
-  exe "1," . 8 . "g/Creation Date :.*/s//Creation Date : " .strftime("%Y-%m-%d %H:%M")
-endfunction
+" function GenerateHeader(filetype)
+"   if a:filetype == 'vim'
+"     r/home/kochi/Git/dotfiles/header_template/.header_template.vim
+"     exec setline(0, '')
+"   elseif a:filetype == 'py'
+"     r/home/kochi/Git/dotfiles/header_template/.header_template.py
+"     exec setline(0, '')
+"   endif
+"   exe '1,' . 8 . 'g/File Name :.*/s//File Name : ' .expand('%')
+"   exe '1,' . 8 . 'g/Creation Date :.*/s//Creation Date : ' .strftime('%Y-%m-%d %H:%M')
+" endfunction
 
 function UpdateHeader()
-  execute "normal ma"
-  exe "1," . 8 . "g/Last Modified :.*/s/Last Modified :.*/Last Modified : " .strftime("%Y-%m-%d %H:%M")
-  exe "1," . 8 . "g/Created By :.*/s/Created By :.*/Created By : Njima1572"
+  execute 'normal ma'
+  exe '1,' . 8 . 'g/Last Modified :.*/s/Last Modified :.*/Last Modified : ' .strftime('%Y-%m-%d %H:%M')
+  exe '1,' . 8 . 'g/Created By :.*/s/Created By :.*/Created By : Njima1572'
 
 endfunction
 
@@ -403,14 +403,14 @@ augroup vim
   autocmd!
   autocmd bufnewfile *.vim call GenerateHeader('vim')
   autocmd Bufwritepre,filewritepre *.vim call UpdateHeader()
-  autocmd bufwritepost,filewritepost *.vim execute "normal `a"
+  autocmd bufwritepost,filewritepost *.vim execute 'normal `a'
 augroup END
 
 augroup python
   autocmd!
   "autocmd bufnewfile *.py call GenerateHeader('py')
   "autocmd Bufwritepre,filewritepre *.py call UpdateHeader()
-  "autocmd bufwritepost,filewritepost *.py execute "normal `a"
+  "autocmd bufwritepost,filewritepost *.py execute 'normal `a'
 augroup END
 
 augroup cpp
