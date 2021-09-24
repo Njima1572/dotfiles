@@ -2,7 +2,7 @@
 " File Name : init.vim
 " Purpose :
 " Creation Date : 2021-01-15
-" Last Modified : 2021-09-23 09:42
+" Last Modified : 2021-09-23 23:25
 " Created By : Njima1572
 " ._._._._._._._._._._._._._._._._._._._._.
 
@@ -99,6 +99,7 @@ call plug#end()
 
 " Custom
 "source ~/.config/nvim/customs/aoki_surround.vim
+let g:python3_host_prog = '~/.asdf/shims/python3'
 
 " Colemak remapping to use qwerty hjkl
 noremap n j

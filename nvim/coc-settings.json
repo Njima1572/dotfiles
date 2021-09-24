@@ -1,4 +1,8 @@
 {
   "coc.preferences.formatOnSaveFiletypes": ["typescript", "typescriptreact", "csharp", "c#", "cs", "python"],
-  "python.formatting.provider": "yapf"
+  "python.formatting.provider": "black",
+  "python.formatting.blackPath": "~/.asdf/shims/black",
+  "python.linting.mypyPath": "~/.asdf/shims/mypy",
+  "python.linting.mypyEnabled": true,
+  "python.linting.flake8Enabled": true
 }
