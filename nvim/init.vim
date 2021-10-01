@@ -2,7 +2,7 @@
 " File Name : init.vim
 " Purpose :
 " Creation Date : 2021-01-15
-" Last Modified : 2021-09-25 09:55
+" Last Modified : 2021-10-01 10:26
 " Created By : Njima1572
 " ._._._._._._._._._._._._._._._._._._._._.
 
@@ -48,6 +48,8 @@ Plug 'dart-lang/dart-vim-plugin'
 " Plug 'nvim-lua/plenary.nvim'
 " Plug 'nvim-telescope/telescope-fzy-native.nvim'
 " Plug 'nvim-telescope/telescope.nvim'
+
+Plug 'neovim/nvim-lspconfig'
 
 Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 
@@ -237,6 +239,7 @@ noremap <Leader>x :bd<CR>
 
 noremap <Leader>o :Defx<CR>
 noremap <Leader>v :vs +Defx<CR>:vertical resize 30<CR>
+noremap <Leader>h :sp +Defx<CR>
 "noremap <Leader>h :split .<CR>
 noremap <Leader>= <C-w>=
 
