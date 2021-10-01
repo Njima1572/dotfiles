@@ -15,6 +15,7 @@
 	bd = branch -dv
 	c = commit -v
 	ca = commit -a -v
+	cm = commit --amend --no-edit
 	ch = checkout
 	chb = checkout -b
 	d = diff
