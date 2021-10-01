@@ -30,7 +30,8 @@ then
 fi
 
 
-git clone https://github.com/VundleVim/Vundle.vim.git $THIS_DIR/.vim/bundle/Vundle.vim
+# Submodules
+git clone https://github.com/junegunn/vim-plug.git $THIS_DIR/.vim/plugged
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 mkdir -p $THIS_DIR/.vim/undo
