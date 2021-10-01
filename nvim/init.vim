@@ -2,7 +2,7 @@
 " File Name : init.vim
 " Purpose :
 " Creation Date : 2021-01-15
-" Last Modified : 2021-09-24 18:29
+" Last Modified : 2021-09-25 09:55
 " Created By : Njima1572
 " ._._._._._._._._._._._._._._._._._._._._.
 
@@ -64,6 +64,8 @@ Plug 'rust-lang/rust.vim'
 "Plug 'leafgarland/typescript-vim'
 Plug 'alvan/vim-closetag'
 "Plug 'peitalin/vim-jsx-typescript'
+Plug 'ap/vim-css-color'
+
 
 " --- Vim improvement tools
 Plug 'theprimeagen/vim-be-good'
@@ -344,7 +346,7 @@ nnoremap <silent> / :BLines<CR>
 source ~/.config/nvim/defx_bindings.vim
 
 " ------ Coc Stuff
-let g:coc_global_extensions = ['coc-prettier', 'coc-omnisharp']
+let g:coc_global_extensions = ['coc-prettier', 'coc-omnisharp', 'coc-pyright']
 
 " Highlight for tsx
 " dark red
@@ -373,7 +375,7 @@ hi ReactLifeCycleMethods ctermfg=204 guifg=#D19A66
 
 hi Search ctermbg=224
 hi ColorColumn ctermbg=7
-hi Pmenu ctermbg=7
+hi Pmenu ctermbg=lightmagenta
 hi Folded ctermbg=7
 hi ErrorMsg ctermfg=255 guifg=#FFFFFF
 hi Error ctermfg=255
@@ -422,7 +424,7 @@ augroup js
   autocmd!
   autocmd FileType typescript :set makeprg=tsc
   autocmd BufNewFile,BufRead *.ts,*.tsx,*.jsx set filetype=typescriptreact
-  autocmd BufNewFile,BufRead *.vue set filetype=vue
+  "autocmd BufNewFile,BufRead *.vue set filetype=vue
   autocmd BufWritePost *.vue,*.js,*.jsx,*.ts,*.tsx PrettierAsync
 augroup END
 
