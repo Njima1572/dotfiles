@@ -2,7 +2,7 @@
 " File Name : init.vim
 " Purpose :
 " Creation Date : 2021-01-15
-" Last Modified : 2021-10-01 10:26
+" Last Modified : 2021-10-15 11:30
 " Created By : Njima1572
 " ._._._._._._._._._._._._._._._._._._._._.
 
@@ -104,6 +104,8 @@ call plug#end()
 " Custom
 "source ~/.config/nvim/customs/aoki_surround.vim
 let g:python3_host_prog = '~/.asdf/shims/python3'
+
+let g:vue_disable_pre_processors=1
 
 " Colemak remapping to use qwerty hjkl
 noremap n j
@@ -427,8 +429,8 @@ augroup js
   autocmd!
   autocmd FileType typescript :set makeprg=tsc
   autocmd BufNewFile,BufRead *.ts,*.tsx,*.jsx set filetype=typescriptreact
-  "autocmd BufNewFile,BufRead *.vue set filetype=vue
-  autocmd BufWritePost *.vue,*.js,*.jsx,*.ts,*.tsx PrettierAsync
+  autocmd BufNewFile,BufRead *.vue set filetype=vue
+  "autocmd BufWritePost *.vue,*.js,*.jsx,*.ts,*.tsx PrettierAsync
 augroup END
 
 augroup rust
