@@ -351,7 +351,7 @@ nnoremap <silent> / :BLines<CR>
 source ~/.config/nvim/defx_bindings.vim
 
 " ------ Coc Stuff
-let g:coc_global_extensions = ['coc-prettier', 'coc-omnisharp', 'coc-pyright']
+let g:coc_global_extensions = ['coc-prettier', 'coc-omnisharp', 'coc-pyright', 'coc-rust-analyzer']
 
 " Highlight for tsx
 " dark red
