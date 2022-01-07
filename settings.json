@@ -1,6 +1,7 @@
 {
     "workbench.colorTheme": "Solarized Light",
     "vim.leader": "<Space>",
+    "vim.easymotion": true,
     "vim.highlightedyank.enable": true,
     "vim.highlightedyank.color": "rgba(250, 240, 170, 0.5)",
     "vim.insertModeKeyBindings": [
@@ -83,6 +84,7 @@
             ]
         }
     ],
+    "scrolloff.alwaysCenter": true,
     "window.zoomLevel": -1,
     "editor.formatOnSave": true,
     "yaml.customTags": [
@@ -114,5 +116,6 @@
         "!Split",
         "!Split sequence"
     ],
-    "yaml.validate": false
+    "yaml.validate": false,
+    "redhat.telemetry.enabled": true
 }
