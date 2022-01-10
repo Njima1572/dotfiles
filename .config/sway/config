@@ -19,7 +19,17 @@ set $term alacritty
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
 # set $menu dmenu_path | dmenu | xargs swaymsg exec --
-set $menu rofi -show run -show-icons
+set $menu rofi -show combi -show-icons
+
+xwayland enable
+exec --no-startup-id fcitx5 -d
+
+client.focused #0099cc #339977 #ffffff
+
+font pango:hack 8
+
+gaps outer 10
+gaps inner 10
 
 ### Output configuration
 #
@@ -235,5 +245,14 @@ bar {
     }
 }
 
+#
+# Alacritty color config
+#
+
+set $light_color solarized_light.yaml
+set $dark_color solarized_dark.yaml
+
+bindsym $mod+Shift+m exec alacritty-colorscheme -V toggle $light_color $dark_color
+bindsym $mod+Shift+b exec notify-send "Alacritty Colorscheme" `alacritty-colorscheme status`
 
 include /etc/sway/config.d/*
