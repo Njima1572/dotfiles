@@ -7,7 +7,8 @@
 " ._._._._._._._._._._._._._._._._._._._._.
 
 syntax enable
-set background=light
+set background=dark
+colorscheme solarized
 
 let mapleader = " "
 
@@ -87,3 +88,6 @@ let g:typescript_compile_options = ''
 let g:closetag_shortcut = '>'
 let g:closetag_close_shortcut = '<leader>>'
 
+
+" ------ Coc Stuff
+let g:coc_global_extensions = ['coc-prettier', 'coc-omnisharp', 'coc-pyright', 'coc-rust-analyzer']

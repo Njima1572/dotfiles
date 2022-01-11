@@ -1,0 +1,9 @@
+#!/bin/bash
+
+mkdir -p $HOME/.config/nvim
+ln -s $PWD $HOME/.config/nvim
+
+pip3 install pynvim
+
+nvim +PlugInstall +qall
+nvim +UpdateRemotePlugin +qall
