@@ -21,6 +21,7 @@ set $term alacritty
 # set $menu dmenu_path | dmenu | xargs swaymsg exec --
 set $menu rofi -show combi -show-icons
 
+
 xwayland enable
 exec --no-startup-id fcitx5 -d
 
@@ -31,10 +32,14 @@ font pango:hack 8
 gaps outer 10
 gaps inner 10
 
+# Not working
+# set $opacity 0.8
+# for_window [class=".*"] opacity set $opacity
+
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
+output * bg /home/kochi/Pictures/Background/dbphxbv-c059b4db-9fb8-429c-a42b-7fbd359e3669.png fill
 #
 # Example configuration:
 #
@@ -232,17 +237,18 @@ bindsym $mod+r mode "resize"
 #
 # Read `man 5 sway-bar` for more information about this section.
 bar {
-    position top
-
-    # When the status_command prints a new line to stdout, swaybar updates.
-    # The default just shows the current date and time.
-    status_command while date +'%Y-%m-%d %l:%M:%S %p'; do sleep 1; done
-
-    colors {
-        statusline #ffffff
-        background #323232
-        inactive_workspace #32323200 #32323200 #5c5c5c
-    }
+    swaybar_command waybar
+#     position top
+# 
+#     # When the status_command prints a new line to stdout, swaybar updates.
+#     # The default just shows the current date and time.
+#     # status_command while date +'%Y-%m-%d %l:%M:%S %p'; do sleep 1; done
+# 
+#     colors {
+#         statusline #ffffff
+#         background #323232
+#         inactive_workspace #32323200 #32323200 #5c5c5c
+#     }
 }
 
 #
@@ -254,5 +260,11 @@ set $dark_color solarized_dark.yaml
 
 bindsym $mod+Shift+m exec alacritty-colorscheme -V toggle $light_color $dark_color
 bindsym $mod+Shift+b exec notify-send "Alacritty Colorscheme" `alacritty-colorscheme status`
+
+set $lock swaylock-blur
+bindsym $mod+Shift+l exec $lock
+
+# Executes swaylock on lid open (It is not intuitive)
+bindswitch --reload --locked lid:on exec $lock
 
 include /etc/sway/config.d/*

@@ -2,7 +2,7 @@
 " File Name : defx_bindings.vim
 " Purpose : For separating the defx clutter
 " Creation Date : 2021-09-22 12:53
-" Last Modified : 2021-09-23 09:10
+" Last Modified : 2022-01-11 11:33
 " Created By : Njima1572
 " ._._._._._._._._._._._._._._._._._._._._.
 
