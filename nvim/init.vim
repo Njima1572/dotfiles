@@ -6,7 +6,6 @@
 " Created By : Njima1572
 " ._._._._._._._._._._._._._._._._._._._._.
 
-"dein Scripts-----------------------------
 if &compatible
   set nocompatible               " Be iMproved
 endif
@@ -22,3 +21,8 @@ source ~/.config/nvim/configs/defx_bindings.vim
 if filereadable(expand("~/.vimrc_background"))
   source ~/.vimrc_background
 endif
+
+augroup filetypedetect
+  au BufRead,BufNewFile *.dockerfile,Dockerfile.* setfiletype dockerfile
+augroup END
+
