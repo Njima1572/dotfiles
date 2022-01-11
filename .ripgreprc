@@ -1,2 +1,8 @@
 --max-columns=150
 --smart-case
+
+# ignore
+--glob=!.git/*
+--glob=!node_modules/*
+--glob=!.cache*
+
