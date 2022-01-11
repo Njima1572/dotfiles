@@ -12,10 +12,10 @@ endfunction
 
 " function GenerateHeader(filetype)
 "   if a:filetype == 'vim'
-"     r$DOTFILES_DIR/nvim/header_template/header_template.vim
+"     r$HOME/.config/nvim/header_template/header_template.vim
 "     exec setline(0, '')
 "   elseif a:filetype == 'py'
-"     r$DOTFILES_DIR/nvim/header_template/header_template.vim
+"     r$HOME/.config/nvim/header_template/header_template.vim
 "     exec setline(0, '')
 "   endif
 "   exe '1,' . 8 . 'g/File Name :.*/s//File Name : ' .expand('%')

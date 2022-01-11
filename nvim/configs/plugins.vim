@@ -37,7 +37,25 @@ Plug 'mxw/vim-jsx'
 Plug 'pangloss/vim-javascript'
 Plug 'simeji/winresizer'
 
+Plug 'dag/vim-fish'
+
 " --- Aoki stuff
 Plug 'siberowl/vim-tiny-surround'
 
 call plug#end()
+
+
+" ------ Coc Stuff
+let g:coc_global_extensions = [
+      \'coc-prettier', 
+      \'coc-pyright', 
+      \'coc-omnisharp', 
+      \'coc-rust-analyzer',
+      \'coc-fish',
+      \'coc-yaml',
+      \'coc-json',
+      \'coc-tsserver',
+      \'coc-sh',
+      \'coc-eslint',
+      \'coc-css'
+      \]
