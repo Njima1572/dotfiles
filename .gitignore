@@ -2,3 +2,6 @@
 .vim/plugged
 
 local_config.fish
+
+nvim/undo
+nvim/plugged
