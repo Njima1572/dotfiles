@@ -2,28 +2,16 @@
 ## Environment
 
 Editor: neovim / occasional VSCode(for live sharing)
-version-manager: asdf / Docker / virtualenvwrapper
-terminal-multiplexer: tmux / tmuxinator
+version-manager: Docker
 shell: fish
 keyboard: colemak
-terminal: alacritty / konsole
+terminal: alacritty
 
 ## Setting up
 
 ### Dependencies
-#### Install `neovim / Vundle`
+#### Install `neovim / vim-plug`
 #### Install `fish / fisher`
-#### Install `asdf`
-- http://asdf-vm.com/guide/getting-started.html#_1-install-dependencies
-
-Add Plugins
-- asdf plugin add nodejs
-- asdf plugin add ruby
-- asdf plugin add python
-- asdf plugin add rust
-
-#### Install tmux
-- `yay -S tmux` / `sudo apt install tmux` would work fine
 
 ## Files
 
@@ -46,7 +34,7 @@ Add Plugins
 ### Upcoming features
 - [x] direnv templates
 - [ ] aws profile
-- [ ] fish history ripgrep
+- [x] fish history ripgrep
 - [ ] xkbconfig for different keyboard layout
-- [ ] i3 config
+- [x] i3 config
 - [ ] install script (for arch / debian / macOS)
