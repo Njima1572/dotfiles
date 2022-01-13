@@ -15,7 +15,7 @@ Plug 'junegunn/fzf.vim'
 "Plug 'jremmen/vim-ripgrep.vim'
 Plug 'mbbill/undotree'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'wakatime/vim-wakatime'
+"Plug 'wakatime/vim-wakatime'
 Plug 'Shougo/defx.nvim', {'do': ':UpdateRemotePlugins'}
 Plug 'kristijanhusak/defx-icons'
 Plug 'jiangmiao/auto-pairs'
@@ -38,6 +38,9 @@ Plug 'pangloss/vim-javascript'
 Plug 'simeji/winresizer'
 
 Plug 'dag/vim-fish'
+
+" Dart more syntax highlights
+Plug 'dart-lang/dart-vim-plugin'
 
 " --- Aoki stuff
 Plug 'siberowl/vim-tiny-surround'

@@ -1,10 +1,18 @@
 {
-  "coc.preferences.formatOnSaveFiletypes": ["typescript", "typescriptreact", "csharp", "c#", "cs", "python", "vue"],
+  "coc.preferences.formatOnSaveFiletypes": [
+    "typescript",
+    "typescriptreact",
+    "csharp",
+    "c#",
+    "cs",
+    "python",
+    "vue",
+    "dart",
+    "json"
+  ],
   "python.formatting.provider": "black",
   "python.formatting.blackPath": "~/.asdf/shims/black",
   "python.linting.mypyPath": "~/.asdf/shims/mypy",
   "python.linting.mypyEnabled": true,
-  "python.linting.flake8Enabled": true,
-  "vetur.validation.template": true,
-  "vetur.completion.scaffoldSnippetSources": true
+  "python.linting.flake8Enabled": true
 }
