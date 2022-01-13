@@ -1,51 +1,34 @@
 #!/usr/local/fish
-set VIRTUALENV_DIR /home/$USER/Virtualenv
 
-set -x XMODIFIER @im=fcitx
-set -x GTK_IM_MODULE fcitx
-set -x QT_IM_MODULE fcitx
-set -x WAKATIME_HOME $HOME
-
+# basic envs
 set -x EDITOR nvim
-
-
-source ~/.config/fish/aliases.fish
-source ~/.config/fish/local_config.fish
-source ~/.config/fish/vi_mode_bindings.fish
-
-
-function fish_mode_prompt
-  switch $fish_bind_mode
-    case default
-      set_color --bold red
-      echo 'N '
-    case insert
-      set_color --bold green
-      echo 'I '
-    case replace_one
-      set_color --bold green
-      echo 'R '
-    case viusal
-      set_color --bold brmagenta
-      echo 'R '
-    case *
-      set_color --bold red
-      echo '? '
-  end
-  set_color normal
-end
-
-source /opt/asdf-vm/asdf.fish
-
+set -x WAKATIME_HOME $HOME/.config/wakatime
 set -x GCM_CREDENTIAL_STORE cache
 set -x PS1 $CUSTOM_PS1:$PS1
 set -gx VENV_WRAPPER_SHELL fish
+fish_add_path $HOME/.local/bin
 
-function venv
-    set result (venv-wrapper $argv)
+# --- Source extra configs
+source $HOME/.config/fish/aliases.fish
+source $HOME/.config/fish/local_config.fish
 
-    if test -n "$result"
-        string join \n $result | source
-    end
+# --- Bindings
+bind \ce 'cd ..; commandline -f repaint'
+bind \cf accept-autosuggestion
+
+# --- direnv
+if type -q "direnv"
+  direnv hook fish | source
+  set -g direnv_fish_mode disable_arrow
 end
-fish_vi_key_bindings
+
+# --- Prompts
+function fish_prompt
+    echo ' > '
+end
+
+function fish_right_prompt
+    echo (pwd) 
+    set_color green
+    echo (fish_git_prompt)
+end

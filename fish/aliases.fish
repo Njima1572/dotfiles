@@ -5,3 +5,6 @@ alias v="nvim"
 alias nv="nvim"
 alias mv="mv -i"
 alias ..="cd .."
+alias dc='docker-compose'
+alias dcb='docker-compose build'
+alias d='docker'
