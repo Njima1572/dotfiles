@@ -15,8 +15,11 @@ source ~/.config/nvim/configs/plugins.vim
 source ~/.config/nvim/configs/basics.vim
 source ~/.config/nvim/configs/functions.vim
 source ~/.config/nvim/configs/keybindings.vim
-" defx
+
+" Extras
 source ~/.config/nvim/configs/defx_bindings.vim
+"source ~/.config/nvim/configs/coc.vim
+source ~/.config/nvim/configs/lsps.vim
 
 " From alacritty-colorcheme
 if filereadable(expand("~/.vimrc_background"))

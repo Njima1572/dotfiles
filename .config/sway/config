@@ -26,12 +26,15 @@ set $menu wofi -c /home/kochi/.config/wofi/config --show run --gtk-dark
 # xwayland enable
 exec fcitx5 -d
 
-client.focused #0099cc #339977 #ffffff
+# Window colors
+client.focused  #EA969696 #D64045 #f4cccc
+client.unfocused #FF99cc #f9e2e2 #5c0000
+client.focused_inactive #EFAEAE #f9e2e2 #5c0000
 
 font pango:hack 8
 
-gaps outer 10
-gaps inner 10
+gaps outer 14
+gaps inner 14
 
 # Not working
 # set $opacity 0.8

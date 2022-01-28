@@ -14,13 +14,16 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 "Plug 'jremmen/vim-ripgrep.vim'
 Plug 'mbbill/undotree'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-"Plug 'wakatime/vim-wakatime'
+"Plug 'neoclide/coc.nvim', {'branch': 'release'} =? moved to configs/coc.nvim
+Plug 'wakatime/vim-wakatime'
 Plug 'Shougo/defx.nvim', {'do': ':UpdateRemotePlugins'}
 Plug 'kristijanhusak/defx-icons'
 Plug 'jiangmiao/auto-pairs'
-Plug 'neovim/nvim-lspconfig'
 Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
+
+" --- Lsps
+Plug 'neovim/nvim-lspconfig'
+Plug 'lspcontainers/lspcontainers.nvim'
 
 " --- Git
 Plug 'airblade/vim-gitgutter'
@@ -46,21 +49,3 @@ Plug 'dart-lang/dart-vim-plugin'
 Plug 'siberowl/vim-tiny-surround'
 
 call plug#end()
-
-
-" ------ Coc Stuff
-let g:coc_global_extensions = [
-      \'coc-prettier', 
-      \'coc-pyright', 
-      \'coc-omnisharp', 
-      \'coc-rust-analyzer',
-      \'coc-flutter',
-      \'coc-snippets',
-      \'coc-fish',
-      \'coc-yaml',
-      \'coc-json',
-      \'coc-tsserver',
-      \'coc-sh',
-      \'coc-eslint',
-      \'coc-css'
-      \]
