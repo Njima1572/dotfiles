@@ -4,7 +4,7 @@ GEM_PKGS = tmuxinator
 CARGO_PKGS = alacritty
 
 arch: 
-	yay -S $(PKGS)
+	yay -S --noconfirm --cleanafter $(PKGS)
 
 debian:
 	apt install -y $(PKGS)

@@ -19,11 +19,12 @@ set $term alacritty
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
 # set $menu dmenu_path | dmenu | xargs swaymsg exec --
-set $menu rofi -show combi -show-icons
+# set $menu rofi -show combi -show-icons
+# set $menu wofi -c $XDG_CONFIG_HOME/wofi/config --show run --gtk-dark
+set $menu wofi -c /home/kochi/.config/wofi/config --show run --gtk-dark
 
-
-xwayland enable
-exec --no-startup-id fcitx5 -d
+# xwayland enable
+exec fcitx5 -d
 
 client.focused #0099cc #339977 #ffffff
 
@@ -71,7 +72,6 @@ output * bg /home/kochi/Pictures/Background/dbphxbv-c059b4db-9fb8-429c-a42b-7fbd
 #       middle_emulation enabled
 #   }
 input * {
-
 	xkb_layout "us"
 	xkb_variant "colemak"
 }
@@ -86,7 +86,7 @@ input * {
 # Basics:
 #
     # Start a terminal
-    bindsym $mod+Return exec $term
+    bindsym $mod+Return exec $term --working-directory $(readlink /proc/$(ps --no-headers --ppid $(swaymsg -t get_tree | jq '.. | select(.focused?==true) | .pid') | awk '{print $1}')/cwd || echo $HOME)
 
     # Kill focused window
     bindsym $mod+Shift+q kill
@@ -261,6 +261,7 @@ set $dark_color solarized_dark.yaml
 bindsym $mod+Shift+m exec alacritty-colorscheme -V toggle $light_color $dark_color
 bindsym $mod+Shift+b exec notify-send "Alacritty Colorscheme" `alacritty-colorscheme status`
 
+## Have som problem with xwayland?
 set $lock swaylock-blur
 bindsym $mod+Shift+l exec $lock
 
@@ -268,3 +269,12 @@ bindsym $mod+Shift+l exec $lock
 bindswitch --reload --locked lid:on exec $lock
 
 include /etc/sway/config.d/*
+
+# From here ref: https://zenn.dev/haxibami/articles/wayland-sway-install
+# By window
+for_window [app_id="nautilus"] {
+  floating enable
+}
+
+# For screen sharing
+exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway

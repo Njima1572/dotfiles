@@ -3,5 +3,5 @@
 
 local_config.fish
 
-nvim/undo
-nvim/plugged
+.config/nvim/undo
+.config/nvim/plugged

@@ -40,7 +40,7 @@ tooltip label {
 
 #idle_inhibitor, #cpu, #memory, #temperature, #backlight, #keyboard-state, #network, #battery, #battery#bat2, #mpd, #pulseaudio, #clock, #language, #tray {
   margin: 8px 0;
-  padding: 0 5px;
+  padding: 0 10px;
   color: #1D3354;
 }
 
@@ -80,9 +80,13 @@ tooltip label {
 
 #pulseaudio {
   background-color: #F8AD9d;
-  padding: 0 8px;
+  padding: 0 12px;
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
+}
+
+#tray {
+  color: snow;
 }
 
 #workspaces button {
@@ -129,9 +133,13 @@ tooltip label {
 }
 
 #window {
+  color: snow;
+  font-weight: 700;
   padding: 0 8px;
+  margin: 8px 20px;
   border-radius: 20px;
-
+  background-color: #467599;
+  min-width: 100px;
 }
 
 @keyframes blink {

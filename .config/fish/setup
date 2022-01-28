@@ -1,0 +1,30 @@
+#!/bin/bash
+
+SCRIPT_DIR=$PWD/`dirname $0`
+TARGET=fish
+
+# install fish first
+if ! command -v fish &> /dev/null
+then
+  echo "Fish not found"
+  # if apt exists
+  # sudo apt install fish -y
+  # if dnf exists
+  # if yum exists
+  sudo yum install fish
+  # if pacman exists
+  sudo pacman -S fish
+fi
+
+# Create local_config.fish
+if [! -f "$SCRIPT_DIR/local_config.fish"]; then
+  echo "Did not find fish/local_config.fish. Creating one..."
+  touch $SCRIPT_DIR/local_config.fish
+fi
+# Create a symbolic link for the fish config
+if [ -d "$HOME/.config/$TARGET/" ]; then
+  echo "Found existing .config/$TARGET, moving to .config/$TARGET.bk"
+  mv $HOME/.config/$TARGET $HOME/.config/$TARGET.bk
+fi
+ln -s $SCRIPT_DIR $HOME/.config/$TARGET
+

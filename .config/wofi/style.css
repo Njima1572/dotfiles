@@ -1,0 +1,97 @@
+* {
+  font-family: hack;
+}
+/*
+colors {
+  ### shades of red
+  color: linen;
+  color: lavenderblush;
+  color: mistyrose;
+  color: lightpink;
+  color: plum;
+  color: salmon;
+  color: lightcoral;
+  color: tomato;
+  color: indianred;
+  color: hotpink;
+  color: firebrick;
+  color: maroon;
+  color: crimson;
+  color: palevioletred;
+
+  ### Shades of blue
+  color: aqua;
+  color: paleturquoise;
+  color: lightcyan;
+  color: skyblue;
+  color: lightblue;
+  color: powderblue;
+  color: deepskyblue;
+  color: cadetblue;
+  color: cornflowerblue;
+  color: dodgerblue;
+  color: turquoise;
+  color: aquamarine;
+  color: teal;
+  color: darkcyan;
+  color: darkturquoise;
+  color: slateblue;
+  color: midnightblue;
+  color: navy;
+  color: darkblue;
+  color: mediumslateblue;
+  color: darkslateblue;
+
+  ## Shades of white + yellow
+  color: ivory;
+  color: honeydew;
+  color: lavenderblush;
+  color: lavender;
+  color: linen;
+  color: lightgray;
+  color: mintcream;
+  color: floralwhite;
+  color: oldlace;
+  color: snow;
+  color: white;
+  color: seashell;
+  color: whitesmoke;
+  color: azure;
+  color: aliceblue;
+  color: antiquewhite;
+  color: beige;
+  color: papayawhip;
+  color: cornsilk;
+  color: bisque;
+  color: blanchedalmond;
+} */
+
+#window {
+  margin: 0px;
+  border: 2px solid aliceblue;
+  background-color: seashell;
+  color: maroon;
+  border-radius: 8px;
+}
+#input {
+  margin: 0px;
+  border: 2px solid aliceblue;
+  background-color: seashell;
+  color: maroon;
+  border-top-right-radius: 8px;
+  border-top-left-radius: 8px;
+}
+
+#entry {
+  margin: 0;
+  padding: 4px;
+}
+
+#entry:selected {
+  background-color: salmon;
+}
+
+#entry:unselected {
+  border: 1px dotted snow;
+
+}
