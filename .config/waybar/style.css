@@ -1,0 +1,152 @@
+/*:palette{
+  snow;
+  #f9e2e2;
+  #f4cccc;
+  #EFAEAE;
+  #EA9696;
+  #F08080;
+  #F4978e;
+  #F8AD9d;
+  #FBC4AB;
+  #FFDAB9;
+  #D64045;
+  #E9FFF9;
+  #9ED8DB;
+  #467599;
+  #1D3354;
+}*/
+
+* {
+    border: none;
+    border-radius: 0;
+    font-family: Roboto, Helvetica, Arial, sans-serif;
+    font-size: 13px;
+    min-height: 0;
+}
+
+window#waybar {
+    background: #1D3354;
+    border-bottom: 3px solid #f9e2e2;
+    color: #f4cccc;
+}
+
+tooltip {
+  background: rgba(43, 48, 59, 0.5);
+  border: 1px solid rgba(100, 114, 125, 0.5);
+}
+tooltip label {
+  color: white;
+}
+
+#idle_inhibitor, #cpu, #memory, #temperature, #backlight, #keyboard-state, #network, #battery, #battery#bat2, #mpd, #pulseaudio, #clock, #language, #tray {
+  margin: 8px 0;
+  padding: 0 5px;
+  color: #1D3354;
+}
+
+#cpu {
+  background: #EFAEAE;
+}
+
+#memory {
+  background: #EA9696;
+}
+#network {
+  background: #F08080;
+}
+
+#keyboard-state {
+  background: #D64045;
+}
+
+#temperature {
+  background: #F4978e;
+}
+
+#backlight {
+  background: #F4978e;
+}
+
+#mpd {
+  background-color: #FBC4AB;
+}
+
+#idle_inhibitor {
+  background-color: #FFDAB9;
+  padding: 0 20px;
+  border-bottom-left-radius: 10px; 
+  border-top-left-radius: 10px; 
+}
+
+#pulseaudio {
+  background-color: #F8AD9d;
+  padding: 0 8px;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+#workspaces button {
+    padding: 0 5px;
+    background: transparent;
+    color: white;
+    border-bottom: 3px solid transparent;
+    padding: 8px;
+}
+
+#workspaces button.focused {
+    background: #f4cccc;
+    color: #1D3354;
+    border-radius: 8px;
+    padding: 8px;
+}
+
+#mode, #clock, #battery {
+    padding: 0 10px;
+}
+
+#mode {
+    background: #f9e2e2;
+    border-bottom: 3px solid white;
+}
+
+#clock {
+  color: snow;
+  font-size: 20px;
+  margin: 8px 0;
+  padding-top: 5px;
+  background-color: transparent;
+}
+
+#battery {
+    background-color: #ffffff;
+
+    color: black;
+}
+
+#battery.charging {
+    color: white;
+    background-color: #26A65B;
+}
+
+#window {
+  padding: 0 8px;
+  border-radius: 20px;
+
+}
+
+@keyframes blink {
+    to {
+        background-color: #ffffff;
+        color: black;
+    }
+}
+
+#battery.warning:not(.charging) {
+    background: #f53c3c;
+    color: white;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
