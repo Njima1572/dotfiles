@@ -26,5 +26,7 @@ source ~/.config/nvim/configs/languages.vim
 " From alacritty-colorcheme
 if filereadable(expand("~/.vimrc_background"))
   source ~/.vimrc_background
+else
+  set background=light
 endif
 
