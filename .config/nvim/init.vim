@@ -21,12 +21,10 @@ source ~/.config/nvim/configs/defx_bindings.vim
 "source ~/.config/nvim/configs/coc.vim
 source ~/.config/nvim/configs/lsps.vim
 
+source ~/.config/nvim/configs/languages.vim
+
 " From alacritty-colorcheme
 if filereadable(expand("~/.vimrc_background"))
   source ~/.vimrc_background
 endif
-
-augroup filetypedetect
-  au BufRead,BufNewFile *.dockerfile,Dockerfile.* setfiletype dockerfile
-augroup END
 

@@ -279,5 +279,15 @@ for_window [app_id="nautilus"] {
   floating enable
 }
 
+for_window [app_id="Emulator" title=".*"] {
+  floating enable
+}
+
+for_window [app_id="qemu" title=".*"] {
+  floating enable
+}
+
 # For screen sharing
 exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
+
+bindsym $mod+Shift+s exec grimshot copy area

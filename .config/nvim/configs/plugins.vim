@@ -42,6 +42,9 @@ Plug 'simeji/winresizer'
 
 Plug 'dag/vim-fish'
 
+Plug 'nvim-lua/plenary.nvim'
+Plug 'akinsho/flutter-tools.nvim'
+
 " Dart more syntax highlights
 Plug 'dart-lang/dart-vim-plugin'
 
@@ -49,3 +52,4 @@ Plug 'dart-lang/dart-vim-plugin'
 Plug 'siberowl/vim-tiny-surround'
 
 call plug#end()
+
