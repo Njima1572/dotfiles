@@ -47,7 +47,6 @@ noremap <silent> <F5> :source ~/.config/nvim/init.vim<CR>:noh<CR>:echo "Refreshe
 
 noremap <Esc><Esc> :nohl<CR>
 map <C-z> <Nop>
-noremap <CR> :w<CR>
 noremap <Leader><Leader> :w<CR>
 noremap <Leader><Leader><Leader> :wq<CR>
 
@@ -121,11 +120,12 @@ else
 endif
 
 " coc
-xmap <leader>a <Plug>(coc-codeaction-line)
-nmap <leader>a <Plug>(coc-codeaction-line)
-
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gr <Plug>(coc-references)
+"xmap <leader>a <Plug>(coc-codeaction-line)
+"nmap <leader>a <Plug>(coc-codeaction-line)
+"
+"nmap <silent> gd <Plug>(coc-definition)
+"nmap <silent> gr <Plug>(coc-references)
 
 
 nnoremap <silent> / :BLines<CR>
+nnoremap <CR> <cmd> lua vim.lsp.buf.formatting()<CR>
