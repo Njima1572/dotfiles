@@ -11,15 +11,27 @@ require'lspconfig'.sumneko_lua.setup{
 }
 -- {{{ Python
 require'lspconfig'.pylsp.setup{ 
-  cmd = require'lspcontainers'.command('pylsp')
+  cmd = require'lspcontainers'.command('pylsp'),
+  settings = {
+    pylsp = {
+      plugins = {
+        pycodestyle = {
+          maxLineLength = 200,
+        },
+        flake8 = {
+          maxLineLength = 200,
+        }
+      }
+    }
+  }
 }
-require'lspconfig'.pyright.setup{
-  before_init = function(params)
-    params.processId = vim.NIL
-  end,
-  cmd = require'lspcontainers'.command('pyright'),
-  root_dir = require'lspconfig'.util.root_pattern(".git", vim.fn.getcwd())
-}
+-- require'lspconfig'.pyright.setup{
+--   before_init = function(params)
+--     params.processId = vim.NIL
+--   end,
+--   cmd = require'lspcontainers'.command('pyright'),
+--   root_dir = require'lspconfig'.util.root_pattern(".git", vim.fn.getcwd())
+-- }
 -- }}}
 -- {{{ Rust
 require'lspconfig'.rust_analyzer.setup{

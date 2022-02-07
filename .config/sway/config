@@ -269,7 +269,7 @@ set $lock swaylock-blur
 bindsym $mod+Shift+l exec $lock
 
 # Executes swaylock on lid open (It is not intuitive)
-bindswitch --reload --locked lid:on exec $lock
+# bindswitch --reload --locked lid:on exec $lock
 
 include /etc/sway/config.d/*
 
