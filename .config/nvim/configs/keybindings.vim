@@ -129,3 +129,7 @@ endif
 
 nnoremap <silent> / :BLines<CR>
 nnoremap <CR> <cmd> lua vim.lsp.buf.formatting()<CR>
+
+" ESKK
+imap xz <Plug>(eskk:toggle)
+cmap xz <Plug>(eskk:toggle)

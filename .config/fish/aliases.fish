@@ -8,3 +8,5 @@ alias ..="cd .."
 alias dc='docker-compose'
 alias dcb='docker-compose build'
 alias d='docker'
+alias emacs='emacs -nw'
+alias e='emacs'

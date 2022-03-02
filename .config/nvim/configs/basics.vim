@@ -88,3 +88,8 @@ let g:typescript_compile_options = ''
 let g:closetag_shortcut = '>'
 let g:closetag_close_shortcut = '<leader>>'
 
+
+" ESKK settings
+let g:eskk#directory = "~/.config/eskk"
+"let g:eskk#dictionary = { 'path': "~/.config/eskk/skk-jisyo", 'sorted': 0, 'encoding': 'utf-8', }
+let g:eskk#large_dictionary = { 'path': "~/.config/eskk/SKK-JISYO.L", 'sorted': 1, 'encoding': 'euc-jp', }

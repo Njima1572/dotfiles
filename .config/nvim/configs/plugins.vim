@@ -18,7 +18,7 @@ Plug 'mbbill/undotree'
 Plug 'wakatime/vim-wakatime'
 Plug 'Shougo/defx.nvim', {'do': ':UpdateRemotePlugins'}
 Plug 'kristijanhusak/defx-icons'
-Plug 'jiangmiao/auto-pairs'
+Plug 'cohama/lexima.vim'
 Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 
 " --- Lsps
@@ -47,6 +47,9 @@ Plug 'akinsho/flutter-tools.nvim'
 
 " Dart more syntax highlights
 Plug 'dart-lang/dart-vim-plugin'
+
+Plug 'lambdalisue/gina.vim'
+Plug 'vim-skk/eskk.vim'
 
 " --- Aoki stuff
 Plug 'siberowl/vim-tiny-surround'
