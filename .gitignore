@@ -5,3 +5,5 @@ local_config.fish
 
 .config/nvim/undo
 .config/nvim/plugged
+
+*.log
