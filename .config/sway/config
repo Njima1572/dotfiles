@@ -27,9 +27,10 @@ set $menu wofi -c /home/kochi/.config/wofi/config --show run --gtk-dark
 exec fcitx5 -d
 
 # Window colors
-client.focused  #EA969696 #D64045 #f4cccc
-client.unfocused #FF99cc #f9e2e2 #5c0000
-client.focused_inactive #EFAEAE #f9e2e2 #5c0000
+# border / inner / font color
+client.focused  #AD8B73 #CEAB93 #FFFBE9
+client.unfocused  #CEAB93 #FFFBE9 #AD8B73 
+client.focused_inactive #CEAB93 #FFFBE9 #AD8B73
 
 font pango:hack 8
 
@@ -55,10 +56,10 @@ output * bg /home/kochi/Pictures/Background/dbphxbv-c059b4db-9fb8-429c-a42b-7fbd
 #
 # Example configuration:
 #
-# exec swayidle -w \
-#          timeout 300 'swaylock -f -c 000000' \
-#          timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
-#          before-sleep 'swaylock -f -c 000000'
+exec swayidle -w \
+         timeout 300 'swaylock -f -c 000000' \
+         timeout 350 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
+         before-sleep 'swaylock -f -c 000000'
 #
 # This will lock your screen after 300 seconds of inactivity, then turn off
 # your displays after another 300 seconds, and turn your screens back on when
@@ -265,11 +266,11 @@ bindsym $mod+Shift+m exec alacritty-colorscheme -V toggle $light_color $dark_col
 bindsym $mod+Shift+b exec notify-send "Alacritty Colorscheme" `alacritty-colorscheme status`
 
 ## Have som problem with xwayland?
-set $lock swaylock-blur
+set $lock swaylock
 bindsym $mod+Shift+l exec $lock
 
 # Executes swaylock on lid open (It is not intuitive)
-# bindswitch --reload --locked lid:on exec $lock
+bindswitch --reload --locked lid:on exec $lock
 
 include /etc/sway/config.d/*
 
@@ -291,3 +292,6 @@ for_window [app_id="qemu" title=".*"] {
 exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
 
 bindsym $mod+Shift+s exec grimshot copy area
+
+exec --no-startup-id greenclip daemon>/dev/null
+bindsym $mod+c exec --no-startup-id rofi -modi "clipboard:greenclip print" -show clipboard
