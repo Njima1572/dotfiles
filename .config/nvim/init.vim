@@ -10,10 +10,12 @@ if &compatible
   set nocompatible               " Be iMproved
 endif
 
+source ~/.config/nvim/configs/functions.vim
+call g:Initialization()
+
 source ~/.config/nvim/configs/paths.vim
 source ~/.config/nvim/configs/plugins.vim
 source ~/.config/nvim/configs/basics.vim
-source ~/.config/nvim/configs/functions.vim
 source ~/.config/nvim/configs/keybindings.vim
 
 " Extras

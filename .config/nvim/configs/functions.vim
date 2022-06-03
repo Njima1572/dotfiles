@@ -28,3 +28,31 @@ function UpdateHeader()
   exe '1,' . 8 . 'g/Created By :.*/s/Created By :.*/Created By : Njima1572'
 
 endfunction
+
+
+" download files
+function! g:DownloadIfNotFileReadable(file_path, remote_url) abort
+    if filereadable(a:file_path)
+        return
+    endif
+    let l:curl_command = has('win64') ? 'curl.exe' : 'curl'
+    let l:message = system(l:curl_command . ' -Lo ' . a:file_path . ' --create-dirs ' . a:remote_url)
+    if l:message  !~# '.*% Total.*% Received.*% Xferd.*'
+        echo 'error: ' . l:message
+    endif
+endfunction
+
+function! g:Initialization()
+" vim-plug install path
+  let s:plug_path =  $HOME . '/.local/share/nvim/site/autoload/plug.vim'
+  if !filereadable(s:plug_path)
+    call g:DownloadIfNotFileReadable(s:plug_path, 'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim')
+
+    source ~/.config/nvim/configs/plugins.vim
+    PlugInstall
+  endif
+
+  if &compatible
+    set nocompatible               " Be iMproved
+  endif
+endfunction
