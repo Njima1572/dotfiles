@@ -57,9 +57,9 @@ output * bg /home/kochi/Pictures/Background/dbphxbv-c059b4db-9fb8-429c-a42b-7fbd
 # Example configuration:
 #
 exec swayidle -w \
-         timeout 300 'swaylock -f -c 000000' \
+         timeout 300 'swaylock-blur' \
          timeout 350 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
-         before-sleep 'swaylock -f -c 000000'
+         before-sleep 'swaylock-blur'
 #
 # This will lock your screen after 300 seconds of inactivity, then turn off
 # your displays after another 300 seconds, and turn your screens back on when
@@ -266,7 +266,7 @@ bindsym $mod+Shift+m exec alacritty-colorscheme -V toggle $light_color $dark_col
 bindsym $mod+Shift+b exec notify-send "Alacritty Colorscheme" `alacritty-colorscheme status`
 
 ## Have som problem with xwayland?
-set $lock swaylock
+set $lock swaylock-blur
 bindsym $mod+Shift+l exec $lock
 
 # Executes swaylock on lid open (It is not intuitive)
