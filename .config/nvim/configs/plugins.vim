@@ -15,15 +15,16 @@ Plug 'junegunn/fzf.vim'
 "Plug 'jremmen/vim-ripgrep.vim'
 Plug 'mbbill/undotree'
 "Plug 'neoclide/coc.nvim', {'branch': 'release'} =? moved to configs/coc.nvim
-Plug 'wakatime/vim-wakatime'
+"Plug 'wakatime/vim-wakatime'
 Plug 'Shougo/defx.nvim', {'do': ':UpdateRemotePlugins'}
 Plug 'kristijanhusak/defx-icons'
 Plug 'cohama/lexima.vim'
-Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
+"Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 
 " --- Lsps
 Plug 'neovim/nvim-lspconfig'
 Plug 'lspcontainers/lspcontainers.nvim'
+Plug 'williamboman/nvim-lsp-installer'
 
 " --- Git
 Plug 'airblade/vim-gitgutter'
@@ -49,7 +50,15 @@ Plug 'akinsho/flutter-tools.nvim'
 Plug 'dart-lang/dart-vim-plugin'
 
 Plug 'lambdalisue/gina.vim'
-Plug 'vim-skk/eskk.vim'
+
+" --- SKK
+"Plug 'vim-skk/eskk.vim'
+Plug 'vim-denops/denops.vim'
+Plug 'vim-skk/denops-skkeleton.vim'
+Plug 'Shougo/ddc.vim'
+Plug 'Shougo/ddc-matcher_head'
+Plug 'Shougo/ddc-sorter_rank'
+
 
 " --- Aoki stuff
 Plug 'siberowl/vim-tiny-surround'
