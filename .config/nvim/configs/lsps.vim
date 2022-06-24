@@ -1,4 +1,5 @@
 lua << EOF
+-- {{{ Lua
 require'lspconfig'.sumneko_lua.setup{
   cmd = require'lspcontainers'.command('sumneko_lua'),
   settings = {
@@ -9,6 +10,7 @@ require'lspconfig'.sumneko_lua.setup{
     }
   }
 }
+-- }}}
 -- {{{ Python
 require'lspconfig'.pylsp.setup{ 
   cmd = require'lspcontainers'.command('pylsp'),
@@ -56,16 +58,22 @@ require'lspconfig'.tsserver.setup{
   before_init = function(params)
     params.processId = vim.NIL
   end,
+  on_new_config = function(new_config, new_root_dir)
+  new_config.cmd = require'lspcontainers'.command('tsserver', {root_dir = new_root_dir})
+  end,
   cmd = require'lspcontainers'.command('tsserver'),
-  root_dir = require'lspconfig'.util.root_pattern(".git", vim.fn.getcwd())
+  root_dir = require'lspconfig'.util.root_pattern("package.json")
 }
 
 require'lspconfig'.vuels.setup{
   before_init = function(params)
     params.processId = vim.NIL
   end,
+  on_new_config = function(new_config, new_root_dir)
+  new_config.cmd = require'lspcontainers'.command('vuels', {root_dir = new_root_dir})
+  end,
   cmd = require'lspcontainers'.command('vuels'),
-  root_dir = require'lspconfig'.util.root_pattern(".git", vim.fn.getcwd())
+  root_dir = require'lspconfig'.util.root_pattern("package.json")
 }
 -- }}}
 -- {{{ Yaml
@@ -92,7 +100,18 @@ require'lspconfig'.dockerls.setup{
     params.processId = vim.NIL
   end,
   cmd = require'lspcontainers'.command('dockerls'),
-  root_dir = require'lspconfig'.util.root_pattern(".git", vim.fn.getcwd())
+  root_dir = require'lspconfig'.util.root_pattern(".git", vim.fn.getcwd()),
+  settings = {
+    vim = {
+      lsp  = {
+        buf = {
+          format ={
+              async = true
+          }
+        }
+      }
+    }
+  }
 }
 --  }}}
 -- {{{ Bash

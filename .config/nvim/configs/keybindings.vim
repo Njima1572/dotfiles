@@ -72,7 +72,6 @@ nmap <silent> <C-i> :wincmd l<CR>
 
 " ~/.vimrc
 noremap <Leader>. :tabe ~/.config/nvim/init.vim<CR>
-noremap <Leader>t :tabe ~/.tmux.conf<CR>
 noremap <Leader>i :tabe ~/.config/sway/config<CR>
 
 " ----- Execute shell in vim and paste it
@@ -82,7 +81,7 @@ nnoremap <Leader>c command! -nargs=1 Nf call CreateAndStartEdit(<q-args>)
 
 "----- Buffers
 set hidden
-" noremap <Leader>b :ls<CR>:b 
+"noremap <Leader>b :ls<CR>:b 
 noremap <Leader>x :bd<CR>
 
 
@@ -107,6 +106,9 @@ noremap <Leader>= <C-w>=
 " ----- Git
 nmap <leader>gs :G<CR>
 
+" ----- Gina
+" https://kitagry.github.io/blog/programmings/2020/09/gina-browse/ 
+
 " ripgrep
 let g:rg_command = 'rg --vimgrep -S'
 command! GitRootRg execute 'cd '.system('git rev-parse --show-cdup') 'Rg'
@@ -127,6 +129,7 @@ endif
 "nmap <silent> gr <Plug>(coc-references)
 
 
+nnoremap <silent> <Leader>b :Buffers<CR>
 nnoremap <silent> / :BLines<CR>
 nnoremap <CR> <cmd> lua vim.lsp.buf.formatting()<CR>
 
