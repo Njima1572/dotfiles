@@ -1,11 +1,16 @@
 # dotfiles
+## Setup
+
+1. `cp .env.sample .env`
+2. Setup `.env` file accordingly
+  e.g. Wakatime API Key
+
 ## Environment
 
 Editor: neovim / occasional VSCode(for live sharing)
 version-manager: Docker
 shell: fish
 keyboard: colemak
-terminal: alacritty
 
 ## Setting up
 
@@ -27,9 +32,7 @@ terminal: alacritty
 1. `.config/fish/aliases.fish` for alias mapping across the machines
 1. `.config/fish/local_config.fish` for the local machine only
 
-### tmux
-1. `.tmux.conf` the config file for neovim
-1. `init.vim` the config file for neovim
+### Wakatime
 
 ### Upcoming features
 - [x] direnv templates
