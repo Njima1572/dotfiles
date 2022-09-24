@@ -291,6 +291,9 @@ for_window [app_id="qemu" title=".*"] {
 # For screen sharing
 exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
 
+# For touch screen to sync with rotation
+exec swaymsg input 1267:10996:ELAN2514:00_04F3:2AF4 map_to_output eDP-1
+
 bindsym $mod+Shift+s exec grimshot copy area
 
 exec --no-startup-id greenclip daemon>/dev/null
