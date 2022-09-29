@@ -47,7 +47,6 @@ function! g:Initialization()
   let s:plug_path =  $HOME . '/.local/share/nvim/site/autoload/plug.vim'
   if !filereadable(s:plug_path)
     call g:DownloadIfNotFileReadable(s:plug_path, 'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim')
-
     source ~/.config/nvim/configs/plugins.vim
     PlugInstall
   endif

@@ -40,8 +40,13 @@ require'lspconfig'.rust_analyzer.setup{
   before_init = function(params)
     params.processId = vim.NIL
   end,
-  cmd = require'lspcontainers'.command('rust_analyzer'),
-  root_dir = require'lspconfig'.util.root_pattern(".git", vim.fn.getcwd())
+  on_new_config = function(new_config, new_root_dir)
+  new_config.cmd = require'lspcontainers'.command('rust_analyzer', {root_dir = new_root_dir, network = "bridge"})
+  end,
+  cmd = require'lspcontainers'.command('rust_analyzer', {
+    network = "bridge",
+  }),
+  root_dir = require'lspconfig'.util.root_pattern("Cargo.toml")
 }
 -- }}}
 -- {{{ Ruby

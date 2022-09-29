@@ -19,9 +19,11 @@ source ~/.config/nvim/configs/basics.vim
 source ~/.config/nvim/configs/keybindings.vim
 
 " Extras
-source ~/.config/nvim/configs/defx_bindings.vim
+"source ~/.config/nvim/configs/defx_bindings.vim
+source ~/.config/nvim/configs/fern.vim
 "source ~/.config/nvim/configs/coc.vim
 source ~/.config/nvim/configs/lsps.vim
+source ~/.config/nvim/configs/treesitter.lua
 
 source ~/.config/nvim/configs/languages.vim
 
