@@ -7,34 +7,10 @@
 " ._._._._._._._._._._._._._._._._._._._._.
 
 syntax enable
-set background=dark
-colorscheme solarized
+" set background=dark
+colorscheme moonlight
 
 let mapleader = " "
-
-set exrc
-set relativenumber
-set hidden
-set noswapfile
-set nobackup
-
-set title
-set number
-set autoindent
-set smartindent
-set virtualedit=onemore
-set scrolloff=40
-set laststatus=2
-set cursorline
-set cursorcolumn
-set showcmd
-set foldmethod=marker
-set hlsearch
-set wrapscan
-set noerrorbells
-set incsearch
-set undofile
-set undodir=~/.vim/undo
 
 syntax on
 
@@ -93,3 +69,5 @@ let g:closetag_close_shortcut = '<leader>>'
 let g:eskk#directory = "~/.config/eskk"
 "let g:eskk#dictionary = { 'path': "~/.config/eskk/skk-jisyo", 'sorted': 0, 'encoding': 'utf-8', }
 let g:eskk#large_dictionary = { 'path': "~/.config/eskk/SKK-JISYO.L", 'sorted': 1, 'encoding': 'euc-jp', }
+
+hi CursorLine ctermbg=242 guibg=#414863

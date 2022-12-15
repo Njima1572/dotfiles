@@ -18,6 +18,7 @@ vim.cmd('source ~/.config/nvim/configs/functions.lua')
 vim.cmd('source ~/.config/nvim/configs/paths.vim')
 vim.cmd('source ~/.config/nvim/configs/plugins.lua')
 vim.cmd('source ~/.config/nvim/configs/basics.vim')
+vim.cmd('source ~/.config/nvim/configs/basics.lua')
 vim.cmd('source ~/.config/nvim/configs/keybindings.lua')
 
 -- Extras
@@ -28,16 +29,3 @@ vim.cmd('source ~/.config/nvim/configs/lsps.lua')
 vim.cmd('source ~/.config/nvim/configs/treesitter.lua')
 
 vim.cmd('source ~/.config/nvim/configs/languages.vim')
-
-local function exists(path)
-	if type(path)~="string" then return false end
-	return os.rename(path,path) and true or false
-end
-
--- From alacritty-colorcheme
-if exists('~/.vimrc_background') then
-  vim.cmd('source ~/.vimrc_background')
-else
-  vim.cmd('set background=light')
-end
-

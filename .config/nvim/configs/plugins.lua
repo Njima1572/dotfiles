@@ -8,65 +8,66 @@
 vim.cmd('packadd vim-jetpack')
 require('jetpack.packer').startup(function(use)
 
-use { 'nvim-lua/plenary.nvim'}
-use { 'nvim-lualine/lualine.nvim'}
-use { 'akinsho/bufferline.nvim'}
-use { 'Shatur/neovim-session-manager'}
-use { 'easymotion/vim-easymotion'}
-use { 'junegunn/fzf', run = 'call fzf#install()' }
-use { 'junegunn/fzf.vim'}
--- use { 'jremmen/vim-ripgrep.vim'}
-use { 'mbbill/undotree'}
--- use { 'neoclide/coc.nvim', {'branch': 'release'} =? moved to configs/coc.nvim}
--- use { 'wakatime/vim-wakatime'}
--- use { 'Shougo/defx.nvim', {'do': ':UpdateRemotePlugins'}}
--- use { 'kristijanhusak/defx-icons'}
-use { 'cohama/lexima.vim'}
--- use { 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
+  use { 'nvim-lua/plenary.nvim' }
+  use { 'nvim-lualine/lualine.nvim' }
+  use { 'akinsho/bufferline.nvim' }
+  use { 'Shatur/neovim-session-manager' }
+  use { 'easymotion/vim-easymotion' }
+  use { 'junegunn/fzf', run = 'call fzf#install()' }
+  use { 'junegunn/fzf.vim' }
+  -- use { 'jremmen/vim-ripgrep.vim'}
+  use { 'mbbill/undotree' }
+  -- use { 'neoclide/coc.nvim', {'branch': 'release'} =? moved to configs/coc.nvim}
+  -- use { 'wakatime/vim-wakatime'}
+  -- use { 'Shougo/defx.nvim', {'do': ':UpdateRemotePlugins'}}
+  -- use { 'kristijanhusak/defx-icons'}
+  use { 'cohama/lexima.vim' }
+  -- use { 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
+  use { 'shaunsingh/moonlight.nvim' }
 
---- Fern
-use { 'lambdalisue/fern.vim'}
-use { 'lambdalisue/fern-hijack.vim'}
+  --- Fern
+  use { 'lambdalisue/fern.vim' }
+  use { 'lambdalisue/fern-hijack.vim' }
 
---- Lsps
-use { 'neovim/nvim-lspconfig'}
-use { 'lspcontainers/lspcontainers.nvim'}
-use { 'williamboman/nvim-lsp-installer'}
-use { 'glepnir/lspsaga.nvim'}
-use { 'nvim-treesitter/nvim-treesitter'}
+  --- Lsps
+  use { 'neovim/nvim-lspconfig' }
+  use { 'lspcontainers/lspcontainers.nvim' }
+  use { 'williamboman/nvim-lsp-installer' }
+  use { 'glepnir/lspsaga.nvim' }
+  use { 'nvim-treesitter/nvim-treesitter' }
 
---- Git
-use { 'airblade/vim-gitgutter'}
-use { 'tpope/vim-fugitive'}
+  --- Git
+  use { 'airblade/vim-gitgutter' }
+  use { 'tpope/vim-fugitive' }
 
-use { 'jparise/vim-graphql'}
+  use { 'jparise/vim-graphql' }
 
---- Web development
-use { 'alvan/vim-closetag'}
-use { 'ap/vim-css-color'}
+  --- Web development
+  use { 'alvan/vim-closetag' }
+  use { 'ap/vim-css-color' }
 
--- Javascript
-use { 'mxw/vim-jsx'}
-use { 'pangloss/vim-javascript'}
-use { 'simeji/winresizer'}
+  -- Javascript
+  use { 'mxw/vim-jsx' }
+  use { 'pangloss/vim-javascript' }
+  use { 'simeji/winresizer' }
 
-use { 'dag/vim-fish'}
+  use { 'dag/vim-fish' }
 
-use { 'nvim-lua/plenary.nvim'}
-use { 'akinsho/flutter-tools.nvim'}
+  use { 'nvim-lua/plenary.nvim' }
+  use { 'akinsho/flutter-tools.nvim' }
 
--- Dart more syntax highlights
-use { 'dart-lang/dart-vim-plugin'}
+  -- Dart more syntax highlights
+  use { 'dart-lang/dart-vim-plugin' }
 
-use { 'lambdalisue/gina.vim'}
+  use { 'lambdalisue/gina.vim' }
 
---- SKK
--- use { 'vim-skk/eskk.vim'}
-use { 'vim-denops/denops.vim'}
-use { 'vim-skk/denops-skkeleton.vim'}
-use { 'Shougo/ddc.vim' }
-use { 'Shougo/ddc-matcher_head' }
-use { 'Shougo/ddc-sorter_rank' }
+  --- SKK
+  -- use { 'vim-skk/eskk.vim'}
+  use { 'vim-denops/denops.vim' }
+  use { 'vim-skk/denops-skkeleton.vim' }
+  use { 'Shougo/ddc.vim' }
+  use { 'Shougo/ddc-matcher_head' }
+  use { 'Shougo/ddc-sorter_rank' }
 
 end)
 
@@ -82,7 +83,7 @@ require('session_manager').setup({
   autosave_ignore_not_normal = true, -- use {in will not save a session when no buffers are opened, or all of them aren't writable or listed.
   autosave_ignore_filetypes = { -- All buffers of these file types will be closed before the session is saved.
     'gitcommit',
-  }, 
+  },
   autosave_only_in_session = false, -- Always autosaves session. If true, only autosaves after a session is active.
-  max_path_length = 80,  -- Shorten the display path if length exceeds this threshold. Use 0 if don't want to shorten the path at all.
+  max_path_length = 80, -- Shorten the display path if length exceeds this threshold. Use 0 if don't want to shorten the path at all.
 })
