@@ -125,7 +125,7 @@ end
 -- 
 nmap('<Leader>b', ':Buffers<CR>')
 nmap('/', ':BLines<CR>')
-nmap('<CR>', ':lua vim.lsp.buf.formatting()<CR>')
+nmap('<CR>', ':lua vim.lsp.buf.format({ async = true })<CR>')
 -- 
 -- " ESKK
 imap('xz', '<Plug>(eskk:toggle)')
