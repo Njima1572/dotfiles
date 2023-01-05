@@ -4,9 +4,11 @@
 set -x EDITOR nvim
 set -x WAKATIME_HOME $HOME/.config/wakatime
 set -x GCM_CREDENTIAL_STORE cache
+set -x GOPATH $HOME/go
 set -x PS1 $CUSTOM_PS1:$PS1
 set -gx VENV_WRAPPER_SHELL fish
 fish_add_path $HOME/.local/bin
+fish_add_path $GOPATH/bin
 
 # --- Source extra configs
 source $HOME/.config/fish/aliases.fish

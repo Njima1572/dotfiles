@@ -1,6 +1,6 @@
 -- {{{ Lua
-require'lspconfig'.sumneko_lua.setup{
-  cmd = require'lspcontainers'.command('sumneko_lua'),
+require 'lspconfig'.sumneko_lua.setup {
+  cmd = require 'lspcontainers'.command('sumneko_lua'),
   settings = {
     Lua = {
       diagnostics = {
@@ -11,8 +11,8 @@ require'lspconfig'.sumneko_lua.setup{
 }
 -- }}}
 -- {{{ Python
-require'lspconfig'.pylsp.setup{ 
-  cmd = require'lspcontainers'.command('pylsp'),
+require 'lspconfig'.pylsp.setup {
+  cmd = require 'lspcontainers'.command('pylsp'),
   settings = {
     pylsp = {
       plugins = {
@@ -35,82 +35,82 @@ require'lspconfig'.pylsp.setup{
 -- }
 -- }}}
 -- {{{ Rust
-require'lspconfig'.rust_analyzer.setup{
+require 'lspconfig'.rust_analyzer.setup {
   before_init = function(params)
     params.processId = vim.NIL
   end,
   on_new_config = function(new_config, new_root_dir)
-  new_config.cmd = require'lspcontainers'.command('rust_analyzer', {root_dir = new_root_dir, network = "bridge"})
+    new_config.cmd = require 'lspcontainers'.command('rust_analyzer', { root_dir = new_root_dir, network = "bridge" })
   end,
-  cmd = require'lspcontainers'.command('rust_analyzer', {
+  cmd = require 'lspcontainers'.command('rust_analyzer', {
     network = "bridge",
   }),
-  root_dir = require'lspconfig'.util.root_pattern("Cargo.toml")
+  root_dir = require 'lspconfig'.util.root_pattern("Cargo.toml")
 }
 -- }}}
 -- {{{ Ruby
-require'lspconfig'.solargraph.setup{
+require 'lspconfig'.solargraph.setup {
   before_init = function(params)
     params.processId = vim.NIL
   end,
-  cmd = require'lspcontainers'.command('solargraph'),
-  root_dir = require'lspconfig'.util.root_pattern(".git", vim.fn.getcwd())
+  cmd = require 'lspcontainers'.command('solargraph'),
+  root_dir = require 'lspconfig'.util.root_pattern(".git", vim.fn.getcwd())
 }
 -- }}}
 -- {{{ TS / Vue
-require'lspconfig'.tsserver.setup{
+require 'lspconfig'.tsserver.setup {
   before_init = function(params)
     params.processId = vim.NIL
   end,
   on_new_config = function(new_config, new_root_dir)
-  new_config.cmd = require'lspcontainers'.command('tsserver', {root_dir = new_root_dir})
+    new_config.cmd = require 'lspcontainers'.command('tsserver', { root_dir = new_root_dir })
   end,
-  cmd = require'lspcontainers'.command('tsserver'),
-  root_dir = require'lspconfig'.util.root_pattern("package.json")
+  cmd = require 'lspcontainers'.command('tsserver'),
+  root_dir = require 'lspconfig'.util.root_pattern("package.json")
 }
 
-require'lspconfig'.vuels.setup{
+require 'lspconfig'.vuels.setup {
   before_init = function(params)
     params.processId = vim.NIL
   end,
   on_new_config = function(new_config, new_root_dir)
-  new_config.cmd = require'lspcontainers'.command('vuels', {root_dir = new_root_dir})
+    new_config.cmd = require 'lspcontainers'.command('vuels', { root_dir = new_root_dir })
   end,
-  cmd = require'lspcontainers'.command('vuels'),
-  root_dir = require'lspconfig'.util.root_pattern("package.json")
+  cmd = require 'lspcontainers'.command('vuels'),
+  root_dir = require 'lspconfig'.util.root_pattern("package.json")
 }
 -- }}}
 -- {{{ Yaml
-require'lspconfig'.yamlls.setup{
+require 'lspconfig'.yamlls.setup {
   before_init = function(params)
     params.processId = vim.NIL
   end,
-  cmd = require'lspcontainers'.command('yamlls'),
-  root_dir = require'lspconfig'.util.root_pattern(".git", vim.fn.getcwd())
+  cmd = require 'lspcontainers'.command('yamlls'),
+  root_dir = require 'lspconfig'.util.root_pattern(".git", vim.fn.getcwd())
 }
 --  }}}
 -- {{{ HTML
-require'lspconfig'.html.setup{
+require 'lspconfig'.html.setup {
   before_init = function(params)
     params.processId = vim.NIL
   end,
-  cmd = require'lspcontainers'.command('html'),
-  root_dir = require'lspconfig'.util.root_pattern(".git", vim.fn.getcwd())
+  cmd = require 'lspcontainers'.command('html'),
+  root_dir = require 'lspconfig'.util.root_pattern(".git", vim.fn.getcwd())
 }
 --  }}}
 -- {{{ Docker
-require'lspconfig'.dockerls.setup{
+require 'lspconfig'.dockerls.setup {
   before_init = function(params)
     params.processId = vim.NIL
   end,
-  cmd = require'lspcontainers'.command('dockerls'),
-  root_dir = require'lspconfig'.util.root_pattern(".git", vim.fn.getcwd()),
+  cmd = require 'lspcontainers'.command('dockerls'),
+  root_dir = require 'lspconfig'.util.root_pattern(".git", vim.fn.getcwd()),
   settings = {
     vim = {
-      lsp  = {
+      lsp = {
         buf = {
-          format ={
-              async = true
+          format = {
+            async = true
           }
         }
       }
@@ -119,12 +119,12 @@ require'lspconfig'.dockerls.setup{
 }
 --  }}}
 -- {{{ Bash
-require'lspconfig'.bashls.setup{
+require 'lspconfig'.bashls.setup {
   before_init = function(params)
     params.processId = vim.NIL
   end,
-  cmd = require'lspcontainers'.command('bashls'),
-  root_dir = require'lspconfig'.util.root_pattern(".git", vim.fn.getcwd())
+  cmd = require 'lspcontainers'.command('bashls'),
+  root_dir = require 'lspconfig'.util.root_pattern(".git", vim.fn.getcwd())
 }
 --  }}}
 -- {{{ Dart/Flutter
@@ -135,14 +135,29 @@ require'lspconfig'.bashls.setup{
 
 -- There are two options to use
 -- require'lspconfig'.dartls.setup{}
-require("flutter-tools").setup{}
+require("flutter-tools").setup {}
 --  }}}
 -- {{{ Go
-require'lspconfig'.gopls.setup{
-  before_init = function(params)
-    params.processId = vim.NIL
-  end,
-  cmd = require'lspcontainers'.command('gopls'),
-  root_dir = require'lspconfig'.util.root_pattern("go.mod", vim.fn.getcwd())
+-- require'lspconfig'.gopls.setup{
+--   before_init = function(params)
+--     params.processId = vim.NIL
+--   end,
+--   cmd = require'lspcontainers'.command('gopls'),
+--   root_dir = require'lspconfig'.util.root_pattern("go.mod", vim.fn.getcwd())
+-- }
+local lspconfig = require "lspconfig"
+local util = require "lspconfig/util"
+lspconfig.gopls.setup {
+  cmd = { "gopls", "serve" },
+  filetypes = { "go", "gomod" },
+  root_dir = util.root_pattern("go.work", "go.mod", ".git"),
+  settings = {
+    gopls = {
+      analyses = {
+        unusedparams = true,
+      },
+      staticcheck = true,
+    },
+  },
 }
 --  }}}

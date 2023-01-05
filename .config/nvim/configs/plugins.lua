@@ -30,11 +30,12 @@ require('jetpack.packer').startup(function(use)
   use { 'lambdalisue/fern-hijack.vim' }
 
   --- Lsps
+  use { 'jose-elias-alvarez/null-ls.nvim' }
   use { 'neovim/nvim-lspconfig' }
   use { 'lspcontainers/lspcontainers.nvim' }
   use { 'williamboman/nvim-lsp-installer' }
   use { 'glepnir/lspsaga.nvim' }
-  use { 'nvim-treesitter/nvim-treesitter' }
+  -- use { 'nvim-treesitter/nvim-treesitter' }
 
   --- Git
   use { 'airblade/vim-gitgutter' }
@@ -71,6 +72,13 @@ require('jetpack.packer').startup(function(use)
 
 end)
 
+local null_ls = require('null-ls')
+null_ls.setup({
+  sources = {
+    null_ls.builtins.formatting.goimports
+  }
+
+})
 require('lualine').setup()
 require('bufferline').setup()
 local Path = require('plenary.path')

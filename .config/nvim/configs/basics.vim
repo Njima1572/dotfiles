@@ -20,6 +20,7 @@ set shiftwidth=2
 set softtabstop=2
 set expandtab
 set list listchars=tab:\-\-
+set mouse-=nvi
 
 " Custom
 let g:python3_host_prog = '/usr/bin/python3'
