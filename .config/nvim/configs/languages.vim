@@ -5,7 +5,7 @@ augroup END
 
 augroup dart
   autocmd! 
-  source ~/.config/nvim/configs/languages/dart.lua
+  source ~/.config/nvim/configs/languages/dart.vim
 augroup END
 
 augroup diff

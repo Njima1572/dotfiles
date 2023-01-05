@@ -1,121 +1,93 @@
 {
-    "workbench.colorTheme": "Solarized Light",
-    "vim.leader": "<Space>",
-    "vim.easymotion": true,
-    "vim.highlightedyank.enable": true,
-    "vim.highlightedyank.color": "rgba(250, 240, 170, 0.5)",
-    "vim.insertModeKeyBindings": [
-        {
-            "before": [
-                "x",
-                "x"
-            ],
-            "after": [
-                "<Esc>"
-            ]
-        }
-    ],
-    "vim.normalModeKeyBindingsNonRecursive": [
-        {
-            "before": [
-                "l"
-            ],
-            "after": [
-                "i"
-            ]
-        },
-        {
-            "before": [
-                "<leader>",
-                "<leader>"
-            ],
-            "commands": [
-                ":w"
-            ]
-        },
-        {
-            "before": [
-                "n"
-            ],
-            "after": [
-                "j"
-            ]
-        },
-        {
-            "before": [
-                "e"
-            ],
-            "after": [
-                "k"
-            ]
-        },
-        {
-            "before": [
-                "i"
-            ],
-            "after": [
-                "l"
-            ]
-        }
-    ],
-    "vim.visualModeKeyBindingsNonRecursive": [
-        {
-            "before": [
-                "n"
-            ],
-            "after": [
-                "j"
-            ]
-        },
-        {
-            "before": [
-                "e"
-            ],
-            "after": [
-                "k"
-            ]
-        },
-        {
-            "before": [
-                "i"
-            ],
-            "after": [
-                "l"
-            ]
-        }
-    ],
-    "scrolloff.alwaysCenter": true,
-    "window.zoomLevel": -1,
+  "workbench.colorTheme": "Solarized Light",
+  "vim.leader": "<Space>",
+  "vim.easymotion": true,
+  "vim.highlightedyank.enable": true,
+  "vim.highlightedyank.color": "rgba(250, 240, 170, 0.5)",
+  "vim.insertModeKeyBindings": [
+    {
+      "before": ["x", "x"],
+      "after": ["<Esc>"]
+    }
+  ],
+  "vim.normalModeKeyBindingsNonRecursive": [
+    {
+      "before": ["l"],
+      "after": ["i"]
+    },
+    {
+      "before": ["<leader>", "<leader>"],
+      "commands": [":w"]
+    },
+    {
+      "before": ["n"],
+      "after": ["j"]
+    },
+    {
+      "before": ["e"],
+      "after": ["k"]
+    },
+    {
+      "before": ["i"],
+      "after": ["l"]
+    }
+  ],
+  "vim.visualModeKeyBindingsNonRecursive": [
+    {
+      "before": ["n"],
+      "after": ["j"]
+    },
+    {
+      "before": ["e"],
+      "after": ["k"]
+    },
+    {
+      "before": ["i"],
+      "after": ["l"]
+    }
+  ],
+  "scrolloff.alwaysCenter": true,
+  "window.zoomLevel": -1,
+  "editor.formatOnSave": true,
+  "yaml.customTags": [
+    "!And",
+    "!And sequence",
+    "!If",
+    "!If sequence",
+    "!Not",
+    "!Not sequence",
+    "!Equals",
+    "!Equals sequence",
+    "!Or",
+    "!Or sequence",
+    "!FindInMap",
+    "!FindInMap sequence",
+    "!Base64",
+    "!Join",
+    "!Join sequence",
+    "!Cidr",
+    "!Ref",
+    "!Sub",
+    "!Sub sequence",
+    "!GetAtt",
+    "!GetAZs",
+    "!ImportValue",
+    "!ImportValue sequence",
+    "!Select",
+    "!Select sequence",
+    "!Split",
+    "!Split sequence"
+  ],
+  "yaml.validate": false,
+  "redhat.telemetry.enabled": true,
+  "[dart]": {
     "editor.formatOnSave": true,
-    "yaml.customTags": [
-        "!And",
-        "!And sequence",
-        "!If",
-        "!If sequence",
-        "!Not",
-        "!Not sequence",
-        "!Equals",
-        "!Equals sequence",
-        "!Or",
-        "!Or sequence",
-        "!FindInMap",
-        "!FindInMap sequence",
-        "!Base64",
-        "!Join",
-        "!Join sequence",
-        "!Cidr",
-        "!Ref",
-        "!Sub",
-        "!Sub sequence",
-        "!GetAtt",
-        "!GetAZs",
-        "!ImportValue",
-        "!ImportValue sequence",
-        "!Select",
-        "!Select sequence",
-        "!Split",
-        "!Split sequence"
-    ],
-    "yaml.validate": false,
-    "redhat.telemetry.enabled": true
+    "editor.formatOnType": true,
+    "editor.rulers": [80],
+    "editor.selectionHighlight": false,
+    "editor.suggest.snippetsPreventQuickSuggestions": false,
+    "editor.suggestSelection": "first",
+    "editor.tabCompletion": "onlySnippets",
+    "editor.wordBasedSuggestions": false
+  }
 }
