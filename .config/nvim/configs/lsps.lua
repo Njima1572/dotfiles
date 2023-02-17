@@ -1,6 +1,6 @@
 -- {{{ Lua
 require 'lspconfig'.sumneko_lua.setup {
-  cmd = require 'lspcontainers'.command('sumneko_lua'),
+  cmd = require 'lspcontainers'.command('lua_ls'),
   settings = {
     Lua = {
       diagnostics = {
