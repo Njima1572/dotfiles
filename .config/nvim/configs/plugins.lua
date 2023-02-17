@@ -29,7 +29,6 @@ require('jetpack.packer').startup(function(use)
   use { 'lambdalisue/fern.vim' }
   use { 'lambdalisue/fern-hijack.vim' }
 
-  --- Lsps
   use { 'jose-elias-alvarez/null-ls.nvim' }
   use { 'neovim/nvim-lspconfig' }
   use { 'lspcontainers/lspcontainers.nvim' }
@@ -77,7 +76,6 @@ null_ls.setup({
   sources = {
     null_ls.builtins.formatting.goimports
   }
-
 })
 require('lualine').setup()
 require('bufferline').setup()

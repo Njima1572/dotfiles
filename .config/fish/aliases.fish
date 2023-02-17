@@ -10,3 +10,6 @@ alias dcb='docker-compose build'
 alias d='docker'
 alias emacs='emacs -nw'
 alias e='emacs'
+alias today='date +"%A, %B %-d, %Y"'
+alias now='date +"%R"'
+alias mochatto="cd ~/Development/mochatto"

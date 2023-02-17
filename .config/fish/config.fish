@@ -6,8 +6,11 @@ set -x WAKATIME_HOME $HOME/.config/wakatime
 set -x GCM_CREDENTIAL_STORE cache
 set -x GOPATH $HOME/go
 set -x PS1 $CUSTOM_PS1:$PS1
+set -x CARGO_HOME $HOME/.cargo
+set -x GOPATH $HOME/go
 set -gx VENV_WRAPPER_SHELL fish
 fish_add_path $HOME/.local/bin
+fish_add_path $HOME/.cargo/bin
 fish_add_path $GOPATH/bin
 
 # --- Source extra configs
