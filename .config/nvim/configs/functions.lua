@@ -9,7 +9,7 @@
 --   echom a:filename
 --   execute "e " .expand("%:h") . "/" . a:filename
 -- endfunction
--- 
+--
 -- " function GenerateHeader(filetype)
 -- "   if a:filetype == 'vim'
 -- "     r$HOME/.config/nvim/header_template/header_template.vim
@@ -21,12 +21,12 @@
 -- "   exe '1,' . 8 . 'g/File Name :.*/s//File Name : ' .expand('%')
 -- "   exe '1,' . 8 . 'g/Creation Date :.*/s//Creation Date : ' .strftime('%Y-%m-%d %H:%M')
 -- " endfunction
--- 
+--
 -- function UpdateHeader()
 --   execute 'normal ma'
 --   exe '1,' . 8 . 'g/Last Modified :.*/s/Last Modified :.*/Last Modified : ' .strftime('%Y-%m-%d %H:%M')
 --   exe '1,' . 8 . 'g/Created By :.*/s/Created By :.*/Created By : Njima1572'
--- 
+--
 -- endfunction
 
 local function _map(mode, shortcut, command)

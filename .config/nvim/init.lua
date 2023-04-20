@@ -23,9 +23,9 @@ vim.cmd('source ~/.config/nvim/configs/keybindings.lua')
 
 -- Extras
 -- vim.cmd('source ~/.config/nvim/configs/defx_bindings.vim
-vim.cmd('source ~/.config/nvim/configs/fern.vim')
+-- vim.cmd('source ~/.config/nvim/configs/fern.vim')
 -- vim.cmd('source ~/.config/nvim/configs/coc.vim
-vim.cmd('source ~/.config/nvim/configs/lsps.lua')
+-- vim.cmd('source ~/.config/nvim/configs/lsps.lua')
 -- vim.cmd('source ~/.config/nvim/configs/treesitter.lua')
 
 vim.cmd('source ~/.config/nvim/configs/languages.vim')

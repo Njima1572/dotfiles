@@ -1,6 +1,5 @@
 -- {{{ Lua
-require 'lspconfig'.sumneko_lua.setup {
-  cmd = require 'lspcontainers'.command('sumneko_lua'),
+require 'lspconfig'.lua_ls.setup {
   settings = {
     Lua = {
       diagnostics = {
@@ -138,12 +137,12 @@ require 'lspconfig'.bashls.setup {
 require("flutter-tools").setup {}
 --  }}}
 -- {{{ Go
--- require'lspconfig'.gopls.setup{
+-- require 'lspconfig'.gopls.setup {
 --   before_init = function(params)
 --     params.processId = vim.NIL
 --   end,
---   cmd = require'lspcontainers'.command('gopls'),
---   root_dir = require'lspconfig'.util.root_pattern("go.mod", vim.fn.getcwd())
+--   cmd = require 'lspcontainers'.command('gopls'),
+--   root_dir = require 'lspconfig'.util.root_pattern("go.mod", vim.fn.getcwd())
 -- }
 local lspconfig = require "lspconfig"
 local util = require "lspconfig/util"
