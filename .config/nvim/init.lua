@@ -14,12 +14,11 @@ if fn.filereadable(jetpackfile) == 0 then
   fn.system('curl -fsSLo ' .. jetpackfile .. ' --create-dirs ' .. jetpackurl)
 end
 
-vim.cmd('source ~/.config/nvim/configs/functions.lua')
-vim.cmd('source ~/.config/nvim/configs/paths.vim')
-vim.cmd('source ~/.config/nvim/configs/plugins.lua')
-vim.cmd('source ~/.config/nvim/configs/basics.vim')
-vim.cmd('source ~/.config/nvim/configs/basics.lua')
-vim.cmd('source ~/.config/nvim/configs/keybindings.lua')
+
+require('njima1572.functions')
+require('njima1572.plugins')
+require('njima1572.basics')
+require('njima1572.keybindings')
 
 -- Extras
 -- vim.cmd('source ~/.config/nvim/configs/defx_bindings.vim
