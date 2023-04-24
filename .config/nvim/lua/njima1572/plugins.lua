@@ -15,6 +15,7 @@ require('jetpack.packer').startup(function(use)
   use { 'easymotion/vim-easymotion' }
   use { 'junegunn/fzf', run = 'call fzf#install()' }
   use { 'junegunn/fzf.vim' }
+  use { 'chrisbra/csv.vim' }
   -- use { 'jremmen/vim-ripgrep.vim'}
   use { 'mbbill/undotree' }
   -- use { 'neoclide/coc.nvim', {'branch': 'release'} =? moved to configs/coc.nvim}
@@ -51,7 +52,7 @@ require('jetpack.packer').startup(function(use)
   -- Javascript
   use { 'mxw/vim-jsx' }
   use { 'pangloss/vim-javascript' }
-  use { 'simeji/winresizer' }
+  -- use { 'simeji/winresizer' }
 
   use { 'dag/vim-fish' }
 
@@ -71,4 +72,3 @@ require('jetpack.packer').startup(function(use)
   use { 'Shougo/ddc-matcher_head' }
   use { 'Shougo/ddc-sorter_rank' }
 end)
-

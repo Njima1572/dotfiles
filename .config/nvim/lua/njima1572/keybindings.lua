@@ -43,6 +43,16 @@ imap('?', '?<c-g>U')
 -- " Moving Chunks
 -- " vnoremap N :m '>+1<CR>gv=gv
 -- " vnoremap E :m '<-2<CR>gv=gv
+
+vmap("N", ":m '>+1<CR>gv=gv")
+vmap("E", ":m '<-2<CR>gv=gv")
+
+vim.keymap.set("x", "<leader>p", '"_dP', {noremap = true, silent = true})
+
+nmap("<leader>y", '"+y')
+vmap("<leader>y", '"+y')
+nmap("<leader>Y", '"+Y')
+
 --
 nmap('<F5>', ':source ~/.config/nvim/init.lua<CR>:noh<CR>:echo "Refreshed config!"<CR>')
 --
