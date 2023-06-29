@@ -63,11 +63,11 @@ require('jetpack.packer').startup(function(use)
 
   --- SKK
   -- use { 'vim-skk/eskk.vim'}
-  use { 'vim-denops/denops.vim' }
-  use { 'vim-skk/denops-skkeleton.vim' }
-  use { 'Shougo/ddc.vim' }
-  use { 'Shougo/ddc-matcher_head' }
-  use { 'Shougo/ddc-sorter_rank' }
+  -- use { 'vim-denops/denops.vim' }
+  -- use { 'vim-skk/denops-skkeleton.vim' }
+  -- use { 'Shougo/ddc.vim' }
+  -- use { 'Shougo/ddc-matcher_head' }
+  -- use { 'Shougo/ddc-sorter_rank' }
 
 end)
 
