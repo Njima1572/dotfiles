@@ -24,7 +24,9 @@ map('I', 'L')
 map('K', 'N')
 map('L', 'I')
 --
+nmap('<C-t>', ':term<CR>')
 tmap('<C-e>', '<C-p>')
+tmap('<C-x>', '<C-\\><C-n>')
 --
 -- " Tab move
 nmap('<S-i>', ':bn<CR>')
@@ -106,6 +108,8 @@ map(',', '<Plug>(easymotion-prefix)')
 --
 -- " ----- Git
 nmap('<leader>gs', ':G<CR>')
+
+nmap('<leader>t', ':term<CR>')
 
 --
 -- " ----- Gina

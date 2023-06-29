@@ -168,3 +168,9 @@ lspconfig.gopls.setup {
   },
 }
 --  }}}
+--  {{{ Terrform
+lspconfig.terraformls.setup {
+  cmd = require 'lspcontainers'.command('terraformls'),
+  filetypes = { "hcl", "tf", "terraform", "tfvars" },
+}
+-- }}}
