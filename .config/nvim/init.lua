@@ -1,31 +1,26 @@
--- -.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.
---  File Name : init.vim
---  Purpose :
---  Creation Date : 2021-01-15
---  Last Modified : 2022-01-11 12:24
---  Created By : Njima1572
---  ._._._._._._._._._._._._._._._._._._._._.
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
 
--- nvim + Lua
-local fn = vim.fn
-local jetpackfile = fn.stdpath('data') .. '/site/pack/jetpack/opt/vim-jetpack/plugin/jetpack.vim'
-local jetpackurl = 'https://raw.githubusercontent.com/tani/vim-jetpack/master/plugin/jetpack.vim'
-if fn.filereadable(jetpackfile) == 0 then
-  fn.system('curl -fsSLo ' .. jetpackfile .. ' --create-dirs ' .. jetpackurl)
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
 end
+vim.opt.rtp:prepend(lazypath)
 
-vim.cmd('source ~/.config/nvim/configs/functions.lua')
-vim.cmd('source ~/.config/nvim/configs/paths.vim')
-vim.cmd('source ~/.config/nvim/configs/plugins.lua')
-vim.cmd('source ~/.config/nvim/configs/basics.vim')
-vim.cmd('source ~/.config/nvim/configs/basics.lua')
-vim.cmd('source ~/.config/nvim/configs/keybindings.lua')
+-- Required:
+vim.cmd('filetype plugin indent on')
+vim.cmd('syntax enable') -- Turned on by default in nvim
+vim.o.termguicolors = true
 
--- Extras
--- vim.cmd('source ~/.config/nvim/configs/defx_bindings.vim
-vim.cmd('source ~/.config/nvim/configs/fern.vim')
--- vim.cmd('source ~/.config/nvim/configs/coc.vim
-vim.cmd('source ~/.config/nvim/configs/lsps.lua')
--- vim.cmd('source ~/.config/nvim/configs/treesitter.lua')
+require("bindings")
+require('lazy').setup(require("plugins"))
+require("basics")
 
-vim.cmd('source ~/.config/nvim/configs/languages.vim')
+-- vim.cmd 'source ~/.config/nvim/bindings.vim'
