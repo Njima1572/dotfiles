@@ -18,41 +18,7 @@ filetype off
 " set rtp+=~/.vim/bundle/Vundle.vim
 " call vundle#begin()
 
-packloadall
-
-"----- Color Scheme
-" source ~/.vim/colorscheme.vim
-
-" Plugin 'VundleVim/Vundle.vim'
-" Plugin 'tpope/vim-fugitive'
-" Plugin 'airblade/vim-gitgutter'
-" Plugin 'vim-airline/vim-airline'
-" Plugin 'jacquesbh/vim-showmarks'
-" "Plugin 'easymotion/vim-easymotion'
-" Plugin 'junegunn/fzf', { 'do': { -> fzf#install() } }
-" Plugin 'junegunn/fzf.vim'
-" Plugin 'rhysd/vim-clang-format'
-" Plugin 'prettier/vim-prettier', { 'do': 'yarn install' }
-" Plugin 'sjl/gundo.vim',
-" Plugin 'leafgarland/typescript-vim'
-" Plugin 'peitalin/vim-jsx-typescript'
-" Plugin 'zah/nim.vim'
-" Plugin 'altercation/vim-colors-solarized'
-" Plugin 'psf/black', { 'tag': '19.10b0' }
-" Plugin 'rust-lang/rust.vim'
-" Plugin 'dag/vim-fish'
-" Plugin 'alvan/vim-closetag'
-" Plugin 'dart-lang/dart-vim-plugin'
-" Plugin 'natebosch/vim-lsc'
-" Plugin 'natebosch/vim-lsc-dart'
-" "" An autocompletion plugin but replaced by kite
-" " Plugin 'neoclide/coc.nvim', {'branch': 'release'}
-" Plugin 'jparise/vim-graphql'
-" Plugin 'kiteco/vim-plugin'
-" 
-" call vundle#end()
-" filetype plugin indent on
-
+let mapleader = " "
 
 "----- Refresh vimrc with <F5>
 noremap <silent> <F5> :source ~/.vimrc<CR>:noh<CR>:echo "Refreshed config!"<CR>
@@ -63,7 +29,7 @@ set number
 set autoindent
 set smartindent
 set virtualedit=onemore
-set scrolloff=999
+set scrolloff=20
 set laststatus=2
 set cursorline
 set cursorcolumn
@@ -73,6 +39,13 @@ set guioptions-=m
 set guioptions-=r
 set incsearch
 
+set showcmd
+
+set foldmethod=marker
+
+set hlsearch
+set wrapscan
+set foldmethod=marker
 
 noremap n j
 noremap e k
@@ -87,15 +60,6 @@ noremap N J
 noremap E K
 noremap K N
 noremap L I
-
-
-set showcmd
-
-set foldmethod=marker
-
-set hlsearch
-set wrapscan
-set foldmethod=marker
 
 noremap <Esc><Esc> :nohl<CR>
 
@@ -120,7 +84,6 @@ if has('persistent_undo')
 endif
 
 "----- Setting <Space> as a leader key
-let mapleader = " "
 
 "----- Disable arrow keys
 inoremap <Left> <Nop>
@@ -137,11 +100,11 @@ noremap F K
 noremap <S-h> ^
 noremap <S-l> $
 ""---- Scroll Faster
-nnoremap <S-n> jjj
-nnoremap <S-e> kkk
+nnoremap <S-n> }
+nnoremap <S-e> {
 
-vnoremap <S-n> jjj
-vnoremap <S-e> kkk
+vnoremap <S-n> }
+vnoremap <S-e> {
 
 "----- Normal mode shortcut
 imap xx <Esc>
@@ -170,9 +133,6 @@ nmap <C-h> :wincmd h<CR>
 nmap <C-n> :wincmd j<CR>
 nmap <C-e> :wincmd k<CR>
 nmap <C-i> :wincmd l<CR>
-
-nmap <S-j> jjj
-nmap <S-k> kkk
 
 "----- gj gk mapping
 noremap j gj
@@ -211,158 +171,28 @@ hi ErrorMsg guibg=Blue
 "----- Airline Theme
 let g:ariline_solarized_bg='dark'
 
-" ---- Sessions
-"  If session was loaded, then overwrites it,
-"  if not, then asks for new name
-if empty(v:this_session)
-  noremap <Leader>s :mks ~/.vim/session/
-  noremap <Leader><Leader><Leader> :wq<CR> 
-else
-  exe "noremap <Leader>s :mks! ".v:this_session."<CR>"
-  exe "noremap <Leader><Leader><Leader> :mks! ".v:this_session."<CR>:wqa<CR>"
-endif
-
-noremap <Leader>S :mks ~/.vim/session/
-noremap <Leader>r :source ~/.vim/session/<C-d>
-
 noremap <Leader>o :e .<CR>
 noremap <Leader>v :vs .<CR>
 noremap <Leader>h :split .<CR>
 noremap <Leader>= <C-w>=
 
-noremap <Leader>f :BLines<CR>
-noremap <Leader>g :Lines<CR>
 
-"----- Gundo
-if has ('python3')
-  let g:gundo_prefer_python3 = 1
-endif
-noremap <Leader>u :GundoToggle<CR>
-
-"----- Directory stuff
-autocmd BufEnter * silent! lcd %:p:h
-
-"----- Buffers
-set hidden
-noremap <Leader>b :ls<CR>:b 
-noremap <Leader>x :bd<CR>
-
-"Automatically set directory to current file
-autocmd BufEnter * silent! lcd %:p:h
-
-"----- Showmarks
-augroup show_marks_sync
-  autocmd!
-  autocmd BufReadPost * silent! DoShowMarks
-augroup END
-
-
-"----- Tag Closing
-" filenames like *.xml, *.html, *.xhtml, ...
-" These are the file extensions where this plugin is enabled.
-"
-let g:closetag_filenames = '*.html,*.xhtml,*.phtml'
-
-" filenames like *.xml, *.xhtml, ...
-" This will make the list of non-closing tags self-closing in the specified files.
-"
-let g:closetag_xhtml_filenames = '*.xhtml,*.jsx'
-
-" filetypes like xml, html, xhtml, ...
-" These are the file types where this plugin is enabled.
-"
-let g:closetag_filetypes = 'html,xhtml,phtml'
-
-" filetypes like xml, xhtml, ...
-" This will make the list of non-closing tags self-closing in the specified files.
-"
-let g:closetag_xhtml_filetypes = 'xhtml,jsx'
-
-" integer value [0|1]
-" This will make the list of non-closing tags case-sensitive (e.g. `<Link>` will be closed while `<link>` won't.)
-"
-let g:closetag_emptyTags_caseSensitive = 1
-
-" dict
-" Disables auto-close if not in a "valid" region (based on filetype)
-"
-let g:closetag_regions = {
-    \ 'typescript.tsx': 'jsxRegion,tsxRegion',
-    \ 'javascript.jsx': 'jsxRegion',
-    \ }
-
-" Shortcut for closing tags, default is '>'
-"
-let g:closetag_shortcut = '>'
-
-" Add > at current position without closing the current tag, default is ''
-"
-let g:closetag_close_shortcut = '<leader>>'
-
-"----- Easymotion Sample : to be cleaned
-
-"map  <C-f> <Plug>(easymotion-bd-n)
-"nmap <C-f> <Plug>(easymotion-overwin-f)
-
-
-" s{char}{char} to move to {char}{char}
-" nmap <C-s> <Plug>(easymotion-everwin-f2)
-
-" Move to line
-" map ,L <Plug>(easymotion-bd-jk)
-" nmap ,L <Plug>(easymotion-overwin-line)
-
-" Move to word
-" map  ,w <Plug>(easymotion-bd-w)
-" nmap ,w <Plug>(easymotion-overwin-w)
-
-" map , <Plug>(easymotion-prefix))
-" map  / <Plug>(easymotion-sn)
-" omap / <Plug>(easymotion-tn)
-" map  n <Plug>(easymotion-next)
-" map  N <Plug>(easymotion-prev)))))/ <Plug>(easymotion-sn)
-" nmap / <Plug>(easymotion-tn)
-
-" Kite config
-let g:kite_supported_languages = ["python", "javascript"]
-let g:kite_tab_complete=1
-let g:kite_completions=0
-set completeopt+=noinsert
-set completeopt+=menuone
-
-" Clang 
-augroup c_group
-  autocmd!
-  autocmd BufRead,BufNewFile *.cpp,*.c source ~/.vim/cpp/cpp.vim
-  autocmd BufWritePost *.cpp,*.c,*.h,*.hpp ClangFormat
-augroup END
-
-" Python
-augroup py_group
-  autocmd!
-  autocmd BufRead,BufNewFile *.py source ~/.vim/python/python.vim
-  autocmd BufWritePost *.py Black
-augroup END
-
-" Javascripts
-augroup js_group
-  autocmd!
-  autocmd BufWritePost *.js,*.jsx,*.ts PrettierAsync
-augroup END
-
-" Set filetype as typescript.tsx
-augroup jsx_group
-  autocmd!
-  autocmd BufNewFile,BufRead *.js,*.tsx,*.jsx source ~/.vim/javascript/typescript.vim
-augroup END
-
-augroup rust
-  autocmd!
-  autocmd! BufNewFile,BufRead *.rs source ~/.vim/rust/rust.vim
-augroup END
-  
-" Dart is for flutter
-augroup dart_group
-  autocmd!
-  autocmd BufNewFile,BufRead *.dart source ~/.vim/dart/dart.vim
-augroup END
+" hi Ignore ctermfg=60
+hi Ignore ctermfg=15 guifg=bg
+hi Title term=bold ctermfg=5 gui=bold guifg=Magenta
+hi SpecialKey guifg=Gray
+hi CursorLine cterm=None term=reverse ctermbg=250
+"hi Special ctermbg=1"
+hi Normal ctermfg=52 guifg=black guibg=NONE ctermbg=NONE
+hi Constant ctermfg=Magenta
+hi Identifier ctermfg=1
+hi Cursor ctermbg=54
+hi PreProc ctermfg=17 CTErm=BOLD
+hi String ctermfg=22
+hi Repeat ctermfg=211 cterm=BOLD
+hi SpecialKey ctermfg=0
+hi Identifier ctermfg=0
+" hi Comment ctermfg=60 guifg=NONE ctermbg=NONE guibg=NONE
+hi Comment term=bold ctermfg=4 guifg=Blue
+hi pythonComment ctermfg=236 guibg=NONE
+hi vimGlobal ctermfg=255
