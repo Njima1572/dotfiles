@@ -1,19 +1,12 @@
 
-PKGS = tmux fish neovim ripgrep fzf direnv
-GEM_PKGS = tmuxinator
-CARGO_PKGS = alacritty
+PKGS = fish neovim ripgrep fzf direnv
 
 arch: 
 	yay -S --noconfirm --cleanafter $(PKGS)
 
 debian:
+	add-apt-repository ppa:neovim-ppa/unstable # for neovim 0.10
 	apt install -y $(PKGS)
 
 mac:
 	brew install $(PKGS)
-
-gems:
-	gem install $(GEM_PKGS)
-
-cargos:
-	cargo install $(CARGO_PKGS)
