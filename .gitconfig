@@ -1,0 +1,46 @@
+; Adopted from forno/dotfiles
+
+[user]
+	email = kochi.nakajima@gmail.com
+	name = Njima1572
+	signingkey = F318AAD1F0C6372C
+[alias]
+	a = add
+	aa = add -A
+	ae = add -e
+	ap = add -p
+	au = add -u
+	b = branch -vv
+	ba = branch -avv
+	bd = branch -dv
+	c = commit -v
+	ca = commit -a -v
+	cm = commit --amend --no-edit
+	ch = checkout
+	chb = checkout -b
+	d = diff
+	dc = diff --cached
+	dch = diff --check
+	fp = fetch --prune
+	g = log --graph --date=short --decorate=short --pretty=format:'%Cgreen%h %Creset%cd %Cblue%cn %Cred%d %Creset%s'
+	ga = log --all --graph --date=short --decorate=short --pretty=format:'%Cgreen%h %Creset%cd %Cblue%cn %Cred%d %Creset%s'
+	l = log
+	ld = log --diff-filter=D --summary
+	lo = log --oneline
+	lp = log -p
+	ls = log --stat
+	s = status
+	sh = show
+	st = stash
+	sw = switch
+	r = restore
+	rp = restore -p
+	rs = restore --staged
+[color]
+	ui = auto
+[core]
+	editor = nvim
+	autocrlf = input
+	ignorecase = true
+[init]
+	defaultBranch = main
