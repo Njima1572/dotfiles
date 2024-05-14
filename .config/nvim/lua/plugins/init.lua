@@ -83,7 +83,10 @@ return {
     },
     cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
     opts = {
-      ensure_installed = { "vim", "c", "c_sharp", "dockerfile", "lua", "javascript", "typescript", "gitcommit" },
+      ensure_installed = { "vim", "c", "c_sharp", "dockerfile", "lua", "javascript", "typescript", "gitcommit", "prisma" },
+      incremental_selection = {
+        enable = true
+      },
       sync_install = false,
       auto_install = true,
       highlight = {
@@ -250,7 +253,7 @@ return {
     },
 
     config = function()
-      local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
+      local capabilities = require('cmp_nvim_lsp').default_capabilities()
       local pid = vim.fn.getpid()
       local lspconfig = require('lspconfig')
       local lspcontainers = require('lspcontainers')
@@ -549,7 +552,7 @@ return {
     config = function()
       vim.keymap.set("i", "<C-l>", "<Plug>(skkeleton-toggle)", { noremap = true, silent = true })
       vim.fn["skkeleton#config"]({
-        globalJisyo = "/usr/share/skk/SKK-JISYO.L"
+        globalDictionaries = {"/usr/share/skk/SKK-JISYO.L"}
       })
     end
   },
