@@ -54,9 +54,11 @@ install_neovim() { #{{{
 
   OS=$(uname -s)
   if [ $OS == "Linux" ]; then
-      curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz
+      mkdir -p .tmp
+      curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz -o ./.tmp/nvim-linux64.tar.gz
       sudo rm -rf /opt/nvim
       sudo tar -C /opt -xzf nvim-linux64.tar.gz
+      rm -rf .tmp
       echo "Add the following line to your .bashrc or .zshrc file:"
       echo ""
       echo '`export PATH=$PATH:/opt/nvim-linux64/bin`'
