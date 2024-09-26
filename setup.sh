@@ -66,15 +66,16 @@ install_neovim() { #{{{
       echo "You may need to install python3-neovim package for python support"
   elif [ $OS == "Darwin" ]; then
       # Check the architecture of the machine
-      arch=$(uname -m)
-      echo "Downloading neovim for $arch"
-      sudo rm -rf /usr/local/nvim-macos-$arch
-      curl -LO https://github.com/neovim/neovim/releases/download/nightly/nvim-macos-$arch.tar.gz
-      sudo tar xzf nvim-macos-$arch.tar.gz -C /usr/local
+      ARCH=$(uname -m)
+      basename=nvim-macos-$ARCH
+      echo "Downloading neovim for $ARCH"
+      sudo rm -rf /usr/local/$basename
+      curl -LO https://github.com/neovim/neovim/releases/download/nightly/$basename.tar.gz
+      sudo tar xzf $basename.tar.gz -C /usr/local
 
       echo "Add the following line to your .bashrc or .zshrc file:"
       echo 
-      echo "`export PATH=\$PATH:/usr/local/nvim-macos-$arch/bin`"
+      echo "export PATH=\$PATH:/usr/local/$basename/bin"
       echo
   else
       echo "Unsupported OS - $OS"
@@ -82,6 +83,35 @@ install_neovim() { #{{{
   fi
 }
 #}}}
+#
+build_fish_linux() {
+  fish_version="3.7.1"
+  mkdir -p .tmp
+  curl -Lo .tmp/fish.tar.gz https://github.com/fish-shell/fish-shell/releases/download/$fish_version/fish-$fish_version.tar.xz
+  tar xzf .tmp/fish.tar.xz -C .tmp
+  cd .tmp/fish-$fish_version
+  cmake .
+  make
+  sudo make install
+}
+
+install_fish() {
+  echo "Checking if fish shell is already installed..."
+  if [ -x "$(command -v fish)" ]; then
+      echo "fish shell is already installed"
+  else
+      echo "Installing fish shell"
+      OS=$(uname -s)
+      if [ $OS == "Linux" ]; then
+          build_fish_linux
+      elif [ $OS == "Darwin" ]; then
+          brew install fish
+      else
+          echo "Unsupported OS - $OS"
+          exit 1
+      fi
+  fi
+}
 
 setup_symlink() { # {{{
   name=$1
@@ -147,20 +177,26 @@ setup_gitconfig() { # {{{
 
 # Ask user if they want to install neovim dotfiles
 
-echo "This script will setup dotfiles for neovim"
-read -p "Do you want to setup neovim dotfiles? [y/n] "
-if [[ $REPLY =~ ^[Yy]$ ]]; then
-    echo "Setting up neovim dotfiles"
+# Check if the user has arguments of [nvim, fish]
+if [ $# -eq 0 ]; then
+    echo "Usage: setup.sh [nvim, fish]"
+fi
+
+if [ $1 == "nvim" ]; then
     install_neovim
-    setup_neovim
+    read -p "Do you want to setup neovim dotfiles? [y/n] "
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+        echo "Setting up neovim dotfiles"
+        setup_neovim
+    fi
+elif [ $1 == "fish" ]; then
+    read -p "Do you want to setup fish shell? [y/n] "
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+        echo "Setting up fish shell"
+        install_fish
+        setup_fish
+    fi
+else
+    echo "Invalid argument"
+    exit 1
 fi
-
-# Ask user if they want to setup fish shell
-read -p "Do you want to setup fish shell? [y/n] "
-if [[ $REPLY =~ ^[Yy]$ ]]; then
-    echo "Setting up fish shell"
-    setup_fish
-fi
-
-
-## Setup .config/fish soft link
