@@ -87,7 +87,7 @@ install_neovim() { #{{{
 build_fish_linux() {
   fish_version="3.7.1"
   mkdir -p .tmp
-  curl -Lo .tmp/fish.tar.gz https://github.com/fish-shell/fish-shell/releases/download/$fish_version/fish-$fish_version.tar.xz
+  curl -Lo .tmp/fish.tar.xz https://github.com/fish-shell/fish-shell/releases/download/$fish_version/fish-$fish_version.tar.xz
   tar xzf .tmp/fish.tar.xz -C .tmp
   cd .tmp/fish-$fish_version
   cmake .
