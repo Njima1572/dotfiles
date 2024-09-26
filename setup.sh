@@ -88,7 +88,7 @@ build_fish_linux() {
   fish_version="3.7.1"
   mkdir -p .tmp
   curl -Lo .tmp/fish.tar.xz https://github.com/fish-shell/fish-shell/releases/download/$fish_version/fish-$fish_version.tar.xz
-  tar xzf .tmp/fish.tar.xz -C .tmp
+  tar xf .tmp/fish.tar.xz -C .tmp
   cd .tmp/fish-$fish_version
   cmake .
   make
