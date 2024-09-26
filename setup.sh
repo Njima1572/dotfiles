@@ -8,7 +8,9 @@ install_neovim() { #{{{
       echo "neovim is already installed"
 
       # Check if the version is greater than 0.8
-      if [ "$(nvim --version | head -n 1 | cut -d ' ' -f 2)" \> "0.8" ]; then
+      version=$(nvim --version | head -n 1 | cut -d ' ' -f 2)
+      echo "neovim version: $version"
+      if [ $version \> "0.8" ]; then
           echo "neovim version is greater than 0.8"
           return
       fi
