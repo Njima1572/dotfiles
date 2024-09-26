@@ -2,6 +2,32 @@
 
 NVIM_RELPATH=".config/nvim"
 
+vercomp () {
+    if [[ $1 == $2 ]]
+    then
+        return 0
+    fi
+    local IFS=.
+    local i ver1=($1) ver2=($2)
+    # fill empty fields in ver1 with zeros
+    for ((i=${#ver1[@]}; i<${#ver2[@]}; i++))
+    do
+        ver1[i]=0
+    done
+    for ((i=0; i<${#ver1[@]}; i++))
+    do
+        if ((10#${ver1[i]:=0} > 10#${ver2[i]:=0}))
+        then
+            return 1
+        fi
+        if ((10#${ver1[i]} < 10#${ver2[i]}))
+        then
+            return 2
+        fi
+    done
+    return 0
+}
+
 install_neovim() { #{{{
   echo "Checking if neovim is already installed..."
   if [ -x "$(command -v nvim)" ]; then
@@ -10,11 +36,22 @@ install_neovim() { #{{{
       # Check if the version is greater than 0.8
       version=$(nvim --version | head -n 1 | cut -d ' ' -f 2)
       echo "neovim version: $version"
-      if [ $version \> "0.8" ]; then
-          echo "neovim version is greater than 0.8"
-          return
+
+      vercomp $version "0.8"
+
+      if [ $? -eq '<' ]
+      then 
+        echo "neovim version is less than 0.8"
+        read -p "Do you want to install latest neovim? [y/n] " -n 1
+        if [[ $REPLY =~ ^[Yy]$ ]]; then
+            echo "Installing latest neovim"
+        else
+            echo "Please install neovim version 0.8 or greater"
+            exit 1
+        fi
       fi
   fi
+
   OS=$(uname -s)
   if [ $OS == "Linux" ]; then
       curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz
@@ -44,50 +81,48 @@ install_neovim() { #{{{
 }
 #}}}
 
-setup_neovim() { # {{{
-  ## Setup nvim soft link
-  # Check if the symbolic link exists and is pointing to the correct directory
-  if [ -L ~/$NVIM_RELPATH ]; then
-      if [ "$(readlink ~/$NVIM_RELPATH)" == "$PWD/$NVIM_RELPATH" ]; then
-          echo "nvim symbolic link already exists"
+setup_symlink() { # {{{
+  name=$1
+  source=$2
+  target=$3
+
+  if [ -L $target ]; then
+      if [ "$(readlink $target)" == "$source" ]; then
+          echo "$name symbolic link already exists"
           return
       else
-          echo "nvim symbolic link exists but pointing to wrong directory"
+          echo "$name symbolic link exists but pointing to wrong directory"
           read -p "Do you want to remove it? [y/n] " -n 1
           echo
           if [[ $REPLY =~ ^[Yy]$ ]]; then
-              rm ~/$NVIM_RELPATH
+              rm $target
           else
-              echo "Please remove ~/$NVIM_RELPATH first"
+              echo "Please remove $target first"
               exit 1
           fi
       fi
-  fi
-  # If there is existing file, check user if they want to move it to .bk
-  if [ -d ~/$NVIM_RELPATH ]; then
-      echo "nvim directory already exists"
-      read -p "Do you want to move it to ~/$NVIM_RELPATH.bk? [y/n] " -n 1
+    elif [ -d $target ]; then
+      echo "$name directory already exists"
+      read -p "Do you want to move it to $target.bk? [y/n] " -n 1
       echo
       if [[ $REPLY =~ ^[Yy]$ ]]; then
-          mv ~/$NVIM_RELPATH ~/$NVIM_RELPATH.bk
+          mv $target $target.bk
       else
-          echo "Please remove ~/$NVIM_RELPATH first"
-          exit 1
-      fi
-  # If symbolic link exists
-  elif [ -L ~/$NVIM_RELPATH ]; then
-      echo "nvim symbolic link already exists"
-      read -p "Do you want to remove it? [y/n] " -n 1
-      echo
-      if [[ $REPLY =~ ^[Yy]$ ]]; then
-          rm ~/$NVIM_RELPATH
-      else
-          echo "Please remove ~/$NVIM_RELPATH first"
+          echo "Please remove $target first"
           exit 1
       fi
   fi
-  ln -s $PWD/$NVIM_RELPATH ~/$NVIM_RELPATH
+  ln -s $source $target
 }
+
+setup_neovim() {
+  setup_symlink "nvim" "$PWD/$NVIM_RELPATH" ~/$NVIM_RELPATH
+}
+
+setup_fish() {
+  setup_symlink "fish" "$PWD/.config/fish" "~/.config/fish"
+}
+
 # }}}
 
 setup_gitconfig() { # {{{
@@ -112,16 +147,17 @@ setup_gitconfig() { # {{{
 
 echo "This script will setup dotfiles for neovim"
 read -p "Do you want to setup neovim dotfiles? [y/n] "
-echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
-    echo
     echo "Setting up neovim dotfiles"
     install_neovim
     setup_neovim
-else
-    echo
-    echo "Exiting"
-    exit 1
+fi
+
+# Ask user if they want to setup fish shell
+read -p "Do you want to setup fish shell? [y/n] "
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+    echo "Setting up fish shell"
+    setup_fish
 fi
 
 
