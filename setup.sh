@@ -194,14 +194,14 @@ fi
 
 clean_tmp_dir
 make_tmp_dir
-if [ $1 -eq "nvim" ]; then
+if [ $1 == "nvim" ]; then
     install_neovim
     read -p "Do you want to setup neovim dotfiles? [y/n] "
     if [[ $REPLY =~ ^[Yy]$ ]]; then
         echo "Setting up neovim dotfiles"
         setup_neovim
     fi
-elif [ $1 -eq "fish" ]; then
+elif [ $1 == "fish" ]; then
     read -p "Do you want to setup fish shell? [y/n] "
     if [[ $REPLY =~ ^[Yy]$ ]]; then
         echo "Setting up fish shell"
