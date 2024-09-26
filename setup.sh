@@ -116,11 +116,11 @@ setup_symlink() { # {{{
 }
 
 setup_neovim() {
-  setup_symlink "nvim" "$PWD/$NVIM_RELPATH" ~/$NVIM_RELPATH
+  setup_symlink "nvim" $PWD/$NVIM_RELPATH $HOME/$NVIM_RELPATH
 }
 
 setup_fish() {
-  setup_symlink "fish" "$PWD/.config/fish" "~/.config/fish"
+  setup_symlink "fish" $PWD/.config/fish $HOME/.config/fish
 }
 
 # }}}
