@@ -29,6 +29,28 @@ vercomp () {
     return 0
 }
 
+prerequisite_check() {
+  if [ ! -x "$(command -v curl)" ]; then
+      echo "curl is not installed"
+      error_exit
+  fi
+
+  if [ ! -x "$(command -v git)" ]; then
+      echo "git is not installed"
+      error_exit
+  fi
+
+  if [ ! -x "$(command -v cmake)" ]; then
+      echo "cmake is not installed"
+      error_exit
+  fi
+  
+  if [ ! -x "$(command -v make)" ]; then
+      echo "make is not installed"
+      error_exit
+  fi
+}
+
 install_neovim() { #{{{
   echo "Checking if neovim is already installed..."
   if [ -x "$(command -v nvim)" ]; then
@@ -184,32 +206,39 @@ error_exit() {
     clean_tmp_dir
     exit 1
 }
-# Ask user if they want to install neovim dotfiles
-
-# Check if the user has arguments of [nvim, fish]
-if [ $# -eq 0 ]; then
-    echo "Usage: setup.sh [nvim, fish]"
-fi
 
 
-clean_tmp_dir
-make_tmp_dir
-if [ $1 == "nvim" ]; then
-    install_neovim
-    read -p "Do you want to setup neovim dotfiles? [y/n] "
-    if [[ $REPLY =~ ^[Yy]$ ]]; then
-        echo "Setting up neovim dotfiles"
-        setup_neovim
-    fi
-elif [ $1 == "fish" ]; then
-    read -p "Do you want to setup fish shell? [y/n] "
-    if [[ $REPLY =~ ^[Yy]$ ]]; then
-        echo "Setting up fish shell"
-        install_fish
-        setup_fish
-    fi
-else
-    echo "Invalid argument"
-    error_exit
-fi
-clean_tmp_dir
+main() {
+  prerequisite_check
+  # Ask user if they want to install neovim dotfiles
+
+  # Check if the user has arguments of [nvim, fish]
+  if [ $# -eq 0 ]; then
+      echo "Usage: setup.sh [nvim, fish]"
+  fi
+
+
+  clean_tmp_dir
+  make_tmp_dir
+  if [ $1 == "nvim" ]; then
+      install_neovim
+      read -p "Do you want to setup neovim dotfiles? [y/n] "
+      if [[ $REPLY =~ ^[Yy]$ ]]; then
+          echo "Setting up neovim dotfiles"
+          setup_neovim
+      fi
+  elif [ $1 == "fish" ]; then
+      read -p "Do you want to setup fish shell? [y/n] "
+      if [[ $REPLY =~ ^[Yy]$ ]]; then
+          echo "Setting up fish shell"
+          install_fish
+          setup_fish
+      fi
+  else
+      echo "Invalid argument"
+      error_exit
+  fi
+  clean_tmp_dir
+}
+
+main $@
