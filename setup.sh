@@ -1,6 +1,7 @@
 #!/bin/bash
 
 NVIM_RELPATH=".config/nvim"
+INSTALLATION_TMP_DIR=".tmp"
 
 vercomp () {
     if [[ $1 == $2 ]]
@@ -47,18 +48,16 @@ install_neovim() { #{{{
             echo "Installing latest neovim"
         else
             echo "Please install neovim version 0.8 or greater"
-            exit 1
+            error_exit
         fi
       fi
   fi
 
   OS=$(uname -s)
   if [ $OS == "Linux" ]; then
-      mkdir -p .tmp
-      curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz -o ./.tmp/nvim-linux64.tar.gz
+      curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz -o ./$INSTALLATION_TMP_DIR/nvim-linux64.tar.gz
       sudo rm -rf /opt/nvim
       sudo tar -C /opt -xzf nvim-linux64.tar.gz
-      rm -rf .tmp
       echo "Add the following line to your .bashrc or .zshrc file:"
       echo ""
       echo '`export PATH=$PATH:/opt/nvim-linux64/bin`'
@@ -79,17 +78,16 @@ install_neovim() { #{{{
       echo
   else
       echo "Unsupported OS - $OS"
-      exit 1
+      error_exit
   fi
 }
 #}}}
 #
 build_fish_linux() {
   fish_version="3.7.1"
-  mkdir -p .tmp
-  curl -Lo .tmp/fish.tar.xz https://github.com/fish-shell/fish-shell/releases/download/$fish_version/fish-$fish_version.tar.xz
-  tar xf .tmp/fish.tar.xz -C .tmp
-  cd .tmp/fish-$fish_version
+  curl -Lo $INSTALLATION_TMP_DIR/fish.tar.xz https://github.com/fish-shell/fish-shell/releases/download/$fish_version/fish-$fish_version.tar.xz
+  tar xf $INSTALLATION_TMP_DIR/fish.tar.xz -C $INSTALLATION_TMP_DIR
+  cd $INSTALLATION_TMP_DIR/fish-$fish_version
   cmake .
   make
   sudo make install
@@ -108,7 +106,7 @@ install_fish() {
           brew install fish
       else
           echo "Unsupported OS - $OS"
-          exit 1
+          error_exit
       fi
   fi
 }
@@ -130,7 +128,7 @@ setup_symlink() { # {{{
               rm $target
           else
               echo "Please remove $target first"
-              exit 1
+              error_exit
           fi
       fi
     elif [ -d $target ]; then
@@ -141,7 +139,7 @@ setup_symlink() { # {{{
           mv $target $target.bk
       else
           echo "Please remove $target first"
-          exit 1
+          error_exit
       fi
   fi
   ln -s $source $target
@@ -167,14 +165,25 @@ setup_gitconfig() { # {{{
           mv ~/.gitconfig ~/.gitconfig.bk
       else
           echo "Please remove ~/.gitconfig first"
-          exit 1
+          error_exit
       fi
   fi
   ln ~/.dotfiles/gitconfig ~/.gitconfig
 }
 #}}}
 
+clean_tmp_dir() {
+  rm -rf $INSTALLATION_TMP_DIR
+}
 
+make_tmp_dir() {
+  mkdir -p $INSTALLATION_TMP_DIR
+}
+
+error_exit() {
+    clean_tmp_dir
+    exit 1
+}
 # Ask user if they want to install neovim dotfiles
 
 # Check if the user has arguments of [nvim, fish]
@@ -182,6 +191,9 @@ if [ $# -eq 0 ]; then
     echo "Usage: setup.sh [nvim, fish]"
 fi
 
+
+clean_tmp_dir
+make_tmp_dir
 if [ $1 == "nvim" ]; then
     install_neovim
     read -p "Do you want to setup neovim dotfiles? [y/n] "
@@ -198,5 +210,6 @@ elif [ $1 == "fish" ]; then
     fi
 else
     echo "Invalid argument"
-    exit 1
+    error_exit
 fi
+clean_tmp_dir
