@@ -87,7 +87,9 @@ imap('!', '!<c-g>U')
 imap('?', '?<c-g>U')
 
 nmap('<F5>', ':source ~/.config/nvim/init.lua<CR>:noh<CR>:echo "Refreshed config!"<CR>')
-nmap('<leader>.', ':e ~/.config/nvim/init.lua<CR>')
+nmap('<leader>..', ':e ~/.config/nvim/init.lua<CR>')
+nmap('<leader>.b', ':e ~/.config/nvim/bindings.lua<CR>')
+nmap('<leader>.p', ':e ~/.config/nvim/lua/plugins.lua<CR>')
 nmap('<leader>i', ':e ~/.config/sway/config<CR>')
 nmap('<leader>,', ':e ~/.config/fish/config.fish<CR>')
 

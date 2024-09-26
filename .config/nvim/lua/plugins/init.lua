@@ -50,7 +50,37 @@ return {
   },
 
   { 'cohama/lexima.vim' },
-
+  {
+    "nvimtools/none-ls.nvim",
+    dependencies = {
+      { "williamboman/mason.nvim" }
+    },
+  },
+  {
+    "williamboman/mason.nvim",
+    dependencies = {
+      { "whoIsSethDaniel/mason-tool-installer.nvim" }
+    },
+    config = function()
+      require("mason").setup(
+      {
+        PATH = 'prepend',
+        python = {
+          pip = true,
+          python = 'python3'
+        }
+      }
+      )
+      local mason_tool_installer = require("mason-tool-installer")
+      mason_tool_installer.setup({
+        ensure_installed = {
+          'prettier',
+          'black',
+          'ruff'
+        }
+      })
+    end
+  },
   {
     "nvim-telescope/telescope.nvim",
     config = require 'plugins/configs/telescope',
@@ -83,7 +113,7 @@ return {
     },
     cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
     opts = {
-      ensure_installed = { "vim", "c", "c_sharp", "dockerfile", "lua", "javascript", "typescript", "gitcommit", "prisma" },
+      ensure_installed = { "vim", "c", "c_sharp", "dockerfile", "lua", "javascript", "typescript", "gitcommit", "prisma", "python" },
       incremental_selection = {
         enable = true
       },
@@ -352,6 +382,22 @@ return {
         end,
         cmd = lspcontainers.command('html'),
         root_dir = lspconfig.util.root_pattern(".git", vim.fn.getcwd()),
+      }
+      -- }}}
+      -- {{{ Python
+      lspconfig.pyright.setup {
+        before_init = function(params)
+          params.processId = vim.NIL
+        end,
+        root_dir = lspconfig.util.root_pattern(".git", vim.fn.getcwd()),
+      }
+      -- }}}
+      -- {{{ GO 
+      lspconfig.gopls.setup {
+        before_init = function(params)
+          params.processId = vim.NIL
+        end,
+        root_dir = lspconfig.util.root_pattern("go.mod", vim.fn.getcwd()),
       }
       -- }}}
 
