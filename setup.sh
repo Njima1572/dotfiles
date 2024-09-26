@@ -57,7 +57,7 @@ setup_neovim() { # {{{
       fi
   fi
   # If there is existing file, check user if they want to move it to .bk
-  if [ -d ~/$NVIM_RELPATH]; then
+  if [ -d ~/$NVIM_RELPATH ]; then
       echo "nvim directory already exists"
       read -p "Do you want to move it to ~/$NVIM_RELPATH.bk? [y/n] " -n 1
       echo
