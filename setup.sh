@@ -6,7 +6,12 @@ install_neovim() { #{{{
   echo "Checking if neovim is already installed..."
   if [ -x "$(command -v nvim)" ]; then
       echo "neovim is already installed"
-      return
+
+      # Check if the version is greater than 0.8
+      if [ "$(nvim --version | head -n 1 | cut -d ' ' -f 2)" \> "0.8" ]; then
+          echo "neovim version is greater than 0.8"
+          return
+      fi
   fi
   OS=$(uname -s)
   if [ $OS == "Linux" ]; then
