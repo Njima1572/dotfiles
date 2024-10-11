@@ -90,7 +90,7 @@ nmap('<F5>', ':source ~/.config/nvim/init.lua<CR>:noh<CR>:echo "Refreshed config
 nmap('<leader>..', ':e ~/.config/nvim/init.lua<CR>')
 nmap('<leader>.b', ':e ~/.config/nvim/bindings.lua<CR>')
 nmap('<leader>.p', ':e ~/.config/nvim/lua/plugins/init.lua<CR>')
-nmap('<leader>i', ':e ~/.config/sway/config<CR>')
+nmap('<leader>i', ':e ~/.config/i3/config<CR>')
 nmap('<leader>,', ':e ~/.config/fish/config.fish<CR>')
 
 

@@ -1,5 +1,5 @@
 return {
-  { 'nvim-lua/plenary.nvim' }, -- neovim-lua library some projects depend on this
+  { 'nvim-lua/plenary.nvim',    lazy = true }, -- neovim-lua library some projects depend on this
   {
     "folke/tokyonight.nvim",
     lazy = false,    -- make sure we load this during startup if it is your main colorscheme
@@ -49,12 +49,21 @@ return {
     end
   },
 
-  { 'cohama/lexima.vim' },
+  -- { 'cohama/lexima.vim' },
   {
     "nvimtools/none-ls.nvim",
     dependencies = {
       { "williamboman/mason.nvim" }
     },
+    config = function()
+      local null_ls = require("null-ls")
+      null_ls.setup({
+        sources = {
+          null_ls.builtins.formatting.prettier,
+          null_ls.builtins.formatting.black,
+        }
+      })
+    end
   },
   {
     "williamboman/mason.nvim",
@@ -63,20 +72,19 @@ return {
     },
     config = function()
       require("mason").setup(
-      {
-        PATH = 'prepend',
-        python = {
-          pip = true,
-          python = 'python3'
+        {
+          PATH = 'prepend',
+          python = {
+            pip = true,
+            python = 'python3'
+          }
         }
-      }
       )
       local mason_tool_installer = require("mason-tool-installer")
       mason_tool_installer.setup({
         ensure_installed = {
           'prettier',
           'black',
-          'ruff'
         }
       })
     end
@@ -113,7 +121,8 @@ return {
     },
     cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
     opts = {
-      ensure_installed = { "vim", "c", "c_sharp", "dockerfile", "lua", "javascript", "typescript", "gitcommit", "prisma", "python" },
+      ensure_installed = { "vim", "c", "c_sharp", "lua", "javascript", "typescript", "gitcommit", "prisma",
+        "python" },
       incremental_selection = {
         enable = true
       },
@@ -248,15 +257,18 @@ return {
     config = function()
       local Path = require('plenary.path')
       require('session_manager').setup({
-        sessions_dir = Path:new(vim.fn.stdpath('data'), 'sessions'),               -- The directory where the session files will be saved.
-        path_replacer = '__',                                                      -- The character to which the path separator will be replaced for session files.
-        colon_replacer = '++',                                                     -- The character to which the colon symbol will be replaced for session files.
-        autoload_mode = require('session_manager.config').AutoloadMode.CurrentDir, -- Define what to do when Neovim is started without arguments. Possible values: Disabled, CurrentDir, LastSession
-        autosave_last_session = true,                                              -- Automatically save last session on exit and on session switch.
-        autosave_ignore_not_normal = true,                                         -- Plugin will not save a session when no buffers are opened, or all of them aren't writable or listed.
-        autosave_ignore_filetypes = {                                              -- All buffers of these file types will be closed before the session is saved.
+        sessions_dir = Path:new(vim.fn.stdpath('data'), 'sessions'), -- The directory where the session files will be saved.
+        -- session_filename_to_dir = session_filename_to_dir,     -- Function that replaces symbols into separators and colons to transform filename into a session directory.
+        -- dir_to_session_filename = dir_to_session_filename,     -- Function that replaces separators and colons into special symbols to transform session directory into a filename. Should use `vim.uv.cwd()` if the passed `dir` is `nil`.
+        -- autoload_mode = config.AutoloadMode.LastSession,       -- Define what to do when Neovim is started without arguments. See "Autoload mode" section below.
+        autosave_last_session = true,      -- Automatically save last session on exit and on session switch.
+        autosave_ignore_not_normal = true, -- Plugin will not save a session when no buffers are opened, or all of them aren't writable or listed.
+        autosave_ignore_dirs = {},         -- A list of directories where the session will not be autosaved.
+        autosave_ignore_filetypes = {      -- All buffers of these file types will be closed before the session is saved.
           'gitcommit',
+          'gitrebase',
         },
+        autosave_ignore_buftypes = {},    -- All buffers of these bufer types will be closed before the session is saved.
         autosave_only_in_session = false, -- Always autosaves session. If true, only autosaves after a session is active.
         max_path_length = 80,             -- Shorten the display path if length exceeds this threshold. Use 0 if don't want to shorten the path at all.
       })
@@ -265,12 +277,10 @@ return {
   },
   {
     'akinsho/toggleterm.nvim',
-    config = function()
-      require("toggleterm").setup({
-        open_mapping = [[<leader>tt]],
-        insert_mappings = false
-      })
-    end
+    opts = {
+      open_mapping = [[<leader>tt]],
+      insert_mappings = false
+    }
   },
 
   --- Lsps
@@ -284,7 +294,6 @@ return {
 
     config = function()
       local capabilities = require('cmp_nvim_lsp').default_capabilities()
-      local pid = vim.fn.getpid()
       local lspconfig = require('lspconfig')
       local lspcontainers = require('lspcontainers')
       -- vim.api.nvim_set_keymap('n', '<leader>h', '<cmd>lua vim.diagnostic.open_float()<CR>',
@@ -336,7 +345,7 @@ return {
       }
       --  }}}
       -- {{{ TS
-      lspconfig.tsserver.setup {
+      lspconfig.ts_ls.setup {
         before_init = function(params)
           params.processId = vim.NIL
         end,
@@ -346,31 +355,30 @@ return {
       }
       -- }}}
       -- {{{ Python
+      -- lspconfig.pylsp.setup {
+      --   before_init = function(params)
+      --     params.processId = vim.NIL
+      --   end,
+      --   root_dir = lspconfig.util.root_pattern(".git", vim.fn.getcwd()),
+      --   capabilities = capabilities,
+      --   settings = {
+      --     pylsp = {
+      --       plugins = {
+      --         rope_autoimport = true,
+      --         pycodestyle = {
+      --           ignore = { 'W391' },
+      --           maxLineLength = 120
+      --         }
+      --       }
+      --     }
+      --   }
+      -- }
       lspconfig.pyright.setup {
         before_init = function(params)
           params.processId = vim.NIL
         end,
         cmd = lspcontainers.command('pyright'),
         root_dir = lspconfig.util.root_pattern(".git", vim.fn.getcwd()),
-        capabilities = capabilities
-      }
-      -- }}}
-      -- {{{ Csharp
-
-      local omnisharp_bin = "/home/kn/.local/omnisharp/run"
-      lspconfig.omnisharp.setup {
-        cmd = { omnisharp_bin, "--languageserver", "--hostPID", tostring(pid) },
-        handlers = {
-          ["textDocument/definition"] = require('omnisharp_extended').handler,
-        },
-        before_init = function(params)
-          params.processId = vim.NIL
-        end,
-        enable_roslyn_analysers = true,
-        enable_import_completion = true,
-        organize_imports_on_format = true,
-        filetypes = { 'cs', 'vb', 'csproj', 'sln', 'slnx', 'props' },
-        root_dir = lspconfig.util.root_pattern("*.sln", "*.csproj", vim.fn.getcwd()),
         capabilities = capabilities
       }
       -- }}}
@@ -384,15 +392,7 @@ return {
         root_dir = lspconfig.util.root_pattern(".git", vim.fn.getcwd()),
       }
       -- }}}
-      -- {{{ Python
-      lspconfig.pyright.setup {
-        before_init = function(params)
-          params.processId = vim.NIL
-        end,
-        root_dir = lspconfig.util.root_pattern(".git", vim.fn.getcwd()),
-      }
-      -- }}}
-      -- {{{ GO 
+      -- {{{ GO
       lspconfig.gopls.setup {
         before_init = function(params)
           params.processId = vim.NIL
@@ -499,6 +499,23 @@ return {
     event = "BufEnter",
     ft = { "javascript", "typescript" },
   },
+  {
+    "dcampos/nvim-snippy",
+    event = "InsertEnter",
+    config = function()
+      local snippy = require('snippy')
+      snippy.setup({
+        i = {
+          ["<C-n>"] = "expand_or_advance",
+          ["<C-e>"] = "previous"
+        }
+      })
+      vim.keymap.set('i', '<C-s>', function()
+        snippy.complete()
+      end, { silent = true }
+      )
+    end
+  },
 
   --- Completion
   -- ~/.config/nvim/cmp.lua for config
@@ -510,6 +527,7 @@ return {
     'hrsh7th/nvim-cmp',
     dependencies = {
       { 'hrsh7th/cmp-cmdline' },
+      { 'dcampos/cmp-snippy' },
     },
     config = function()
       local cmp = require 'cmp'
@@ -517,15 +535,15 @@ return {
         snippet = {
           -- REQUIRED - you must specify a snippet engine
           expand = function(args)
-            vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
+            vim.fn["vsnip#anonymous"](args.body)        -- For `vsnip` users.
             -- require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
-            -- require('snippy').expand_snippet(args.body) -- For `snippy` users.
+            require('snippy').expand_snippet(args.body) -- For `snippy` users.
             -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
           end,
         },
         window = {
-          -- completion = cmp.config.window.bordered(),
-          -- documentation = cmp.config.window.bordered(),
+          completion = cmp.config.window.bordered(),
+          documentation = cmp.config.window.bordered(),
         },
         mapping = cmp.mapping.preset.insert({
           ['<C-b>'] = cmp.mapping.scroll_docs(-4),
@@ -533,16 +551,29 @@ return {
           ['<C-Space>'] = cmp.mapping.complete(),
           ['<C-e>'] = cmp.mapping.abort(),
           ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+          ['<C-j>'] = cmp.mapping(function()
+            if vim.fn['skkeleton#is_enabled']() == 0 then
+              vim.fn['skkeleton#enable']()
+            else
+              vim.fn['skkeleton#disable']()
+            end
+          end, { 'i', 'c' })
         }),
         sources = cmp.config.sources({
           { name = 'nvim_lsp' },
           { name = 'vsnip' }, -- For vsnip users.
           -- { name = 'luasnip' }, -- For luasnip users.
           -- { name = 'ultisnips' }, -- For ultisnips users.
-          -- { name = 'snippy' }, -- For snippy users.
+          { name = 'snippy' },    -- For snippy users.
+          { name = 'skkeleton' }, -- For snippy users.
         }, {
           { name = 'buffer' },
-        })
+        }),
+        completion = {
+          debug = true,
+          completeopt = 'menu,menuone,noinsert',
+          autocomplete = { cmp.TriggerEvent.InsertEnter, cmp.TriggerEvent.TextChanged }
+        }
       })
 
       -- Set configuration for specific filetype.
@@ -578,16 +609,6 @@ return {
   {
     'rinx/cmp-skkeleton',
     after = { 'nvim-cmp', 'skkeleton' },
-    config = function()
-      require 'cmp'.setup {
-        sources = {
-          { name = 'skkeleton' }
-        },
-        view = {
-          -- entries = 'native'
-        }
-      }
-    end
   },
   {
     'vim-skk/skkeleton',
@@ -598,7 +619,7 @@ return {
     config = function()
       vim.keymap.set("i", "<C-l>", "<Plug>(skkeleton-toggle)", { noremap = true, silent = true })
       vim.fn["skkeleton#config"]({
-        globalDictionaries = {"/usr/share/skk/SKK-JISYO.L"}
+        globalDictionaries = { "/usr/share/skk/SKK-JISYO.L" }
       })
     end
   },
