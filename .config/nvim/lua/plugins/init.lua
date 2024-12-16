@@ -1,5 +1,5 @@
 return {
-  { 'nvim-lua/plenary.nvim',    lazy = true }, -- neovim-lua library some projects depend on this
+  { 'nvim-lua/plenary.nvim', lazy = true }, -- neovim-lua library some projects depend on this
   {
     "folke/tokyonight.nvim",
     lazy = false,    -- make sure we load this during startup if it is your main colorscheme
@@ -49,7 +49,7 @@ return {
     end
   },
 
-  -- { 'cohama/lexima.vim' },
+  { 'cohama/lexima.vim' },
   {
     "nvimtools/none-ls.nvim",
     dependencies = {
@@ -61,6 +61,7 @@ return {
         sources = {
           null_ls.builtins.formatting.prettier,
           null_ls.builtins.formatting.black,
+          null_ls.builtins.formatting.phpcsfixer,
         }
       })
     end
@@ -121,8 +122,8 @@ return {
     },
     cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
     opts = {
-      ensure_installed = { "vim", "c", "c_sharp", "lua", "javascript", "typescript", "gitcommit", "prisma",
-        "python" },
+      ensure_installed = { "vim", "c", "c_sharp", "lua", "javascript", "typescript", "gitcommit", "prisma", "php",
+        "python", "dockerfile" },
       incremental_selection = {
         enable = true
       },
@@ -131,6 +132,9 @@ return {
       highlight = {
         enable = true,
       },
+      indent = {
+        enable = true,
+      }
     },
     config = function(_, opts)
       --- if type(opts.ensure_installed) == "table" then
@@ -256,15 +260,16 @@ return {
     },
     config = function()
       local Path = require('plenary.path')
+      local config = require('session_manager.config')
       require('session_manager').setup({
         sessions_dir = Path:new(vim.fn.stdpath('data'), 'sessions'), -- The directory where the session files will be saved.
         -- session_filename_to_dir = session_filename_to_dir,     -- Function that replaces symbols into separators and colons to transform filename into a session directory.
         -- dir_to_session_filename = dir_to_session_filename,     -- Function that replaces separators and colons into special symbols to transform session directory into a filename. Should use `vim.uv.cwd()` if the passed `dir` is `nil`.
-        -- autoload_mode = config.AutoloadMode.LastSession,       -- Define what to do when Neovim is started without arguments. See "Autoload mode" section below.
-        autosave_last_session = true,      -- Automatically save last session on exit and on session switch.
-        autosave_ignore_not_normal = true, -- Plugin will not save a session when no buffers are opened, or all of them aren't writable or listed.
-        autosave_ignore_dirs = {},         -- A list of directories where the session will not be autosaved.
-        autosave_ignore_filetypes = {      -- All buffers of these file types will be closed before the session is saved.
+        autoload_mode = { config.AutoloadMode.CurrentDir }, -- Define what to do when Neovim is started without arguments. See "Autoload mode" section below.
+        autosave_last_session = true,                       -- Automatically save last session on exit and on session switch.
+        autosave_ignore_not_normal = true,                  -- Plugin will not save a session when no buffers are opened, or all of them aren't writable or listed.
+        autosave_ignore_dirs = {},                          -- A list of directories where the session will not be autosaved.
+        autosave_ignore_filetypes = {                       -- All buffers of these file types will be closed before the session is saved.
           'gitcommit',
           'gitrebase',
         },
@@ -400,7 +405,53 @@ return {
         root_dir = lspconfig.util.root_pattern("go.mod", vim.fn.getcwd()),
       }
       -- }}}
-
+      -- {{{ PHP
+      -- lspconfig.phpactor.setup {
+      --   -- on_attach = on_attach,
+      --   init_options = {
+      --     ["language_server_phpstan.enabled"] = false,
+      --     ["language_server_psalm.enabled"] = false,
+      --   },
+      --   cmd = { "phpactor", "language-server", "-vvv" },
+      --   capabilities = require("cmp_nvim_lsp").default_capabilities(),
+      --   filetypes = { "php" },
+      --   root_dir = lspconfig.util.root_pattern("composer.json", ".git", vim.fn.getcwd()),
+      -- }
+      lspconfig.intelephense.setup {
+        -- before_init = function(params)
+        --   params.processId = vim.NIL
+        -- end,
+        settings = {
+          intelephense = {
+            environment = {
+              includePaths = {
+                "./vendor/**",
+                -- '/home/nakajima/.config/composer/vendor/php-stubs/wordpress-stubs', -- Composer globalのパス
+              }
+            },
+            files = {
+              maxSize = 10000000, -- Optional, increase if needed
+            }
+          }
+        },
+        cmd = { "intelephense", "--stdio" },
+        filetypes = { "php" },
+        root_dir = lspconfig.util.root_pattern("composer.json", vim.fn.getcwd()),
+      }
+      -- }}}
+      -- {{{ SQL
+      lspconfig.sqls.setup {
+        before_init = function(params)
+          params.processId = vim.NIL
+        end,
+        cmd = { "sqls" },
+        root_dir = lspconfig.util.root_pattern(".git", vim.fn.getcwd()),
+        on_attach = function(client, _)
+          client.server_capabilities.documentFormattingProvider = false
+          client.server_capabilities.documentRangeFormattingProvider = false
+        end,
+      }
+      -- }}}
       vim.api.nvim_create_autocmd('LspAttach', {
         group = vim.api.nvim_create_augroup('UserLspConfig', {}),
         callback = function(ev)
@@ -429,12 +480,9 @@ return {
       "nvim-telescope/telescope.nvim", -- optional
       "sindrets/diffview.nvim",        -- optional
     },
-    config = function()
-      local neogit = require('neogit')
-      neogit.setup({
-        vim.keymap.set("n", '<leader>ng', "<cmd>Neogit<CR>")
-      })
-    end
+    opts = {
+      vim.keymap.set("n", '<leader>ng', "<cmd>Neogit<CR>")
+    },
   },
   {
     'lewis6991/gitsigns.nvim',
@@ -499,23 +547,23 @@ return {
     event = "BufEnter",
     ft = { "javascript", "typescript" },
   },
-  {
-    "dcampos/nvim-snippy",
-    event = "InsertEnter",
-    config = function()
-      local snippy = require('snippy')
-      snippy.setup({
-        i = {
-          ["<C-n>"] = "expand_or_advance",
-          ["<C-e>"] = "previous"
-        }
-      })
-      vim.keymap.set('i', '<C-s>', function()
-        snippy.complete()
-      end, { silent = true }
-      )
-    end
-  },
+  -- {
+  --   "dcampos/nvim-snippy",
+  --   event = "InsertEnter",
+  --   config = function()
+  --     local snippy = require('snippy')
+  --     snippy.setup({
+  --       i = {
+  --         ["<C-n>"] = "expand_or_advance",
+  --         ["<C-e>"] = "previous"
+  --       }
+  --     })
+  --     vim.keymap.set('i', '<C-s>', function()
+  --       snippy.complete()
+  --     end, { silent = true }
+  --     )
+  --   end
+  -- },
 
   --- Completion
   -- ~/.config/nvim/cmp.lua for config
@@ -527,7 +575,7 @@ return {
     'hrsh7th/nvim-cmp',
     dependencies = {
       { 'hrsh7th/cmp-cmdline' },
-      { 'dcampos/cmp-snippy' },
+      -- { 'dcampos/cmp-snippy' },
     },
     config = function()
       local cmp = require 'cmp'
@@ -535,9 +583,9 @@ return {
         snippet = {
           -- REQUIRED - you must specify a snippet engine
           expand = function(args)
-            vim.fn["vsnip#anonymous"](args.body)        -- For `vsnip` users.
+            vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
             -- require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
-            require('snippy').expand_snippet(args.body) -- For `snippy` users.
+            -- require('snippy').expand_snippet(args.body) -- For `snippy` users.
             -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
           end,
         },
@@ -550,21 +598,17 @@ return {
           ['<C-f>'] = cmp.mapping.scroll_docs(4),
           ['<C-Space>'] = cmp.mapping.complete(),
           ['<C-e>'] = cmp.mapping.abort(),
-          ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-          ['<C-j>'] = cmp.mapping(function()
-            if vim.fn['skkeleton#is_enabled']() == 0 then
-              vim.fn['skkeleton#enable']()
-            else
-              vim.fn['skkeleton#disable']()
-            end
-          end, { 'i', 'c' })
+          ['<CR>'] = cmp.mapping.confirm({
+            behavior = cmp.ConfirmBehavior.Replace,
+            select = false,
+          }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
         }),
         sources = cmp.config.sources({
           { name = 'nvim_lsp' },
           { name = 'vsnip' }, -- For vsnip users.
           -- { name = 'luasnip' }, -- For luasnip users.
           -- { name = 'ultisnips' }, -- For ultisnips users.
-          { name = 'snippy' },    -- For snippy users.
+          -- { name = 'snippy' },    -- For snippy users.
           { name = 'skkeleton' }, -- For snippy users.
         }, {
           { name = 'buffer' },
@@ -631,4 +675,23 @@ return {
     event = "InsertEnter",
     opts = {}
   },
+  {
+    'cameron-wags/rainbow_csv.nvim',
+    config = true,
+    ft = {
+      'csv',
+      'tsv',
+      'csv_semicolon',
+      'csv_whitespace',
+      'csv_pipe',
+      'rfc_csv',
+      'rfc_semicolon'
+    },
+    cmd = {
+      'RainbowDelim',
+      'RainbowDelimSimple',
+      'RainbowDelimQuoted',
+      'RainbowMultiDelim'
+    }
+  }
 }
