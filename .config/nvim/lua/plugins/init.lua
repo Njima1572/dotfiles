@@ -32,6 +32,35 @@ return {
     opts = {},
   },
   {
+    "folke/snacks.nvim",
+    requires={
+      "echasnovski/mini.nvim",
+      "nvim-tree/nvim-web-devicons",
+    },
+    opts={
+      bigfile = { enabled = true },
+      indent = { enabled = true },
+      input = { enabled = true },
+      notifier = { enabled = true },
+      quickfile = { enabled = true },
+      scope = { enabled = true },
+      input = { enabled = true },
+      statuscolumn = { enabled = true },
+      scroll = { 
+        enabled = true ,
+        animate = {
+          duration = {
+            step = 5,
+            total = 50
+          }
+        },
+        animate_repeat = {
+          delay = 10
+        }
+      },
+    }
+  },
+  {
     'smoka7/hop.nvim',
     config = function()
       local hop = require('hop')
@@ -317,7 +346,7 @@ return {
         before_init = function(params)
           params.processId = vim.NIL
         end,
-        cmd = lspcontainers.command('lua_ls'),
+        cmd = "lua-language-server",
         settings = {
           Lua = {
             diagnostics = {
@@ -609,7 +638,7 @@ return {
           -- { name = 'luasnip' }, -- For luasnip users.
           -- { name = 'ultisnips' }, -- For ultisnips users.
           -- { name = 'snippy' },    -- For snippy users.
-          { name = 'skkeleton' }, -- For snippy users.
+          -- { name = 'skkeleton' }, -- For snippy users.
         }, {
           { name = 'buffer' },
         }),
@@ -650,23 +679,23 @@ return {
 
   },
   { 'hrsh7th/vim-vsnip' },
-  {
-    'rinx/cmp-skkeleton',
-    after = { 'nvim-cmp', 'skkeleton' },
-  },
-  {
-    'vim-skk/skkeleton',
-    -- event = "InsertEnter",
-    dependencies = {
-      { 'vim-denops/denops.vim' }
-    },
-    config = function()
-      vim.keymap.set("i", "<C-l>", "<Plug>(skkeleton-toggle)", { noremap = true, silent = true })
-      vim.fn["skkeleton#config"]({
-        globalDictionaries = { "/usr/share/skk/SKK-JISYO.L" }
-      })
-    end
-  },
+  -- {
+  --   'rinx/cmp-skkeleton',
+  --   after = { 'nvim-cmp', 'skkeleton' },
+  -- },
+  -- {
+  --   'vim-skk/skkeleton',
+  --   -- event = "InsertEnter",
+  --   dependencies = {
+  --     { 'vim-denops/denops.vim' }
+  --   },
+  --   config = function()
+  --     vim.keymap.set("i", "<C-l>", "<Plug>(skkeleton-toggle)", { noremap = true, silent = true })
+  --     vim.fn["skkeleton#config"]({
+  --       globalDictionaries = { "/usr/share/skk/SKK-JISYO.L" }
+  --     })
+  --   end
+  -- },
   {
     'github/copilot.vim'
   },

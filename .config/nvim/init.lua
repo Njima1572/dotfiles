@@ -24,3 +24,6 @@ require('lazy').setup(require("plugins"))
 require("basics")
 
 -- vim.cmd 'source ~/.config/nvim/bindings.vim'
+
+-- Gopass disable swapfile, backup, undo
+vim.cmd('autocmd BufNewFile,BufRead /private/**/gopass** setlocal noswapfile nobackup noundofile shada=""')
