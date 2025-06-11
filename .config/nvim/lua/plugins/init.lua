@@ -78,22 +78,48 @@ return {
     end
   },
 
-  { 'cohama/lexima.vim' },
   {
-    "nvimtools/none-ls.nvim",
-    dependencies = {
-      { "williamboman/mason.nvim" }
-    },
+    'echasnovski/mini.nvim',
     config = function()
-      local null_ls = require("null-ls")
-      null_ls.setup({
-        sources = {
-          null_ls.builtins.formatting.prettier,
-          null_ls.builtins.formatting.black,
-          null_ls.builtins.formatting.phpcsfixer,
-        }
-      })
+      require('mini.ai').setup()        -- Better text objects
+      require('mini.pairs').setup()     -- Auto pairs
+      require('mini.surround').setup()  -- Surround actions
+      require('mini.comment').setup()   -- Better commenting
+      require('mini.indentscope').setup() -- Indent guides
     end
+  },
+  {
+    'stevearc/conform.nvim',
+    event = { "BufWritePre" },
+    cmd = { "ConformInfo" },
+    opts = {
+      formatters_by_ft = {
+        javascript = { "prettier" },
+        typescript = { "prettier" },
+        html = { "prettier" },
+        css = { "prettier" },
+        json = { "prettier" },
+        yaml = { "prettier" },
+        python = { "black" },
+        php = { "php_cs_fixer" },
+        lua = { "stylua" },
+      },
+      format_on_save = {
+        timeout_ms = 500,
+        lsp_fallback = true,
+      },
+    },
+    config = function(_, opts)
+      require("conform").setup(opts)
+      
+      -- Format on save
+      vim.api.nvim_create_autocmd("BufWritePre", {
+        pattern = "*",
+        callback = function(args)
+          require("conform").format({ bufnr = args.buf })
+        end,
+      })
+    end,
   },
   {
     "williamboman/mason.nvim",
@@ -111,12 +137,14 @@ return {
         }
       )
       local mason_tool_installer = require("mason-tool-installer")
-      -- mason_tool_installer.setup({
-      --   ensure_installed = {
-      --     'prettier',
-      --     'black',
-      --   }
-      -- })
+      mason_tool_installer.setup({
+        ensure_installed = {
+          'prettier',
+          'black',
+          'php-cs-fixer',
+          'stylua',
+        }
+      })
     end
   },
   {
@@ -229,7 +257,7 @@ return {
 
       local find_buffer_by_type = function(type)
         for _, buf in ipairs(vim.api.nvim_list_bufs()) do
-          local ft = vim.api.nvim_buf_get_option(buf, "filetype")
+          local ft = vim.bo[buf].filetype
           if ft == type then return buf end
         end
         return -1
@@ -487,6 +515,9 @@ return {
   },
   {
     'lewis6991/gitsigns.nvim',
+    cond = function()
+      return vim.fn.executable('git') == 1
+    end,
     opts = {
       numhl = true,
       linehl = false,
@@ -670,11 +701,6 @@ return {
   -- },
   {
     'github/copilot.vim'
-  },
-  {
-    'windwp/nvim-autopairs',
-    event = "InsertEnter",
-    opts = {}
   },
   {
     'cameron-wags/rainbow_csv.nvim',
