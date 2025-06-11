@@ -24,42 +24,42 @@ return {
       }
     }
   },
-  {
-    'akinsho/bufferline.nvim',
-    dependencies = {
-      { "nvim-tree/nvim-web-devicons" }
-    },
-    opts = {},
-  },
-  {
-    "folke/snacks.nvim",
-    requires={
-      "echasnovski/mini.nvim",
-      "nvim-tree/nvim-web-devicons",
-    },
-    opts={
-      bigfile = { enabled = true },
-      indent = { enabled = true },
-      input = { enabled = true },
-      notifier = { enabled = true },
-      quickfile = { enabled = true },
-      scope = { enabled = true },
-      input = { enabled = true },
-      statuscolumn = { enabled = true },
-      scroll = { 
-        enabled = true ,
-        animate = {
-          duration = {
-            step = 5,
-            total = 50
-          }
-        },
-        animate_repeat = {
-          delay = 10
-        }
-      },
-    }
-  },
+  -- {
+  --   'akinsho/bufferline.nvim',
+  --   dependencies = {
+  --     { "nvim-tree/nvim-web-devicons" }
+  --   },
+  --   opts = {},
+  -- },
+  -- {
+  --   "folke/snacks.nvim",
+  --   requires={
+  --     "echasnovski/mini.nvim",
+  --     "nvim-tree/nvim-web-devicons",
+  --   },
+  --   opts={
+  --     bigfile = { enabled = true },
+  --     indent = { enabled = true },
+  --     input = { enabled = true },
+  --     notifier = { enabled = true },
+  --     quickfile = { enabled = true },
+  --     scope = { enabled = true },
+  --     input = { enabled = true },
+  --     statuscolumn = { enabled = true },
+  --     scroll = { 
+  --       enabled = true ,
+  --       animate = {
+  --         duration = {
+  --           step = 5,
+  --           total = 50
+  --         }
+  --       },
+  --       animate_repeat = {
+  --         delay = 10
+  --       }
+  --     },
+  --   }
+  -- },
   {
     'smoka7/hop.nvim',
     config = function()
@@ -333,60 +333,32 @@ return {
       -- vim.api.nvim_set_keymap('n', '<leader>h', '<cmd>lua vim.diagnostic.open_float()<CR>',
       --   { noremap = true, silent = true })
       -- {{{ Yaml
-      lspconfig.yamlls.setup {
-        before_init = function(params)
-          params.processId = vim.NIL
-        end,
-        cmd = lspcontainers.command('yamlls'),
-        root_dir = lspconfig.util.root_pattern(".git", vim.fn.getcwd())
-      }
-      --  }}}
-      -- {{{ Lua
-      lspconfig.lua_ls.setup {
-        before_init = function(params)
-          params.processId = vim.NIL
-        end,
-        cmd = "lua-language-server",
-        settings = {
-          Lua = {
-            diagnostics = {
-              enable = true,
-              globals = { 'vim', 'describe' },
-              disabled = { "lowercase-global" }
-            }
-          }
-        },
-        root_dir = function(fname)
-          -- print(fname)
-          local resolved_dir = lspconfig.util.root_pattern('.git')(fname) or
-              lspconfig.util.root_pattern(".luacheckrc")(fname) or
-              lspconfig.util.path.dirname(fname)
-          print("Resolved LSP root_dir: " .. resolved_dir) -- Debug print
-          return resolved_dir
-          -- return require 'lspconfig'.util.root_pattern('.git', vim.fn.getcwd())()
-          --        or require 'lspconfig'.util.root_pattern(".luacheckrc", vim.fn.getcwd())()
-          --        -- or require 'lspconfig'.util.path.dirname(fname)
-        end
-      }
+      -- lspconfig.yamlls.setup {
+      --   before_init = function(params)
+      --     params.processId = vim.NIL
+      --   end,
+      --   cmd = lspcontainers.command('yamlls'),
+      --   root_dir = lspconfig.util.root_pattern(".git", vim.fn.getcwd())
+      -- }
       --  }}}
       -- {{{ Docker
-      lspconfig.dockerls.setup {
-        before_init = function(params)
-          params.processId = vim.NIL
-        end,
-        cmd = lspcontainers.command('dockerls'),
-        root_dir = lspconfig.util.root_pattern(".git", vim.fn.getcwd())
-      }
+      -- lspconfig.dockerls.setup {
+      --   before_init = function(params)
+      --     params.processId = vim.NIL
+      --   end,
+      --   cmd = lspcontainers.command('dockerls'),
+      --   root_dir = lspconfig.util.root_pattern(".git", vim.fn.getcwd())
+      -- }
       --  }}}
       -- {{{ TS
-      lspconfig.ts_ls.setup {
-        before_init = function(params)
-          params.processId = vim.NIL
-        end,
-        cmd = { "typescript-language-server", "--stdio" },
-        root_dir = lspconfig.util.root_pattern("package.json", vim.fn.getcwd()),
-        capabilities = capabilities
-      }
+      -- lspconfig.ts_ls.setup {
+      --   before_init = function(params)
+      --     params.processId = vim.NIL
+      --   end,
+      --   cmd = { "typescript-language-server", "--stdio" },
+      --   root_dir = lspconfig.util.root_pattern("package.json", vim.fn.getcwd()),
+      --   capabilities = capabilities
+      -- }
       -- }}}
       -- {{{ Python
       -- lspconfig.pylsp.setup {
@@ -469,7 +441,7 @@ return {
       }
       -- }}}
       -- {{{ SQL
-      lspconfig.sqls.setup {
+      lspconfig.sqlls.setup {
         before_init = function(params)
           params.processId = vim.NIL
         end,
