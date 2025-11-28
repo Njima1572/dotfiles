@@ -269,7 +269,7 @@ return {
 		keys = {
 			{ "<leader>b", "<cmd>Neotree buffers float<cr>", mode = "n" },
 			{ "<leader>o", "<cmd>LspNeoTree<cr>", mode = "n" },
-			{ "<leader>O", "<cmd>Neotree toggle float dir=%:h<cr>", mode = "n" },
+			{ "<leader>O", "<cmd>Neotree toggle left dir=%:h<cr>", mode = "n" },
 		},
 		config = function()
 			function GetLspRootDir()
@@ -297,9 +297,9 @@ return {
 					neotree_command.execute({ action = "close" })
 				else
 					if root_dir then
-						neotree_command.execute({ action = "focus", dir = root_dir, position = "float" })
+						neotree_command.execute({ action = "focus", dir = root_dir, position = "left" })
 					else
-						neotree_command.execute({ action = "focus", dir = vim.fn.getcwd(), position = "float" })
+						neotree_command.execute({ action = "focus", dir = vim.fn.getcwd(), position = "left" })
 					end
 				end
 			end, {})
