@@ -333,78 +333,114 @@ return {
       -- vim.api.nvim_set_keymap('n', '<leader>h', '<cmd>lua vim.diagnostic.open_float()<CR>',
       --   { noremap = true, silent = true })
       -- {{{ Yaml
-      -- lspconfig.yamlls.setup {
-      --   before_init = function(params)
-      --     params.processId = vim.NIL
-      --   end,
-      --   cmd = lspcontainers.command('yamlls'),
-      --   root_dir = lspconfig.util.root_pattern(".git", vim.fn.getcwd())
-      -- }
+      vim.lsp.config("yamlls", {
+        before_init = function(params)
+          params.processId = vim.NIL
+        end,
+        cmd = lspcontainers.command('yamlls'),
+        root_dir = lspconfig.util.root_pattern(".git", vim.fn.getcwd())
+      })
+      vim.lsp.enable("yamlls")
+      --  }}}
+      -- {{{ Lua
+      vim.lsp.config("lua_ls", {
+        before_init = function(params)
+          params.processId = vim.NIL
+        end,
+        cmd = "lua-language-server",
+        settings = {
+          Lua = {
+            diagnostics = {
+              enable = true,
+              globals = { 'vim', 'describe' },
+              disabled = { "lowercase-global" }
+            }
+          }
+        },
+        root_dir = function(fname)
+          -- print(fname)
+          local resolved_dir = lspconfig.util.root_pattern('.git')(fname) or
+              lspconfig.util.root_pattern(".luacheckrc")(fname) or
+              lspconfig.util.path.dirname(fname)
+          print("Resolved LSP root_dir: " .. resolved_dir) -- Debug print
+          return resolved_dir
+          -- return require 'lspconfig'.util.root_pattern('.git', vim.fn.getcwd())()
+          --        or require 'lspconfig'.util.root_pattern(".luacheckrc", vim.fn.getcwd())()
+          --        -- or require 'lspconfig'.util.path.dirname(fname)
+        end
+      })
+      vim.lsp.enable("lua_ls")
       --  }}}
       -- {{{ Docker
-      -- lspconfig.dockerls.setup {
-      --   before_init = function(params)
-      --     params.processId = vim.NIL
-      --   end,
-      --   cmd = lspcontainers.command('dockerls'),
-      --   root_dir = lspconfig.util.root_pattern(".git", vim.fn.getcwd())
-      -- }
+      vim.lsp.config("dockerls", {
+        before_init = function(params)
+          params.processId = vim.NIL
+        end,
+        cmd = lspcontainers.command('dockerls'),
+        root_dir = lspconfig.util.root_pattern(".git", vim.fn.getcwd())
+      })
+      vim.lsp.enable("dockerls")
       --  }}}
       -- {{{ TS
-      -- lspconfig.ts_ls.setup {
-      --   before_init = function(params)
-      --     params.processId = vim.NIL
-      --   end,
-      --   cmd = { "typescript-language-server", "--stdio" },
-      --   root_dir = lspconfig.util.root_pattern("package.json", vim.fn.getcwd()),
-      --   capabilities = capabilities
-      -- }
+      vim.lsp.config("ts_ls",{
+        before_init = function(params)
+          params.processId = vim.NIL
+        end,
+        cmd = { "typescript-language-server", "--stdio" },
+        root_dir = lspconfig.util.root_pattern("package.json", vim.fn.getcwd()),
+        capabilities = capabilities
+      })
+      vim.lsp.enable("ts_ls")
       -- }}}
       -- {{{ Python
-      -- lspconfig.pylsp.setup {
-      --   before_init = function(params)
-      --     params.processId = vim.NIL
-      --   end,
-      --   root_dir = lspconfig.util.root_pattern(".git", vim.fn.getcwd()),
-      --   capabilities = capabilities,
-      --   settings = {
-      --     pylsp = {
-      --       plugins = {
-      --         rope_autoimport = true,
-      --         pycodestyle = {
-      --           ignore = { 'W391' },
-      --           maxLineLength = 120
-      --         }
-      --       }
-      --     }
-      --   }
-      -- }
-      lspconfig.pyright.setup {
+      vim.lsp.config("pylsp", {
+        before_init = function(params)
+          params.processId = vim.NIL
+        end,
+        root_dir = lspconfig.util.root_pattern(".git", vim.fn.getcwd()),
+        capabilities = capabilities,
+        settings = {
+          pylsp = {
+            plugins = {
+              rope_autoimport = true,
+              pycodestyle = {
+                ignore = { 'W391' },
+                maxLineLength = 120
+              }
+            }
+          }
+        }
+      })
+      vim.lsp.enable("pylsp")
+      vim.lsp.config("pyright", {
         before_init = function(params)
           params.processId = vim.NIL
         end,
         cmd = lspcontainers.command('pyright'),
         root_dir = lspconfig.util.root_pattern(".git", vim.fn.getcwd()),
         capabilities = capabilities
-      }
+      })
+      vim.lsp.enable("pyright")
       -- }}}
       -- {{{ HTML
-      lspconfig.html.setup {
+      vim.lsp.config("html", {
         filetypes = { 'html', 'xhtml' },
         before_init = function(params)
           params.processId = vim.NIL
         end,
         cmd = lspcontainers.command('html'),
         root_dir = lspconfig.util.root_pattern(".git", vim.fn.getcwd()),
-      }
+      })
+      vim.lsp.enable("html")
       -- }}}
       -- {{{ GO
-      lspconfig.gopls.setup {
+      vim.lsp.config("gopls", {
         before_init = function(params)
           params.processId = vim.NIL
         end,
         root_dir = lspconfig.util.root_pattern("go.mod", vim.fn.getcwd()),
-      }
+      })
+      vim.lsp.enable("gopls")
       -- }}}
       -- {{{ PHP
       -- lspconfig.phpactor.setup {
@@ -418,7 +454,7 @@ return {
       --   filetypes = { "php" },
       --   root_dir = lspconfig.util.root_pattern("composer.json", ".git", vim.fn.getcwd()),
       -- }
-      lspconfig.intelephense.setup {
+      vim.lsp.config("intelephense", {
         -- before_init = function(params)
         --   params.processId = vim.NIL
         -- end,
@@ -438,10 +474,11 @@ return {
         cmd = { "intelephense", "--stdio" },
         filetypes = { "php" },
         root_dir = lspconfig.util.root_pattern("composer.json", vim.fn.getcwd()),
-      }
+      })
+      vim.lsp.enable("intelephense")
       -- }}}
       -- {{{ SQL
-      lspconfig.sqlls.setup {
+      vim.lsp.config("sqls", {
         before_init = function(params)
           params.processId = vim.NIL
         end,
@@ -451,7 +488,22 @@ return {
           client.server_capabilities.documentFormattingProvider = false
           client.server_capabilities.documentRangeFormattingProvider = false
         end,
-      }
+      })
+      vim.lsp.enable("sqls")
+      -- }}}
+      -- {{{ Terraform
+      vim.lsp.config("terraformls", {
+        before_init = function(params)
+          params.processId = vim.NIL
+        end,
+        cmd = { "terraform-lsp" },
+        root_dir = lspconfig.util.root_pattern(".git", vim.fn.getcwd()),
+        on_attach = function(client, _)
+          client.server_capabilities.documentFormattingProvider = false
+          client.server_capabilities.documentRangeFormattingProvider = false
+        end,
+      })
+      vim.lsp.enable("terraformls")
       -- }}}
       vim.api.nvim_create_autocmd('LspAttach', {
         group = vim.api.nvim_create_augroup('UserLspConfig', {}),
@@ -694,32 +746,6 @@ return {
       'RainbowDelimQuoted',
       'RainbowMultiDelim'
     }
-  },
-  {
-    "ravitemer/mcphub.nvim",
-    dependencies = {
-      "nvim-lua/plenary.nvim", -- Required for Job and HTTP requests
-    },
-    -- comment the following line to ensure hub will be ready at the earliest
-    cmd = "MCPHub",                          -- lazy load by default
-    build = "npm install -g mcp-hub@latest", -- Installs required mcp-hub npm module
-    -- uncomment this if you don't want mcp-hub to be available globally or can't use -g
-    -- build = "bundled_build.lua",  -- Use this and set use_bundled_binary = true in opts  (see Advanced configuration)
-    config = function()
-      require("mcphub").setup({
-        auto_approve = false,
-        extensions = {
-          codecompanion = {
-          }
-        },
-        log = {
-          level = vim.log.levels.WARN,
-          to_file = false,
-          file_path = nil,
-          prefix = "MCPHub"
-        }
-      })
-    end,
   },
   {
     "olimorris/codecompanion.nvim"

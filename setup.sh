@@ -51,6 +51,20 @@ prerequisite_check() {
   fi
 }
 
+fish_prerequisite() {
+  # ncurses-dev libncurses5-dev gettext
+
+  if [ ! -x "$(command -v cmake)" ]; then
+      echo "cmake is not installed"
+      error_exit
+  fi
+
+  if [ ! -x "$(command -v make)" ]; then
+      echo "make is not installed"
+      error_exit
+  fi
+}
+
 install_neovim() { #{{{
   echo "Checking if neovim is already installed..."
   if [ -x "$(command -v nvim)" ]; then

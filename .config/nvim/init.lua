@@ -19,6 +19,8 @@ vim.cmd('filetype plugin indent on')
 vim.cmd('syntax enable') -- Turned on by default in nvim
 vim.o.termguicolors = true
 
+vim.g.python3_host_prog = '/home/nakajima/.pyenv/versions/3.10.15/bin/python3'
+
 require("bindings")
 require('lazy').setup(require("plugins"))
 require("basics")
