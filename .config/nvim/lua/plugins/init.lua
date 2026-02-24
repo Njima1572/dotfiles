@@ -78,7 +78,6 @@ return {
     end
   },
 
-  { 'cohama/lexima.vim' },
   {
     "nvimtools/none-ls.nvim",
     dependencies = {
@@ -203,7 +202,7 @@ return {
       })
     end
   },
-  { 'nvim-lualine/lualine.nvim' },
+
   {
     'nvim-neo-tree/neo-tree.nvim',
     branch = "v3.x",
@@ -220,7 +219,7 @@ return {
     },
     config = function()
       function GetLspRootDir()
-        local clients = vim.lsp.buf_get_clients()
+        local clients = vim.lsp.get_clients({ bufnr = 0 })
         for _, client in pairs(clients) do
           return client.config.root_dir
         end
@@ -229,7 +228,7 @@ return {
 
       local find_buffer_by_type = function(type)
         for _, buf in ipairs(vim.api.nvim_list_bufs()) do
-          local ft = vim.api.nvim_buf_get_option(buf, "filetype")
+          local ft = vim.api.nvim_get_option_value("filetype", { buf = buf })
           if ft == type then return buf end
         end
         return -1
@@ -317,226 +316,10 @@ return {
     }
   },
 
-  --- Lsps
-  {
-    'neovim/nvim-lspconfig',
-    dependencies = {
-      { 'hrsh7th/cmp-nvim-lsp' },
-      { 'lspcontainers/lspcontainers.nvim' },
-      { 'Hoffs/omnisharp-extended-lsp.nvim' },
-    },
-
-    config = function()
-      local capabilities = require('cmp_nvim_lsp').default_capabilities()
-      local lspconfig = require('lspconfig')
-      local lspcontainers = require('lspcontainers')
-      -- vim.api.nvim_set_keymap('n', '<leader>h', '<cmd>lua vim.diagnostic.open_float()<CR>',
-      --   { noremap = true, silent = true })
-      -- {{{ Yaml
-      vim.lsp.config("yamlls", {
-        before_init = function(params)
-          params.processId = vim.NIL
-        end,
-        cmd = lspcontainers.command('yamlls'),
-        root_dir = lspconfig.util.root_pattern(".git", vim.fn.getcwd())
-      })
-      vim.lsp.enable("yamlls")
-      --  }}}
-      -- {{{ Lua
-      vim.lsp.config("lua_ls", {
-        before_init = function(params)
-          params.processId = vim.NIL
-        end,
-        cmd = "lua-language-server",
-        settings = {
-          Lua = {
-            diagnostics = {
-              enable = true,
-              globals = { 'vim', 'describe' },
-              disabled = { "lowercase-global" }
-            }
-          }
-        },
-        root_dir = function(fname)
-          -- print(fname)
-          local resolved_dir = lspconfig.util.root_pattern('.git')(fname) or
-              lspconfig.util.root_pattern(".luacheckrc")(fname) or
-              lspconfig.util.path.dirname(fname)
-          print("Resolved LSP root_dir: " .. resolved_dir) -- Debug print
-          return resolved_dir
-          -- return require 'lspconfig'.util.root_pattern('.git', vim.fn.getcwd())()
-          --        or require 'lspconfig'.util.root_pattern(".luacheckrc", vim.fn.getcwd())()
-          --        -- or require 'lspconfig'.util.path.dirname(fname)
-        end
-      })
-      vim.lsp.enable("lua_ls")
-      --  }}}
-      -- {{{ Docker
-      vim.lsp.config("dockerls", {
-        before_init = function(params)
-          params.processId = vim.NIL
-        end,
-        cmd = lspcontainers.command('dockerls'),
-        root_dir = lspconfig.util.root_pattern(".git", vim.fn.getcwd())
-      })
-      vim.lsp.enable("dockerls")
-      --  }}}
-      -- {{{ TS
-      vim.lsp.config("ts_ls",{
-        before_init = function(params)
-          params.processId = vim.NIL
-        end,
-        cmd = { "typescript-language-server", "--stdio" },
-        root_dir = lspconfig.util.root_pattern("package.json", vim.fn.getcwd()),
-        capabilities = capabilities
-      })
-      vim.lsp.enable("ts_ls")
-      -- }}}
-      -- {{{ Python
-      vim.lsp.config("pylsp", {
-        before_init = function(params)
-          params.processId = vim.NIL
-        end,
-        root_dir = lspconfig.util.root_pattern(".git", vim.fn.getcwd()),
-        capabilities = capabilities,
-        settings = {
-          pylsp = {
-            plugins = {
-              rope_autoimport = true,
-              pycodestyle = {
-                ignore = { 'W391' },
-                maxLineLength = 120
-              }
-            }
-          }
-        }
-      })
-      vim.lsp.enable("pylsp")
-      vim.lsp.config("pyright", {
-        before_init = function(params)
-          params.processId = vim.NIL
-        end,
-        cmd = lspcontainers.command('pyright'),
-        root_dir = lspconfig.util.root_pattern(".git", vim.fn.getcwd()),
-        capabilities = capabilities
-      })
-      vim.lsp.enable("pyright")
-      -- }}}
-      -- {{{ HTML
-      vim.lsp.config("html", {
-        filetypes = { 'html', 'xhtml' },
-        before_init = function(params)
-          params.processId = vim.NIL
-        end,
-        cmd = lspcontainers.command('html'),
-        root_dir = lspconfig.util.root_pattern(".git", vim.fn.getcwd()),
-      })
-      vim.lsp.enable("html")
-      -- }}}
-      -- {{{ GO
-      vim.lsp.config("gopls", {
-        before_init = function(params)
-          params.processId = vim.NIL
-        end,
-        root_dir = lspconfig.util.root_pattern("go.mod", vim.fn.getcwd()),
-      })
-      vim.lsp.enable("gopls")
-      -- }}}
-      -- {{{ PHP
-      -- lspconfig.phpactor.setup {
-      --   -- on_attach = on_attach,
-      --   init_options = {
-      --     ["language_server_phpstan.enabled"] = false,
-      --     ["language_server_psalm.enabled"] = false,
-      --   },
-      --   cmd = { "phpactor", "language-server", "-vvv" },
-      --   capabilities = require("cmp_nvim_lsp").default_capabilities(),
-      --   filetypes = { "php" },
-      --   root_dir = lspconfig.util.root_pattern("composer.json", ".git", vim.fn.getcwd()),
-      -- }
-      vim.lsp.config("intelephense", {
-        -- before_init = function(params)
-        --   params.processId = vim.NIL
-        -- end,
-        settings = {
-          intelephense = {
-            environment = {
-              includePaths = {
-                "./vendor/**",
-                -- '/home/nakajima/.config/composer/vendor/php-stubs/wordpress-stubs', -- Composer globalのパス
-              }
-            },
-            files = {
-              maxSize = 10000000, -- Optional, increase if needed
-            }
-          }
-        },
-        cmd = { "intelephense", "--stdio" },
-        filetypes = { "php" },
-        root_dir = lspconfig.util.root_pattern("composer.json", vim.fn.getcwd()),
-      })
-      vim.lsp.enable("intelephense")
-      -- }}}
-      -- {{{ SQL
-      vim.lsp.config("sqls", {
-        before_init = function(params)
-          params.processId = vim.NIL
-        end,
-        cmd = { "sqls" },
-        root_dir = lspconfig.util.root_pattern(".git", vim.fn.getcwd()),
-        on_attach = function(client, _)
-          client.server_capabilities.documentFormattingProvider = false
-          client.server_capabilities.documentRangeFormattingProvider = false
-        end,
-      })
-      vim.lsp.enable("sqls")
-      -- }}}
-      -- {{{ Terraform
-      vim.lsp.config("terraformls", {
-        before_init = function(params)
-          params.processId = vim.NIL
-        end,
-        cmd = { "terraform-lsp" },
-        root_dir = lspconfig.util.root_pattern(".git", vim.fn.getcwd()),
-        on_attach = function(client, _)
-          client.server_capabilities.documentFormattingProvider = false
-          client.server_capabilities.documentRangeFormattingProvider = false
-        end,
-      })
-      vim.lsp.enable("terraformls")
-      -- }}}
-      vim.api.nvim_create_autocmd('LspAttach', {
-        group = vim.api.nvim_create_augroup('UserLspConfig', {}),
-        callback = function(ev)
-          local opts = { buffer = ev.buf }
-          -- vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
-          -- vim.keymap.set('n', 'gh', vim.lsp.buf.references, opts)
-          vim.keymap.set('n', 'gr', vim.lsp.buf.rename, opts)
-          vim.keymap.set('n', '<Leader>h', vim.diagnostic.open_float, opts)
-          vim.keymap.set('n', "<CR>", function()
-            vim.lsp.buf.format({ async = true })
-          end, opts)
-        end
-      })
-    end
-  },
-  { 'folke/lsp-colors.nvim' },
+  --- Lsps (server configs are in lua/lsp.lua using native vim.lsp.config)
+  { 'neovim/nvim-lspconfig' },
 
   --- Git
-  -- {'airblade/vim-gitgutter'}
-  -- {'tpope/vim-fugitive'}
-  -- {'wting/gitsessions.vim'}
-  {
-    'NeogitOrg/neogit',
-    dependencies = {
-      "nvim-lua/plenary.nvim",         -- required
-      "nvim-telescope/telescope.nvim", -- optional
-      "sindrets/diffview.nvim",        -- optional
-    },
-    opts = {
-      vim.keymap.set("n", '<leader>ng', "<cmd>Neogit<CR>")
-    },
-  },
   {
     'lewis6991/gitsigns.nvim',
     opts = {
@@ -588,18 +371,6 @@ return {
   --- Web development
   { 'alvan/vim-closetag' },
   { 'norcalli/nvim-colorizer.lua' },
-
-  -- Javascript
-  {
-    'mxw/vim-jsx',
-    event = "BufEnter",
-    ft = { "javascript", "typescript" },
-  },
-  {
-    'pangloss/vim-javascript',
-    event = "BufEnter",
-    ft = { "javascript", "typescript" },
-  },
   -- {
   --   "dcampos/nvim-snippy",
   --   event = "InsertEnter",
@@ -619,7 +390,6 @@ return {
   -- },
 
   --- Completion
-  -- ~/.config/nvim/cmp.lua for config
   { 'hrsh7th/cmp-nvim-lsp' },
   { 'hrsh7th/cmp-buffer' },
   { 'hrsh7th/cmp-path' },

@@ -1,17 +1,8 @@
-vim.lsp.enable({"luals", "yamlls", "dockerls"})
+-- {{{ Lua
 vim.lsp.config("luals", {
-  -- Command and arguments to start the server.
   cmd = { 'lua-language-server' },
-  -- Filetypes to automatically attach to.
   filetypes = { 'lua' },
-  -- Sets the "root directory" to the parent directory of the file in the
-  -- current buffer that contains either a ".luarc.json" or a
-  -- ".luarc.jsonc" file. Files that share a root directory will reuse
-  -- the connection to the same LSP server.
   root_markers = { '.luarc.json', '.luarc.jsonc' },
-  -- Specific settings to send to the server. The schema for this is
-  -- defined by the server. For example the schema for lua-language-server
-  -- can be found here https://raw.githubusercontent.com/LuaLS/vscode-lua/master/setting/schema.json
   settings = {
     Lua = {
       runtime = {
@@ -25,23 +16,18 @@ vim.lsp.config("luals", {
     }
   }
 })
+-- }}}
 
+-- {{{ YAML
 vim.lsp.config("yamlls", {
-  root_markers = {'.git' },
+  root_markers = { '.git' },
 })
+-- }}}
 
-vim.lsp.config["dockerls"] = {
-  before_init = function(params)
-    params.processId = vim.NIL
-  end,
-  cmd = lspcontainers.command('dockerls'),
-  root_dir = lspconfig.util.root_pattern(".git", vim.fn.getcwd())
-}
-
+-- {{{ TypeScript
 vim.lsp.config("ts_ls", {
   init_options = {
-    plugins = {
-    },
+    plugins = {},
   },
   filetypes = {
     "javascript",
@@ -50,12 +36,15 @@ vim.lsp.config("ts_ls", {
     "typescriptreact",
     "typescript.tsx",
   },
-  root_markers = {
-    "package.json"
-  }
+  root_markers = { "package.json" }
 })
+-- }}}
 
+-- {{{ Python (pyright)
 vim.lsp.config("pyright", {
+  cmd = { "pyright-langserver", "--stdio" },
+  filetypes = { "python" },
+  root_markers = { "pyproject.toml", "setup.py", "setup.cfg", "requirements.txt", "Pipfile", ".git" },
   settings = {
     python = {
       analysis = {
@@ -65,4 +54,92 @@ vim.lsp.config("pyright", {
       }
     }
   }
+})
+-- }}}
+
+-- {{{ HTML
+vim.lsp.config("html", {
+  filetypes = { 'html', 'xhtml' },
+  root_markers = { '.git' },
+})
+-- }}}
+
+-- {{{ Go
+vim.lsp.config("gopls", {
+  cmd = { "gopls" },
+  filetypes = { "go", "gomod", "gowork", "gotmpl" },
+  root_markers = { "go.mod", ".git" },
+})
+-- }}}
+
+-- {{{ PHP (intelephense)
+vim.lsp.config("intelephense", {
+  cmd = { "intelephense", "--stdio" },
+  filetypes = { "php" },
+  root_markers = { "composer.json", ".git" },
+  settings = {
+    intelephense = {
+      environment = {
+        includePaths = {
+          "./vendor/**",
+        }
+      },
+      files = {
+        maxSize = 10000000,
+      }
+    }
+  }
+})
+-- }}}
+
+-- {{{ SQL
+vim.lsp.config("sqlls", {
+  cmd = { "sqls" },
+  filetypes = { "sql" },
+  root_markers = { ".git" },
+})
+-- }}}
+
+-- {{{ Docker
+-- NOTE: Commented out because it previously used lspcontainers which
+-- needs a separate plugin. Uncomment and adjust if you use lspcontainers.
+-- vim.lsp.config("dockerls", {
+--   cmd = { "docker-langserver", "--stdio" },
+--   filetypes = { "dockerfile" },
+--   root_markers = { "Dockerfile", ".git" },
+-- })
+-- }}}
+
+-- {{{ Terraform
+vim.lsp.config("terraformls", {
+  cmd = { "terraform-lsp" },
+  filetypes = { "terraform", "terraform-vars" },
+  root_markers = { ".terraform", ".git" },
+})
+-- }}}
+
+-- Enable all configured servers
+vim.lsp.enable({
+  "luals",
+  "yamlls",
+  "ts_ls",
+  "pyright",
+  "html",
+  "gopls",
+  "intelephense",
+  "sqlls",
+  "terraformls",
+})
+
+-- LspAttach keybindings
+vim.api.nvim_create_autocmd('LspAttach', {
+  group = vim.api.nvim_create_augroup('UserLspConfig', {}),
+  callback = function(ev)
+    local opts = { buffer = ev.buf }
+    vim.keymap.set('n', 'gr', vim.lsp.buf.rename, opts)
+    vim.keymap.set('n', '<Leader>h', vim.diagnostic.open_float, opts)
+    vim.keymap.set('n', "<CR>", function()
+      vim.lsp.buf.format({ async = true })
+    end, opts)
+  end
 })
