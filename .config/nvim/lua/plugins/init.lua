@@ -150,15 +150,21 @@ return {
     },
     cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
     opts = {
-      ensure_installed = { "vim", "c", "c_sharp", "lua", "javascript", "typescript", "gitcommit", "prisma", "php",
-        "python", "dockerfile" },
+      ensure_installed = { "vim", "vimdoc", "query", "c", "c_sharp", "lua", "javascript", "typescript", "tsx",
+        "gitcommit", "prisma", "php", "python", "dockerfile", "markdown", "markdown_inline", "bash", "json", "yaml",
+        "toml", "html", "css" },
       incremental_selection = {
         enable = true
       },
       sync_install = false,
-      auto_install = true,
+      auto_install = false,
       highlight = {
         enable = true,
+        disable = function(lang, buf)
+          local ok = pcall(vim.treesitter.start, buf, lang)
+          if ok then vim.treesitter.stop(buf) end
+          return not ok
+        end,
       },
       indent = {
         enable = true,
@@ -490,9 +496,6 @@ return {
   --     })
   --   end
   -- },
-  {
-    'github/copilot.vim'
-  },
   {
     'windwp/nvim-autopairs',
     event = "InsertEnter",
